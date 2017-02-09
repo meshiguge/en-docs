@@ -323,18 +323,5 @@ intersphinx_mapping = {
     'numpy': ('http://docs.scipy.org/doc/numpy/', None),
 }
 
-doctest_global_setup = '''
-import numpy as np
-import cupy
-import chainer
-from chainer import cuda, Function, gradient_check, training, utils, Variable
-from chainer import datasets, iterators, optimizers, serializers
-from chainer import Link, Chain, ChainList
-import chainer.functions as F
-import chainer.links as L
-from chainer.training import extensions
-np.random.seed(0)
-'''
-
 spelling_lang = 'en_US'
 spelling_word_list_filename = 'spelling_wordlist.txt'
