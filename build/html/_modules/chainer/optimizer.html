@@ -1,0 +1,767 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.optimizer &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../index.html"/>
+        <link rel="up" title="chainer" href="../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.optimizer</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.optimizer</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">collections</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">import</span> <span class="nn">chainer.link</span> <span class="kn">as</span> <span class="nn">link_module</span>
+
+
+<span class="k">def</span> <span class="nf">_sum_sqnorm</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="n">sq_sum</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">defaultdict</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">sq_sum</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)]</span> <span class="o">+=</span> <span class="n">s</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="n">sq_sum</span><span class="p">)])</span>
+
+
+<div class="viewcode-block" id="Optimizer"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer">[docs]</a><span class="k">class</span> <span class="nc">Optimizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Base class of all numerical optimizers.</span>
+
+<span class="sd">    This class provides basic features for all optimization methods. It</span>
+<span class="sd">    optimizes parameters of a *target link*. The target link is registered via</span>
+<span class="sd">    the :meth:`setup` method, and then the :meth:`update` method updates its</span>
+<span class="sd">    parameters based on a given loss function.</span>
+
+<span class="sd">    Each optimizer implementation must be defined as a child class of</span>
+<span class="sd">    Optimizer. It must override :meth:`update` method. An optimizer can use</span>
+<span class="sd">    *internal states* each of which is tied to one of the parameters. State is</span>
+<span class="sd">    a dictionary of serializable values (typically arrays of size same as</span>
+<span class="sd">    the corresponding parameters). In order to use state dictionaries, the</span>
+<span class="sd">    optimizer must override :meth:`init_state` method (or its CPU/GPU versions,</span>
+<span class="sd">    :meth:`init_state_cpu` and :meth:`init_state_gpu`).</span>
+
+<span class="sd">    If the optimizer is based on single gradient computation (like</span>
+<span class="sd">    most first-order methods), then it should inherit :class:`GradientMethod`,</span>
+<span class="sd">    which adds some features dedicated for the first order methods.</span>
+
+<span class="sd">    Optimizer instance also supports *hook functions*. Hook function is</span>
+<span class="sd">    registered by the :meth:`add_hook` method. Each hook function is called</span>
+<span class="sd">    in registration order in advance of the actual parameter update.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        target: Target link object. It is set by the :meth:`setup` method.</span>
+<span class="sd">        t: Number of update steps. It must be incremented by the</span>
+<span class="sd">            :meth:`update` method.</span>
+<span class="sd">        epoch: Current epoch. It is incremented by the :meth:`new_epoch`</span>
+<span class="sd">            method.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Optimizer.setup"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.setup">[docs]</a>    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">link</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets a target link and initializes the optimizer states.</span>
+
+<span class="sd">        Given link is set to the :attr:`target` attribute. It also prepares the</span>
+<span class="sd">        optimizer state dictionaries corresponding to all parameters in the</span>
+<span class="sd">        link hierarchy. The existing states are discarded.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            link (~chainer.Link): Target link object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">link_module</span><span class="o">.</span><span class="n">Link</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;optimization target must be a link&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span> <span class="o">=</span> <span class="n">link</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_states</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Optimizer.prepare"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prepares for an update.</span>
+
+<span class="sd">        This method initializes missing optimizer states (e.g. for newly added</span>
+<span class="sd">        parameters after the set up), and copies arrays in each state</span>
+<span class="sd">        dictionary to CPU or GPU according to the corresponding parameter</span>
+<span class="sd">        array.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">namedparams</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">states</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">init_state</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+                <span class="n">states</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">state</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="n">states</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>  <span class="c"># cpu</span>
+                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">cuda</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                                <span class="n">state</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+                    <span class="k">else</span><span class="p">:</span>  <span class="c"># gpu</span>
+                        <span class="n">cupy</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span>
+                        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                                <span class="n">state</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                            <span class="k">elif</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">cupy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span>
+                                  <span class="n">value</span><span class="o">.</span><span class="n">device</span> <span class="o">!=</span> <span class="n">dev</span><span class="p">):</span>
+                                <span class="n">state</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">cupy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.init_state"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.init_state">[docs]</a>    <span class="k">def</span> <span class="nf">init_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the optimizer state corresponding to the parameter.</span>
+
+<span class="sd">        This method should add needed items to the ``state`` dictionary. Each</span>
+<span class="sd">        optimizer implementation that uses its own states should override this</span>
+<span class="sd">        method or CPU/GPU dedicated versions (:meth:`init_state_cpu` and</span>
+<span class="sd">        :meth:`init_state_gpu`).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        .. seealso:: :meth:`init_state_cpu`, :meth:`init_state_gpu`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">init_state_cpu</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">init_state_gpu</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.init_state_cpu"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.init_state_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">init_state_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the optimizer state on CPU.</span>
+
+<span class="sd">        This method is called from :meth:`init_state` by default.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable. Its data array is</span>
+<span class="sd">                of type :class:`numpy.ndarray`.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        .. seealso:: :meth:`init_state`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Optimizer.init_state_gpu"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.init_state_gpu">[docs]</a>    <span class="k">def</span> <span class="nf">init_state_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the optimizer state on GPU.</span>
+
+<span class="sd">        This method is called from :meth:`init_state` by default.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable. Its data array is</span>
+<span class="sd">                of type :class:`cupy.ndarray`.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        .. seealso:: :meth:`init_state`</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span>
+</div>
+<div class="viewcode-block" id="Optimizer.update"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lossfun</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates the parameters and optimizer states.</span>
+
+<span class="sd">        This method updates the parameters of the target link and corresponding</span>
+<span class="sd">        optimizer states. The behavior of this method is different for the</span>
+<span class="sd">        cases either ``lossfun`` is given or not.</span>
+
+<span class="sd">        If ``lossfun`` is given, then this method initializes the gradients by</span>
+<span class="sd">        zeros, calls it with given extra arguments, and calls the</span>
+<span class="sd">        :meth:`~chainer.Variable.backward` method of its output to compute the</span>
+<span class="sd">        gradients. The implementation might call ``lossfun`` more than once.</span>
+
+<span class="sd">        If ``lossfun`` is not given, then this method assumes that the</span>
+<span class="sd">        gradients of all parameters are already computed. An implementation</span>
+<span class="sd">        that requires multiple gradient computations might raise an error on</span>
+<span class="sd">        this case.</span>
+
+<span class="sd">        In both cases, this method invokes the update procedure for all</span>
+<span class="sd">        parameters.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            lossfun (function): Loss function. It accepts arbitrary arguments</span>
+<span class="sd">                and returns one :class:`~chainer.Variable` object that</span>
+<span class="sd">                represents the loss (or objective) value. This argument can be</span>
+<span class="sd">                omitted for single gradient-based methods. In this case, this</span>
+<span class="sd">                method assumes gradient arrays computed.</span>
+<span class="sd">            args, kwds: Arguments for the loss function.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</div>
+<div class="viewcode-block" id="Optimizer.new_epoch"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.new_epoch">[docs]</a>    <span class="k">def</span> <span class="nf">new_epoch</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Starts a new epoch.</span>
+
+<span class="sd">        This method increments the :attr:`epoch` count. Note that if the</span>
+<span class="sd">        optimizer depends on the epoch count, then user should call this method</span>
+<span class="sd">        appropriately at the beginning of each epoch.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span> <span class="o">+=</span> <span class="mi">1</span>
+</div>
+<div class="viewcode-block" id="Optimizer.add_hook"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.add_hook">[docs]</a>    <span class="k">def</span> <span class="nf">add_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hook</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Registers a hook function.</span>
+
+<span class="sd">        Hook function is typically called right after the gradient computation,</span>
+<span class="sd">        though the timing depends on the optimization method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hook (function): Hook function. It accepts the optimizer object.</span>
+<span class="sd">            name (str): Name of the registration. If omitted, ``hook.name`` is</span>
+<span class="sd">                used by default.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">hook</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s">&#39;hook function is not callable&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;_hooks&#39;</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s">&#39;call `setup` method before `add_hook` method&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">hook</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s">&#39;hook </span><span class="si">%s</span><span class="s"> already exists&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">hook</span>
+</div>
+<div class="viewcode-block" id="Optimizer.remove_hook"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.remove_hook">[docs]</a>    <span class="k">def</span> <span class="nf">remove_hook</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Removes a hook function.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            name (str): Registered name of the hook function to remove.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="Optimizer.call_hooks"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.call_hooks">[docs]</a>    <span class="k">def</span> <span class="nf">call_hooks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Invokes hook functions in registration order.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_hooks</span><span class="p">):</span>
+            <span class="n">hook</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.serialize"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.serialize">[docs]</a>    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serializer</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serializes or deserializes the optimizer.</span>
+
+<span class="sd">        It only saves or loads the following things:</span>
+
+<span class="sd">        - Optimizer states</span>
+<span class="sd">        - Global states (:attr:`t` and :attr:`epoch`)</span>
+
+<span class="sd">        **It does not saves nor loads the parameters of the target link.** They</span>
+<span class="sd">        should be separately saved or loaded.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            serializer (~chainer.AbstractSerializer): Serializer or</span>
+<span class="sd">                deserializer object.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="n">serializer</span><span class="p">(</span><span class="s">&#39;t&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">t</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span> <span class="o">=</span> <span class="n">serializer</span><span class="p">(</span><span class="s">&#39;epoch&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">epoch</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_states</span><span class="p">):</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">serializer</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">iteritems</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+                <span class="n">state</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.zero_grads"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.zero_grads">[docs]</a>    <span class="k">def</span> <span class="nf">zero_grads</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fills all gradient arrays by zeros.</span>
+
+<span class="sd">        .. deprecated:: v1.5</span>
+<span class="sd">           Use the :meth:`chainer.Link.zerograds` method for the target link</span>
+<span class="sd">           instead.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">zerograds</span><span class="p">()</span>
+</div>
+<div class="viewcode-block" id="Optimizer.compute_grads_norm"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.compute_grads_norm">[docs]</a>    <span class="k">def</span> <span class="nf">compute_grads_norm</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Computes the norm of whole gradients.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: L2 norm of whole gradients, i.e. square root of sum of</span>
+<span class="sd">            square of all gradient elements.</span>
+
+<span class="sd">        .. warning::</span>
+
+<span class="sd">            This method returns a CPU-computed value, which means that this</span>
+<span class="sd">            method synchronizes between CPU and GPU if at least one of the</span>
+<span class="sd">            gradients reside on the GPU.</span>
+
+<span class="sd">        .. deprecated:: v1.5</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_sum_sqnorm</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">()]))</span>
+</div>
+<div class="viewcode-block" id="Optimizer.clip_grads"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.clip_grads">[docs]</a>    <span class="k">def</span> <span class="nf">clip_grads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">maxnorm</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clips the norm of whole gradients up to the threshold.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            maxnorm (float): Threshold of gradient L2 norm.</span>
+
+<span class="sd">        .. deprecated:: v1.5</span>
+<span class="sd">           Use the :class:`~chainer.optimizer.GradientClipping` hook function</span>
+<span class="sd">           instead.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">GradientClipping</span><span class="p">(</span><span class="n">maxnorm</span><span class="p">)(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.weight_decay"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.weight_decay">[docs]</a>    <span class="k">def</span> <span class="nf">weight_decay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">decay</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Applies weight decay to the parameter/gradient pairs.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            decay (float): Coefficient of weight decay</span>
+
+<span class="sd">        .. deprecated:: v1.5</span>
+<span class="sd">           Use the :class:`~chainer.optimizer.WeightDecay` hook function</span>
+<span class="sd">           instead.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">WeightDecay</span><span class="p">(</span><span class="n">decay</span><span class="p">)(</span><span class="bp">self</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Optimizer.accumulate_grads"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Optimizer.accumulate_grads">[docs]</a>    <span class="k">def</span> <span class="nf">accumulate_grads</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Accumulates gradients from other source.</span>
+
+<span class="sd">        This method just adds given gradient arrays to gradients that this</span>
+<span class="sd">        optimizer holds. It is typically used in data-parallel optimization,</span>
+<span class="sd">        where gradients for different shards are computed in parallel and</span>
+<span class="sd">        aggregated by this method. This method correctly treats multiple GPU</span>
+<span class="sd">        devices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            grads (Iterable): Iterable of gradient arrays to be accumulated.</span>
+
+<span class="sd">        .. deprecated:: v1.5</span>
+<span class="sd">           Use the :meth:`chainer.Link.addgrads` method of the target link</span>
+<span class="sd">           instead.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">param</span><span class="p">,</span> <span class="n">g_src</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">(),</span> <span class="n">grads</span><span class="p">):</span>
+            <span class="n">g_dst</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">g_dst</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">g_dst</span> <span class="o">+=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_cpu</span><span class="p">(</span><span class="n">g_src</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">g_dst</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">g_src</span><span class="p">,</span> <span class="n">cuda</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="ow">and</span>
+                        <span class="n">g_dst</span><span class="o">.</span><span class="n">device</span> <span class="o">!=</span> <span class="n">g_src</span><span class="o">.</span><span class="n">device</span><span class="p">):</span>
+                    <span class="n">g_dst</span> <span class="o">+=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">g_src</span><span class="p">,</span> <span class="n">out_device</span><span class="o">=</span><span class="n">g_dst</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">g_dst</span> <span class="o">+=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="n">g_src</span><span class="p">)</span>
+
+</div></div>
+<div class="viewcode-block" id="GradientMethod"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientMethod">[docs]</a><span class="k">class</span> <span class="nc">GradientMethod</span><span class="p">(</span><span class="n">Optimizer</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Base class of all single gradient-based optimizers.</span>
+
+<span class="sd">    This is an extension of the :class:`Optimizer` class. Typical gradient</span>
+<span class="sd">    methods that just require the gradient at the current parameter vector on</span>
+<span class="sd">    an update can be implemented as its child class.</span>
+
+<span class="sd">    An implementation of a gradient method must override the following methods:</span>
+
+<span class="sd">    - :meth:`init_state` or both :meth:`init_state_cpu` and</span>
+<span class="sd">      :meth:`init_state_gpu`</span>
+<span class="sd">    - :meth:`update_one` or both :meth:`update_one_cpu` and</span>
+<span class="sd">      :meth:`update_one_gpu`</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="GradientMethod.update"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientMethod.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lossfun</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates parameters based on a loss function or computed gradients.</span>
+
+<span class="sd">        This method runs in two ways.</span>
+
+<span class="sd">        - If ``lossfun`` is given, then use it as a loss function to compute</span>
+<span class="sd">          gradients.</span>
+<span class="sd">        - Otherwise, this method assumes that the gradients are already</span>
+<span class="sd">          computed.</span>
+
+<span class="sd">        In both cases, the computed gradients are used to update parameters.</span>
+<span class="sd">        The actual update routines are defined by the :meth:`update_one`</span>
+<span class="sd">        method (or its CPU/GPU versions, :meth:`update_one_cpu` and</span>
+<span class="sd">        :meth:`update_one_gpu`).</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">lossfun</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">zerograds</span><span class="p">()</span>
+            <span class="n">loss</span> <span class="o">=</span> <span class="n">lossfun</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+            <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+            <span class="k">del</span> <span class="n">loss</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call_hooks</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prepare</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">states</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_states</span>
+        <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">namedparams</span><span class="p">():</span>
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_one</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">states</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="GradientMethod.update_one"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientMethod.update_one">[docs]</a>    <span class="k">def</span> <span class="nf">update_one</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates a parameter based on the corresponding gradient and state.</span>
+
+<span class="sd">        This method calls appropriate one from :meth:`update_param_cpu` or</span>
+<span class="sd">        :meth:`update_param_gpu`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_one_cpu</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_one_gpu</span><span class="p">(</span><span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="GradientMethod.update_one_cpu"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientMethod.update_one_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">update_one_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates a parameter on CPU.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</div>
+<div class="viewcode-block" id="GradientMethod.update_one_gpu"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientMethod.update_one_gpu">[docs]</a>    <span class="k">def</span> <span class="nf">update_one_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">param</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Updates a parameter on GPU.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            param (~chainer.Variable): Parameter variable.</span>
+<span class="sd">            state (dict): State dictionary.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+</div></div>
+<div class="viewcode-block" id="WeightDecay"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.WeightDecay">[docs]</a><span class="k">class</span> <span class="nc">WeightDecay</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Optimizer hook function for weight decay regularization.</span>
+
+<span class="sd">    This hook function adds a scaled parameter to the corresponding gradient.</span>
+<span class="sd">    It can be used as a regularization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rate (float): Coefficient for the weight decay.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        rate (float): Coefficient for the weight decay.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;WeightDecay&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">=</span> <span class="n">rate</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+            <span class="n">kernel</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">elementwise</span><span class="p">(</span>
+                <span class="s">&#39;T p, T decay&#39;</span><span class="p">,</span> <span class="s">&#39;T g&#39;</span><span class="p">,</span> <span class="s">&#39;g += decay * p&#39;</span><span class="p">,</span> <span class="s">&#39;weight_decay&#39;</span><span class="p">)</span>
+
+        <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">():</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">+=</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">p</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">kernel</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="Lasso"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.Lasso">[docs]</a><span class="k">class</span> <span class="nc">Lasso</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Optimizer hook function for Lasso regularization.</span>
+
+<span class="sd">    This hook function adds a scaled parameter to the sign of each weight.</span>
+<span class="sd">    It can be used as a regularization.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rate (float): Coefficient for the weight decay.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        rate (float): Coefficient for the weight decay.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;Lasso&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rate</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rate</span> <span class="o">=</span> <span class="n">rate</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">available</span><span class="p">:</span>
+            <span class="n">kernel</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">elementwise</span><span class="p">(</span>
+                <span class="s">&#39;T s, T decay&#39;</span><span class="p">,</span> <span class="s">&#39;T g&#39;</span><span class="p">,</span> <span class="s">&#39;g += decay * s&#39;</span><span class="p">,</span> <span class="s">&#39;lasso&#39;</span><span class="p">)</span>
+
+        <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rate</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">():</span>
+            <span class="n">p</span><span class="p">,</span> <span class="n">g</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="n">sign</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">+=</span> <span class="n">rate</span> <span class="o">*</span> <span class="n">sign</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">kernel</span><span class="p">(</span><span class="n">sign</span><span class="p">,</span> <span class="n">rate</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+
+</div>
+<div class="viewcode-block" id="GradientClipping"><a class="viewcode-back" href="../../reference/core/optimizer.html#chainer.GradientClipping">[docs]</a><span class="k">class</span> <span class="nc">GradientClipping</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Optimizer hook function for gradient clipping.</span>
+
+<span class="sd">    This hook function scales all gradient arrays to fit to the defined L2 norm</span>
+<span class="sd">    threshold.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        threshold (float): L2 norm threshold.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        threshold (float): L2 norm threshold of gradient norm.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;GradientClipping&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">=</span> <span class="n">threshold</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">opt</span><span class="p">):</span>
+        <span class="n">norm</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">_sum_sqnorm</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">grad</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">()]))</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">threshold</span> <span class="o">/</span> <span class="n">norm</span>
+        <span class="k">if</span> <span class="n">rate</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">opt</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">params</span><span class="p">():</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">grad</span>
+                <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">grad</span><span class="p">):</span>
+                    <span class="n">grad</span> <span class="o">*=</span> <span class="n">rate</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

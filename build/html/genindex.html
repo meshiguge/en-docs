@@ -1,0 +1,1543 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Index &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li></li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#_"><strong>_</strong></a>
+ | <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#H"><strong>H</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ | <a href="#W"><strong>W</strong></a>
+ | <a href="#X"><strong>X</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
+ 
+</div>
+<h2 id="_">_</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/serializer.html#chainer.AbstractSerializer.__call__">__call__() (chainer.AbstractSerializer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/function.html#chainer.Function.__call__">(chainer.Function method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.BatchNormalization.__call__">(chainer.links.BatchNormalization method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Bilinear.__call__">(chainer.links.Bilinear method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.BinaryHierarchicalSoftmax.__call__">(chainer.links.BinaryHierarchicalSoftmax method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Classifier.__call__">(chainer.links.Classifier method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Convolution2D.__call__">(chainer.links.Convolution2D method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.EmbedID.__call__">(chainer.links.EmbedID method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Inception.__call__">(chainer.links.Inception method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.LSTM.__call__">(chainer.links.LSTM method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Linear.__call__">(chainer.links.Linear method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.MLPConvolution2D.__call__">(chainer.links.MLPConvolution2D method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Maxout.__call__">(chainer.links.Maxout method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.NegativeSampling.__call__">(chainer.links.NegativeSampling method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.PReLU.__call__">(chainer.links.PReLU method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/links.html#chainer.links.Parameter.__call__">(chainer.links.Parameter method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/caffe.html#chainer.links.caffe.CaffeFunction.__call__">(chainer.links.caffe.CaffeFunction method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/serializer.html#chainer.AbstractSerializer.__getitem__">__getitem__() (chainer.AbstractSerializer method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/link.html#chainer.Chain.__getitem__">(chainer.Chain method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/core/link.html#chainer.ChainList.__getitem__">(chainer.ChainList method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet.__getitem__">(chainer.FunctionSet method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/link.html#chainer.ChainList.__len__">__len__() (chainer.ChainList method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/variable.html#chainer.Variable.__len__">(chainer.Variable method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+</tr></table>
+
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/serializer.html#chainer.AbstractSerializer">AbstractSerializer (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.accumulate_grads">accumulate_grads() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.accuracy">accuracy() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.AdaDelta">AdaDelta (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.AdaGrad">AdaGrad (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.Adam">Adam (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.add_hook">add_hook() (chainer.Function method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.add_hook">(chainer.Optimizer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/link.html#chainer.Chain.add_link">add_link() (chainer.Chain method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/link.html#chainer.ChainList.add_link">(chainer.ChainList method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/link.html#chainer.Link.add_param">add_param() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.add_persistent">add_persistent() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.addgrad">addgrad() (chainer.Variable method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.addgrads">addgrads() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/flag.html#chainer.flag.aggregate_flags">aggregate_flags() (in module chainer.flag)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/flag.html#chainer.AUTO">AUTO (in module chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.average_pooling_2d">average_pooling_2d() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/function.html#chainer.Function.backward">backward() (chainer.Function method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/variable.html#chainer.Variable.backward">(chainer.Variable method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/function.html#chainer.Function.backward_cpu">backward_cpu() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.backward_gpu">backward_gpu() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function.FunctionHook.backward_postprocess">backward_postprocess() (chainer.function.FunctionHook method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function.FunctionHook.backward_preprocess">backward_preprocess() (chainer.function.FunctionHook method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.batch_inv">batch_inv() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.batch_l2_norm_squared">batch_l2_norm_squared() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.batch_matmul">batch_matmul() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.batch_normalization">batch_normalization() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/links.html#chainer.links.BatchNormalization">BatchNormalization (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.bernoulli_nll">bernoulli_nll() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Bilinear">Bilinear (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.bilinear">bilinear() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.binary_accuracy">binary_accuracy() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.BinaryHierarchicalSoftmax">BinaryHierarchicalSoftmax (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.broadcast">broadcast() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.broadcast_to">broadcast_to() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/graph.html#chainer.computational_graph.build_computational_graph">build_computational_graph() (in module chainer.computational_graph)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/caffe.html#chainer.links.caffe.CaffeFunction">CaffeFunction (class in chainer.links.caffe)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.call_hooks">call_hooks() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Chain">Chain (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/index.html#module-chainer">chainer (module)</a>, <a href="reference/initializers.html#module-chainer">[1]</a>
+  </dt>
+
+      
+  <dt><a href="reference/graph.html#module-chainer.computational_graph">chainer.computational_graph (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/util/cuda.html#module-chainer.cuda">chainer.cuda (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/dataset.html#module-chainer.dataset">chainer.dataset (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/datasets.html#module-chainer.datasets">chainer.datasets (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#module-chainer.function">chainer.function (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#module-chainer.function_hooks">chainer.function_hooks (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#module-chainer.functions">chainer.functions (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#module-chainer.gradient_check">chainer.gradient_check (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/initializers.html#module-chainer.initializer">chainer.initializer (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/initializers.html#module-chainer.initializers">chainer.initializers (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/iterators.html#module-chainer.iterators">chainer.iterators (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#module-chainer.links">chainer.links (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/caffe.html#module-chainer.links.caffe">chainer.links.caffe (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#module-chainer.serializers">chainer.serializers (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#module-chainer.testing">chainer.testing (module)</a>, <a href="reference/check.html#module-chainer.testing">[1]</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/training.html#module-chainer.training">chainer.training (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/extensions.html#module-chainer.training.extensions">chainer.training.extensions (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/triggers.html#module-chainer.training.triggers">chainer.training.triggers (module)</a>
+  </dt>
+
+      
+  <dt><a href="compatibility.html#module-chainer.utils">chainer.utils (module)</a>, <a href="reference/util/algorithm.html#module-chainer.utils">[1]</a>, <a href="reference/util/experimental.html#module-chainer.utils">[2]</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#module-chainer.utils.type_check">chainer.utils.type_check (module)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.ChainList">ChainList (class in chainer)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/check.html#chainer.gradient_check.check_backward">check_backward() (in module chainer.gradient_check)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.check_type_forward">check_type_forward() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.children">children() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Classifier">Classifier (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.clip">clip() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.clip_grads">clip_grads() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.clipped_relu">clipped_relu() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet.collect_parameters">collect_parameters() (chainer.FunctionSet method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/graph.html#chainer.computational_graph.ComputationalGraph">ComputationalGraph (class in chainer.computational_graph)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.compute_grads_norm">compute_grads_norm() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.concat">concat() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.connectionist_temporal_classification">connectionist_temporal_classification() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.contrastive">contrastive() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Convolution2D">Convolution2D (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.convolution_2d">convolution_2d() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.copy">copy() (chainer.Link method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/util/cuda.html#chainer.cuda.copy">(in module chainer.cuda)</a>
+  </dt>
+
+        
+  <dt><a href="reference/functions.html#chainer.functions.copy">(in module chainer.functions)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet.copy_parameters_from">copy_parameters_from() (chainer.FunctionSet method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.copydata">copydata() (chainer.Variable method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.copyparams">copyparams() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.cos">cos() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.BinaryHierarchicalSoftmax.create_huffman_tree">create_huffman_tree() (chainer.links.BinaryHierarchicalSoftmax static method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.cross_covariance">cross_covariance() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="cupy-reference/index.html#module-cupy">cupy (module)</a>, <a href="cupy-reference/kernel.html#module-cupy">[1]</a>, <a href="cupy-reference/overview.html#module-cupy">[2]</a>, <a href="cupy-reference/routines.html#module-cupy">[3]</a>, <a href="cupy-reference/ufunc.html#module-cupy">[4]</a>
+  </dt>
+
+      
+  <dt><a href="cupy-reference/random.html#module-cupy.random">cupy.random (module)</a>
+  </dt>
+
+      
+  <dt><a href="cupy-reference/testing.html#module-cupy.testing">cupy.testing (module)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.debug_print">debug_print() (chainer.Variable method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Deconvolution2D">Deconvolution2D (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.deconvolution_2d">deconvolution_2d() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.delete_hook">delete_hook() (chainer.Function method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/serializer.html#chainer.Deserializer">Deserializer (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.DictionarySerializer">DictionarySerializer (class in chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.dropout">dropout() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/graph.html#chainer.computational_graph.ComputationalGraph.dump">dump() (chainer.computational_graph.ComputationalGraph method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/util/cuda.html#chainer.cuda.elementwise">elementwise() (in module chainer.cuda)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.elu">elu() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.embed_id">embed_id() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.EmbedID">EmbedID (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.Expr.eval">eval() (chainer.utils.type_check.Expr method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.exp">exp() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.expand_dims">expand_dims() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.expect">expect() (in module chainer.utils.type_check)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.Expr">Expr (class in chainer.utils.type_check)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.fixed_batch_normalization">fixed_batch_normalization() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/flag.html#chainer.Flag">Flag (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.forward">forward() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.forward_cpu">forward_cpu() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.forward_gpu">forward_gpu() (chainer.Function method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/function_hooks.html#chainer.function.FunctionHook.forward_postprocess">forward_postprocess() (chainer.function.FunctionHook method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function.FunctionHook.forward_preprocess">forward_preprocess() (chainer.function.FunctionHook method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function">Function (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function.FunctionHook">FunctionHook (class in chainer.function)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet">FunctionSet (class in chainer)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.gaussian">gaussian() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.gaussian_kl_divergence">gaussian_kl_divergence() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.gaussian_nll">gaussian_nll() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/util/cuda.html#chainer.cuda.get_array_module">get_array_module() (in module chainer.cuda)</a>
+  </dt>
+
+      
+  <dt><a href="reference/util/cuda.html#chainer.cuda.get_device">get_device() (in module chainer.cuda)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.optimizer.GradientClipping">GradientClipping (class in chainer.optimizer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.GradientMethod">GradientMethod (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet.gradients">gradients (chainer.FunctionSet attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.GRU">GRU (class in chainer.links)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="H">H</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.HDF5Deserializer">HDF5Deserializer (class in chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.HDF5Serializer">HDF5Serializer (class in chainer.serializers)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.hinge">hinge() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.huber_loss">huber_loss() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.identity">identity() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Inception">Inception (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.InceptionBN">InceptionBN (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.init_state">init_state() (chainer.Optimizer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.init_state_cpu">init_state_cpu() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.init_state_gpu">init_state_gpu() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.inv">inv() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/debug.html#chainer.is_debug">is_debug() (in module chainer)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/function.html#chainer.Function.label">label (chainer.Function attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/variable.html#chainer.Variable.label">(chainer.Variable attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.optimizer.Lasso">Lasso (class in chainer.optimizer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.leaky_relu">leaky_relu() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Linear">Linear (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.linear">linear() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link">Link (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.links">links() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/serializer.html#chainer.Deserializer.load">load() (chainer.Deserializer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.load_hdf5">load_hdf5() (in module chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.load_npz">load_npz() (in module chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function.html#chainer.Function.local_function_hooks">local_function_hooks (chainer.Function attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.local_response_normalization">local_response_normalization() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.log">log() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.log_softmax">log_softmax() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.LSTM">LSTM (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.lstm">lstm() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.matmul">matmul() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.max">max() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.max_pooling_2d">max_pooling_2d() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.Maxout">Maxout (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.maxout">maxout() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.mean_squared_error">mean_squared_error() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/util/cuda.html#chainer.cuda.memoize">memoize() (in module chainer.cuda)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.min">min() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.MLPConvolution2D">MLPConvolution2D (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.MomentumSGD">MomentumSGD (class in chainer.optimizers)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/link.html#chainer.Link.namedlinks">namedlinks() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.namedparams">namedparams() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.negative_sampling">negative_sampling() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.NegativeSampling">NegativeSampling (class in chainer.links)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.NesterovAG">NesterovAG (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.new_epoch">new_epoch() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.NpzDeserializer">NpzDeserializer (class in chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.gradient_check.numerical_grad">numerical_grad() (in module chainer.gradient_check)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/flag.html#chainer.OFF">OFF (in module chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/flag.html#chainer.ON">ON (in module chainer)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer">Optimizer (class in chainer)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/links.html#chainer.links.Parameter">Parameter (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/function_set.html#chainer.FunctionSet.parameters">parameters (chainer.FunctionSet attribute)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.params">params() (chainer.Link method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.PReLU">PReLU (class in chainer.links)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.prelu">prelu() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.prepare">prepare() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function_hooks.PrintHook">PrintHook (class in chainer.function_hooks)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/util/cuda.html#chainer.cuda.reduce">reduce() (in module chainer.cuda)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.relu">relu() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.remove_hook">remove_hook() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.LSTM.reset_state">reset_state() (chainer.links.LSTM method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.reshape">reshape() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.RMSprop">RMSprop (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.RMSpropGraves">RMSpropGraves (class in chainer.optimizers)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/util/algorithm.html#chainer.utils.WalkerAlias.sample">sample() (chainer.utils.WalkerAlias method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/serializer.html#chainer.Serializer.save">save() (chainer.Serializer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.save_hdf5">save_hdf5() (in module chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/serializers.html#chainer.serializers.save_npz">save_npz() (in module chainer.serializers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.select_item">select_item() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.serialize">serialize() (chainer.Link method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.serialize">(chainer.Optimizer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/serializer.html#chainer.Serializer">Serializer (class in chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.set_creator">set_creator() (chainer.Variable method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/debug.html#chainer.set_debug">set_debug() (in module chainer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.setup">setup() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/optimizers.html#chainer.optimizers.SGD">SGD (class in chainer.optimizers)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.sigmoid">sigmoid() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.sigmoid_cross_entropy">sigmoid_cross_entropy() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.sin">sin() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.TypeInfoTuple.size">size() (chainer.utils.type_check.TypeInfoTuple method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.slstm">slstm() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.softmax">softmax() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.softmax_cross_entropy">softmax_cross_entropy() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.softplus">softplus() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.spatial_pyramid_pooling_2d">spatial_pyramid_pooling_2d() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.split_axis">split_axis() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.BatchNormalization.start_finetuning">start_finetuning() (chainer.links.BatchNormalization method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/links.html#chainer.links.StatefulGRU">StatefulGRU (class in chainer.links)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.sum">sum() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.swapaxes">swapaxes() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="T">T</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/functions.html#chainer.functions.tanh">tanh() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/function_hooks.html#chainer.function_hooks.TimerHook">TimerHook (class in chainer.function_hooks)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/link.html#chainer.Link.to_cpu">to_cpu() (chainer.Link method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/variable.html#chainer.Variable.to_cpu">(chainer.Variable method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/util/cuda.html#chainer.cuda.to_cpu">(in module chainer.cuda)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/core/link.html#chainer.Link.to_gpu">to_gpu() (chainer.Link method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/variable.html#chainer.Variable.to_gpu">(chainer.Variable method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/util/algorithm.html#chainer.utils.WalkerAlias.to_gpu">(chainer.utils.WalkerAlias method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/util/cuda.html#chainer.cuda.to_gpu">(in module chainer.cuda)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/function_hooks.html#chainer.function_hooks.TimerHook.total_time">total_time() (chainer.function_hooks.TimerHook method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.transpose">transpose() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.TypeInfo">TypeInfo (class in chainer.utils.type_check)</a>
+  </dt>
+
+      
+  <dt><a href="reference/check.html#chainer.utils.type_check.TypeInfoTuple">TypeInfoTuple (class in chainer.utils.type_check)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/function.html#chainer.Function.unchain">unchain() (chainer.Function method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.unchain_backward">unchain_backward() (chainer.Variable method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.unpooling_2d">unpooling_2d() (in module chainer.functions)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.GradientMethod.update">update() (chainer.GradientMethod method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.update">(chainer.Optimizer method)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.GradientMethod.update_one">update_one() (chainer.GradientMethod method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.GradientMethod.update_one_cpu">update_one_cpu() (chainer.GradientMethod method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.GradientMethod.update_one_gpu">update_one_gpu() (chainer.GradientMethod method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable">Variable (class in chainer)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="W">W</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/util/algorithm.html#chainer.utils.WalkerAlias">WalkerAlias (class in chainer.utils)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.weight_decay">weight_decay() (chainer.Optimizer method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.optimizer.WeightDecay">WeightDecay (class in chainer.optimizer)</a>
+  </dt>
+
+      
+  <dt><a href="reference/functions.html#chainer.functions.where">where() (in module chainer.functions)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="X">X</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/link.html#chainer.Link.xp">xp (chainer.Link attribute)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/optimizer.html#chainer.Optimizer.zero_grads">zero_grads() (chainer.Optimizer method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/core/variable.html#chainer.Variable.zerograd">zerograd() (chainer.Variable method)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/core/link.html#chainer.Link.zerograds">zerograds() (chainer.Link method)</a>
+  </dt>
+
+  </dl></td>
+</tr></table>
+
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

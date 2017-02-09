@@ -1,0 +1,621 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Function &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Core functionalities" href="../core.html"/>
+        <link rel="next" title="Link and Chain" href="link.html"/>
+        <link rel="prev" title="Flag" href="flag.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Chainer Reference Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Chainer Reference Manual</a> &raquo;</li>
+      
+          <li><a href="../core.html">Core functionalities</a> &raquo;</li>
+      
+    <li>Function</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../_sources/reference/core/function.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="function">
+<h1>Function<a class="headerlink" href="#function" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="chainer.Function">
+<em class="property">class </em><code class="descclassname">chainer.</code><code class="descname">Function</code><a class="reference internal" href="../../_modules/chainer/function.html#Function"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function on variables with backpropagation ability.</p>
+<p>All function implementations defined in <a class="reference internal" href="../functions.html#module-chainer.functions" title="chainer.functions"><code class="xref py py-mod docutils literal"><span class="pre">chainer.functions</span></code></a> inherit
+this class.</p>
+<p>The main feature of this class is keeping track of function applications as
+a backward graph. When a function is applied to <a class="reference internal" href="variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects,
+its <a class="reference internal" href="#chainer.Function.forward" title="chainer.Function.forward"><code class="xref py py-meth docutils literal"><span class="pre">forward()</span></code></a> method is called on <code class="xref py py-data docutils literal"><span class="pre">data</span></code> fields of
+input variables, and at the same time it chains references from output
+variables to the function and from the function to its inputs.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>As of v1.5, a function instance cannot be used twice in any
+computational graphs. In order to reuse a function object multiple
+times, use <a class="reference external" href="https://docs.python.org/3/library/copy.html#copy.copy" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">copy.copy()</span></code></a> before the function applications to make a
+copy of the instance.</p>
+<p class="last">This restriction also means that we cannot make a <em>stateful function</em>
+anymore. For example, it is now not allowed to let a function hold
+parameters. Define a function as a pure (stateless) procedure, and use
+<a class="reference internal" href="link.html#chainer.Link" title="chainer.Link"><code class="xref py py-class docutils literal"><span class="pre">Link</span></code></a> to combine it with parameter variables.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>Let <code class="docutils literal"><span class="pre">x</span></code> an instance of <a class="reference internal" href="variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> and <code class="docutils literal"><span class="pre">f</span></code> an instance of
+<a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> taking only one argument. Then a line</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span><span class="o">,</span> <span class="nn">chainer</span><span class="o">,</span> <span class="nn">chainer.functions</span> <span class="kn">as</span> <span class="nn">F</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">chainer</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>computes a new variable <code class="docutils literal"><span class="pre">y</span></code> and creates backward references. Actually,
+backward references are set as per the following diagram:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">x</span> <span class="o">&lt;---</span> <span class="n">f</span> <span class="o">&lt;---</span> <span class="n">y</span>
+</pre></div>
+</div>
+<p>If an application of another function <code class="docutils literal"><span class="pre">g</span></code> occurs as</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">Identity</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>then the graph grows with a branch:</p>
+<div class="highlight-python"><div class="highlight"><pre>    |--- f &lt;--- y
+x &lt;-+
+    |--- g &lt;--- z
+</pre></div>
+</div>
+<p class="last">Note that the branching is correctly managed on backward computation,
+i.e. the gradients from <code class="docutils literal"><span class="pre">f</span></code> and <code class="docutils literal"><span class="pre">g</span></code> are accumulated to the gradient
+of <code class="docutils literal"><span class="pre">x</span></code>.</p>
+</div>
+<p>Every function implementation should provide <a class="reference internal" href="#chainer.Function.forward_cpu" title="chainer.Function.forward_cpu"><code class="xref py py-meth docutils literal"><span class="pre">forward_cpu()</span></code></a>,
+<a class="reference internal" href="#chainer.Function.forward_gpu" title="chainer.Function.forward_gpu"><code class="xref py py-meth docutils literal"><span class="pre">forward_gpu()</span></code></a>, <a class="reference internal" href="#chainer.Function.backward_cpu" title="chainer.Function.backward_cpu"><code class="xref py py-meth docutils literal"><span class="pre">backward_cpu()</span></code></a> and <a class="reference internal" href="#chainer.Function.backward_gpu" title="chainer.Function.backward_gpu"><code class="xref py py-meth docutils literal"><span class="pre">backward_gpu()</span></code></a>.
+Alternatively, one can provide <a class="reference internal" href="#chainer.Function.forward" title="chainer.Function.forward"><code class="xref py py-meth docutils literal"><span class="pre">forward()</span></code></a> and <a class="reference internal" href="#chainer.Function.backward" title="chainer.Function.backward"><code class="xref py py-meth docutils literal"><span class="pre">backward()</span></code></a> instead
+of separate methods. Backward methods have default implementations that
+just return <code class="docutils literal"><span class="pre">None</span></code>, which indicates that the function is non-
+differentiable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>inputs</strong> &#8211; A tuple or list of input variables.</li>
+<li><strong>outputs</strong> &#8211; A tuple or list of output variables.</li>
+<li><strong>type_check_enable</strong> &#8211; When it is <code class="docutils literal"><span class="pre">True</span></code>, the function checks types of
+input arguments. Set <code class="docutils literal"><span class="pre">CHAINER_TYPE_CHECK</span></code> environment variable
+<code class="docutils literal"><span class="pre">0</span></code> to disable type check, or set the variable directly in
+your own program.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.Function.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>*inputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies forward propagation with chaining backward references.</p>
+<p>Basic behavior is expressed in documentation of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a>
+class.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If the <code class="xref py py-data docutils literal"><span class="pre">data</span></code> attribute of input variables exist on
+GPU device, then, before it calls <a class="reference internal" href="#chainer.Function.forward" title="chainer.Function.forward"><code class="xref py py-meth docutils literal"><span class="pre">forward()</span></code></a> method, the
+appropriate device is selected, so in most cases implementers do
+not need to take care of device selection.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> &#8211; Tuple of input <a class="reference internal" href="variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects. The volatile
+flags of all input variables must agree.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">class:<cite>Variable</cite> object or a tuple of multiple
+<a class="reference internal" href="variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">One</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.add_hook">
+<code class="descname">add_hook</code><span class="sig-paren">(</span><em>hook</em>, <em>name=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.add_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.add_hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers the function hook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>hook</strong> (<a class="reference internal" href="../function_hooks.html#chainer.function.FunctionHook" title="chainer.function.FunctionHook"><em>FunctionHook</em></a>) &#8211; the function hook to be registered.</li>
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; The name of the function hook.
+name must be unique among function hooks
+registered to the function. If <code class="docutils literal"><span class="pre">None</span></code>,
+default name of the function hook is used.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.backward">
+<code class="descname">backward</code><span class="sig-paren">(</span><em>inputs</em>, <em>grad_outputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.backward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.backward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies backprop to output gradient arrays.</p>
+<p>It delegates the procedure to <a class="reference internal" href="#chainer.Function.backward_cpu" title="chainer.Function.backward_cpu"><code class="xref py py-meth docutils literal"><span class="pre">backward_cpu()</span></code></a> or
+<a class="reference internal" href="#chainer.Function.backward_gpu" title="chainer.Function.backward_gpu"><code class="xref py py-meth docutils literal"><span class="pre">backward_gpu()</span></code></a> by default. Which it selects is determined by the
+type of input arrays and output gradient arrays. Implementations of
+<a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must implement either CPU/GPU methods or this method,
+if the function is intended to be backprop-ed.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> &#8211; Tuple of input arrays.</li>
+<li><strong>grad_outputs</strong> &#8211; Tuple of output gradient arrays.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Tuple of input gradient arrays. Some or all of them can be
+<code class="docutils literal"><span class="pre">None</span></code>, if the function is not differentiable on
+inputs.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.backward_cpu">
+<code class="descname">backward_cpu</code><span class="sig-paren">(</span><em>inputs</em>, <em>grad_outputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.backward_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.backward_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies backprop to output gradient arrays on CPU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> &#8211; Tuple of input <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> object(s).</li>
+<li><strong>grad_outputs</strong> &#8211; Tuple of output gradient <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>
+object(s).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Tuple of input gradient <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> object(s).
+Some or all of them can be <code class="docutils literal"><span class="pre">None</span></code>, if the function is not
+differentiable on corresponding inputs.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.backward_gpu">
+<code class="descname">backward_gpu</code><span class="sig-paren">(</span><em>inputs</em>, <em>grad_outputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.backward_gpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.backward_gpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies backprop to output gradient arrays on GPU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> &#8211; Tuple of input <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code>
+object(s).</li>
+<li><strong>grad_outputs</strong> &#8211; Tuple of output gradient
+<code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> object(s).</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Tuple of input gradient <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code>
+object(s). Some or all of them can be <code class="docutils literal"><span class="pre">None</span></code>, if the function is
+not differentiable on corresponding inputs.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.check_type_forward">
+<code class="descname">check_type_forward</code><span class="sig-paren">(</span><em>in_types</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.check_type_forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.check_type_forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks types of input data before forward propagation.</p>
+<p>Before <a class="reference internal" href="#chainer.Function.forward" title="chainer.Function.forward"><code class="xref py py-meth docutils literal"><span class="pre">forward()</span></code></a> is called, this function is called.
+You need to validate types of input data in this function
+using <a class="reference internal" href="../check.html#type-check-utils"><span>the type checking utilities</span></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>in_types</strong> (<a class="reference internal" href="../check.html#chainer.utils.type_check.TypeInfoTuple" title="chainer.utils.type_check.TypeInfoTuple"><em>TypeInfoTuple</em></a>) &#8211; The type
+information of input data for <a class="reference internal" href="#chainer.Function.forward" title="chainer.Function.forward"><code class="xref py py-meth docutils literal"><span class="pre">forward()</span></code></a>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.delete_hook">
+<code class="descname">delete_hook</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.delete_hook"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.delete_hook" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unregisters the function hook.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; the name of the function hook</li>
+<li><strong>be unregistered.</strong> (<em>to</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.forward">
+<code class="descname">forward</code><span class="sig-paren">(</span><em>inputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.forward"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.forward" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies forward propagation to input arrays.</p>
+<p>It delegates the procedure to <a class="reference internal" href="#chainer.Function.forward_cpu" title="chainer.Function.forward_cpu"><code class="xref py py-meth docutils literal"><span class="pre">forward_cpu()</span></code></a> or
+<a class="reference internal" href="#chainer.Function.forward_gpu" title="chainer.Function.forward_gpu"><code class="xref py py-meth docutils literal"><span class="pre">forward_gpu()</span></code></a> by default. Which it selects is determined by the
+type of input arrays.
+Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must implement either CPU/GPU
+methods or this method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> &#8211; Tuple of input array(s).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tuple of output array(s).</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.forward_cpu">
+<code class="descname">forward_cpu</code><span class="sig-paren">(</span><em>inputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.forward_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.forward_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies forward propagation to input arrays on CPU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> &#8211; Tuple of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> object(s).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tuple of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> object(s).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.forward_gpu">
+<code class="descname">forward_gpu</code><span class="sig-paren">(</span><em>inputs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.forward_gpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.forward_gpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies forward propagation to input arrays on GPU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> &#8211; Tuple of <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> object(s).</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Tuple of <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> object(s).</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Implementations of <a class="reference internal" href="#chainer.Function" title="chainer.Function"><code class="xref py py-class docutils literal"><span class="pre">Function</span></code></a> must take care that the
+return value must be a tuple even if it returns only one array.</p>
+</div>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chainer.Function.label">
+<code class="descname">label</code><a class="headerlink" href="#chainer.Function.label" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short text that represents the function.</p>
+<p>The default implementation returns its type name.
+Each function should override it to give more information.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="chainer.Function.local_function_hooks">
+<code class="descname">local_function_hooks</code><a class="headerlink" href="#chainer.Function.local_function_hooks" title="Permalink to this definition">¶</a></dt>
+<dd><p>Ordered Dictionary of registered function hooks.</p>
+<p>Contrary to <code class="docutils literal"><span class="pre">chainer.thread_local.function_hooks</span></code>,
+which registers its elements to all functions,
+Function hooks in this property is specific to this function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.Function.unchain">
+<code class="descname">unchain</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/function.html#Function.unchain"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.Function.unchain" title="Permalink to this definition">¶</a></dt>
+<dd><p>Purges in/out variables and this function itself from the graph.</p>
+<p>This method is called from <a class="reference internal" href="variable.html#chainer.Variable.unchain_backward" title="chainer.Variable.unchain_backward"><code class="xref py py-meth docutils literal"><span class="pre">Variable.unchain_backward()</span></code></a> method.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="link.html" class="btn btn-neutral float-right" title="Link and Chain">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="flag.html" class="btn btn-neutral" title="Flag"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

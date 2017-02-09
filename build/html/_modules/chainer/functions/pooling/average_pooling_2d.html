@@ -1,0 +1,385 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.functions.pooling.average_pooling_2d &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="chainer" href="../../../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.functions.pooling.average_pooling_2d</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.functions.pooling.average_pooling_2d</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span>
+
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">from</span> <span class="nn">chainer.functions.pooling</span> <span class="kn">import</span> <span class="n">pooling_2d</span>
+<span class="kn">from</span> <span class="nn">chainer.utils</span> <span class="kn">import</span> <span class="n">conv</span>
+
+<span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn_enabled</span><span class="p">:</span>
+    <span class="n">cudnn</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn</span>
+    <span class="n">libcudnn</span> <span class="o">=</span> <span class="n">cudnn</span><span class="o">.</span><span class="n">cudnn</span>
+
+
+<span class="k">class</span> <span class="nc">AveragePooling2D</span><span class="p">(</span><span class="n">pooling_2d</span><span class="o">.</span><span class="n">Pooling2D</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Average pooling over a set of 2d planes.&quot;&quot;&quot;</span>
+    <span class="c"># TODO(beam2d): Support cover_all mode.</span>
+
+    <span class="k">def</span> <span class="nf">forward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">im2col_cpu</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span>
+                              <span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">forward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn_enabled</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AveragePooling2D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">forward_gpu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">y_h</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">get_conv_outsize</span><span class="p">(</span><span class="n">h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">)</span>
+        <span class="n">y_w</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">get_conv_outsize</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">y_h</span><span class="p">,</span> <span class="n">y_w</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">cuda</span><span class="o">.</span><span class="n">elementwise</span><span class="p">(</span>
+            <span class="s">&#39;raw T in, int32 h, int32 w,&#39;</span>
+            <span class="s">&#39;int32 out_h, int32 out_w, int32 kh, int32 kw,&#39;</span>
+            <span class="s">&#39;int32 sy, int32 sx, int32 ph, int32 pw, T coeff&#39;</span><span class="p">,</span>
+            <span class="s">&#39;T out&#39;</span><span class="p">,</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">               int c0    = i / (out_h * out_w);</span>
+<span class="sd">               int out_y = i / out_w % out_h;</span>
+<span class="sd">               int out_x = i % out_w;</span>
+<span class="sd">               int in_y_0 = max(0, out_y * sy - ph);</span>
+<span class="sd">               int in_y_1 = min(h, out_y * sy + kh - ph);</span>
+<span class="sd">               int in_x_0 = max(0, out_x * sx - pw);</span>
+<span class="sd">               int in_x_1 = min(w, out_x * sx + kw - pw);</span>
+
+<span class="sd">               float val = 0;</span>
+<span class="sd">               for (int y = in_y_0; y &lt; in_y_1; ++y) {</span>
+<span class="sd">                 int offset_y = w * (y + h * c0);</span>
+<span class="sd">                 for (int x = in_x_0; x &lt; in_x_1; ++x) {</span>
+<span class="sd">                   val += in[x + offset_y];</span>
+<span class="sd">                 }</span>
+<span class="sd">               }</span>
+<span class="sd">               out = val * coeff;</span>
+<span class="sd">            &#39;&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;avg_pool_fwd&#39;</span><span class="p">)(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_view</span><span class="p">(),</span>
+                                 <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">y_h</span><span class="p">,</span> <span class="n">y_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span>
+                                 <span class="n">y</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">backward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">):</span>
+        <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">gcol</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">tile</span><span class="p">(</span><span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">][:,</span> <span class="p">:,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span>
+                          <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">gx</span> <span class="o">=</span> <span class="n">conv</span><span class="o">.</span><span class="n">col2im_cpu</span><span class="p">(</span><span class="n">gcol</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+        <span class="n">gx</span> <span class="o">/=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span>
+        <span class="k">return</span> <span class="n">gx</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">backward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn_enabled</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">AveragePooling2D</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">backward_gpu</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">)</span>
+
+        <span class="n">n</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">w</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">y_h</span><span class="p">,</span> <span class="n">y_w</span> <span class="o">=</span> <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">gx</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kh</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">cuda</span><span class="o">.</span><span class="n">elementwise</span><span class="p">(</span>
+            <span class="s">&#39;raw T gy, int32 h, int32 w,&#39;</span>
+            <span class="s">&#39;int32 out_h, int32 out_w, int32 kh, int32 kw,&#39;</span>
+            <span class="s">&#39;int32 sy, int32 sx, int32 ph, int32 pw, T coeff&#39;</span><span class="p">,</span>
+            <span class="s">&#39;T gx&#39;</span><span class="p">,</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">               int c0 = i / (h * w);</span>
+<span class="sd">               int y  = i / w % h + ph;</span>
+<span class="sd">               int x  = i % w + pw;</span>
+<span class="sd">               int out_y_0 = max(0,     (y - kh + sy) / sy);</span>
+<span class="sd">               int out_y_1 = min(out_h, (y      + sy) / sy);</span>
+<span class="sd">               int out_x_0 = max(0,     (x - kw + sx) / sx);</span>
+<span class="sd">               int out_x_1 = min(out_w, (x      + sx) / sx);</span>
+<span class="sd">               int hc0  = out_h * c0;</span>
+
+<span class="sd">               float val = 0;</span>
+<span class="sd">               for (int out_y = out_y_0; out_y &lt; out_y_1; ++out_y) {</span>
+<span class="sd">                 for (int out_x = out_x_0; out_x &lt; out_x_1; ++out_x) {</span>
+<span class="sd">                   val += gy[out_x + out_w * (out_y + hc0)];</span>
+<span class="sd">                 }</span>
+<span class="sd">               }</span>
+<span class="sd">               gx = val * coeff;</span>
+<span class="sd">            &#39;&#39;&#39;</span><span class="p">,</span> <span class="s">&#39;avg_pool_bwd&#39;</span><span class="p">)(</span><span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reduced_view</span><span class="p">(),</span>
+                                 <span class="n">h</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">y_h</span><span class="p">,</span> <span class="n">y_w</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">,</span>
+                                 <span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span>
+                                 <span class="n">gx</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gx</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">create_pool_desc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">cudnn</span><span class="o">.</span><span class="n">create_pooling_descriptor</span><span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">kh</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kw</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sy</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sx</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pw</span><span class="p">),</span>
+            <span class="n">libcudnn</span><span class="o">.</span><span class="n">CUDNN_POOLING_AVERAGE_COUNT_INCLUDE_PADDING</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="average_pooling_2d"><a class="viewcode-back" href="../../../../reference/functions.html#chainer.functions.average_pooling_2d">[docs]</a><span class="k">def</span> <span class="nf">average_pooling_2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ksize</span><span class="p">,</span> <span class="n">stride</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Spatial average pooling function.</span>
+
+<span class="sd">    This function acts similarly to :class:`~functions.Convolution2D`, but</span>
+<span class="sd">    it computes the average of input spatial patch for each channel</span>
+<span class="sd">    without any parameter instead of computing the inner products.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (~chainer.Variable): Input variable.</span>
+<span class="sd">        ksize (int or pair of ints): Size of pooling window. ``ksize=k`` and</span>
+<span class="sd">            ``ksize=(k, k)`` are equivalent.</span>
+<span class="sd">        stride (int or pair of ints or None): Stride of pooling applications.</span>
+<span class="sd">            ``stride=s`` and ``stride=(s, s)`` are equivalent. If None is</span>
+<span class="sd">            specified, then it uses same stride as the pooling window size.</span>
+<span class="sd">        pad (int or pair of ints): Spatial padding width for the input array.</span>
+<span class="sd">            ``pad=p`` and ``pad=(p, p)`` are equivalent.</span>
+<span class="sd">        use_cudnn (bool): If ``True`` and cuDNN is enabled, then this function</span>
+<span class="sd">            uses cuDNN as the core implementation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ~chainer.Variable: Output variable.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">       This function currently does not support ``cover_all`` mode as</span>
+<span class="sd">       :func:`max_pooling_2d`. Average pooling runs in non-cover-all mode.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">AveragePooling2D</span><span class="p">(</span><span class="n">ksize</span><span class="p">,</span> <span class="n">stride</span><span class="p">,</span> <span class="n">pad</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

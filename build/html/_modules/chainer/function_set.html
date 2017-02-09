@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.function_set &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../index.html"/>
+        <link rel="up" title="chainer" href="../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.function_set</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.function_set</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">link</span>
+
+
+<div class="viewcode-block" id="FunctionSet"><a class="viewcode-back" href="../../reference/core/function_set.html#chainer.FunctionSet">[docs]</a><span class="k">class</span> <span class="nc">FunctionSet</span><span class="p">(</span><span class="n">link</span><span class="o">.</span><span class="n">Chain</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Set of links (as &quot;parameterized functions&quot;).</span>
+
+<span class="sd">    FunctionSet is a subclass of :class:`~chainer.Chain`. Function</span>
+<span class="sd">    registration is done just by adding an attribute to :class:`</span>
+<span class="sd">    object.</span>
+
+<span class="sd">    .. deprecated:: v1.5</span>
+<span class="sd">       Use :class:`~chainer.Chain` instead.</span>
+
+<span class="sd">       .. note::</span>
+<span class="sd">          FunctionSet was used for manipulation of one or more parameterized</span>
+<span class="sd">          functions. The concept of parameterized function is gone, and it has</span>
+<span class="sd">          been replaced by :class:`~chainer.Link` and :class:`~chainer.Chain`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">links</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">FunctionSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">links</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s">&#39;FunctionSet is deprecated. Use Chain instead.&#39;</span><span class="p">,</span>
+                      <span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">link</span><span class="o">.</span><span class="n">Link</span><span class="p">):</span>
+            <span class="c"># we cannot use add_link here since add_link calls setattr, and we</span>
+            <span class="c"># should allow overwriting for backward compatibility</span>
+            <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="s">&#39;given link is already registered to another chain by name&#39;</span>
+                    <span class="s">&#39; </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">value</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">None</span>
+                <span class="k">del</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">d</span><span class="p">[</span><span class="s">&#39;_children&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            <span class="n">value</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="c"># deal with properties</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="nb">property</span><span class="p">)</span> <span class="ow">and</span> <span class="n">prop</span><span class="o">.</span><span class="n">fset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">prop</span><span class="o">.</span><span class="n">fset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">FunctionSet</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__setattr__</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<div class="viewcode-block" id="FunctionSet.collect_parameters"><a class="viewcode-back" href="../../reference/core/function_set.html#chainer.FunctionSet.collect_parameters">[docs]</a>    <span class="k">def</span> <span class="nf">collect_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a tuple of parameters and gradients.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Tuple (pair) of two tuples. The first element is a tuple of</span>
+<span class="sd">            parameter arrays, and the second is a tuple of gradient arrays.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;&#39;collect_parameters&#39; is deprecated. &quot;</span>
+               <span class="s">&quot;You can pass FunctionSet itself to &#39;optimizer.setup&#39;&quot;</span><span class="p">)</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="ne">FutureWarning</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+</div>
+<div class="viewcode-block" id="FunctionSet.__getitem__"><a class="viewcode-back" href="../../reference/core/function_set.html#chainer.FunctionSet.__getitem__">[docs]</a>    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns an attribute by name.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            key (str): Name of the attribute.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Attribute.</span>
+
+<span class="sd">        .. admonition:: Example</span>
+
+<span class="sd">           &gt;&gt;&gt; import chainer.links as L</span>
+<span class="sd">           &gt;&gt;&gt; model = FunctionSet(l1=L.Linear(10, 10), l2=L.Linear(10, 10))</span>
+<span class="sd">           &gt;&gt;&gt; l1 = model[&#39;l1&#39;]  # equivalent to l1 = model.l1</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="FunctionSet.copy_parameters_from"><a class="viewcode-back" href="../../reference/core/function_set.html#chainer.FunctionSet.copy_parameters_from">[docs]</a>    <span class="k">def</span> <span class="nf">copy_parameters_from</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies parameters from another source without reallocation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            params (Iterable): Iterable of parameter arrays.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">dst</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parameters</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                    <span class="n">numpy</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">dst</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">src</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+                <span class="n">dst</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">cuda</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">dst</span><span class="p">)</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tuple of parameter arrays of all registered functions.</span>
+
+<span class="sd">        The order of parameters is consistent with :meth:`parameters` property.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">())</span>
+
+    <span class="nd">@parameters.setter</span>
+    <span class="k">def</span> <span class="nf">parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">params</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">()])</span>
+        <span class="k">for</span> <span class="n">dst</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">(),</span> <span class="n">params</span><span class="p">):</span>
+            <span class="n">dst</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">src</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">gradients</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tuple of gradient arrays of all registered functions.</span>
+
+<span class="sd">        The order of gradients is consistent with :meth:`parameters` property.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">param</span><span class="o">.</span><span class="n">grad</span> <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">())</span>
+
+    <span class="nd">@gradients.setter</span>
+    <span class="k">def</span> <span class="nf">gradients</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">grads</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">grads</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">([</span><span class="n">_</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">()])</span>
+        <span class="k">for</span> <span class="n">dst</span><span class="p">,</span> <span class="n">src</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">params</span><span class="p">(),</span> <span class="n">grads</span><span class="p">):</span>
+            <span class="n">dst</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">src</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

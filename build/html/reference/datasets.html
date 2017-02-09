@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Dataset examples &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Chainer Reference Manual" href="index.html"/>
+        <link rel="next" title="Iterator examples" href="iterators.html"/>
+        <link rel="prev" title="Weight Initializers" href="initializers.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Chainer Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Chainer Reference Manual</a> &raquo;</li>
+      
+    <li>Dataset examples</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/reference/datasets.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <span class="target" id="module-chainer.datasets"></span><div class="section" id="dataset-examples">
+<span id="datasets"></span><h1>Dataset examples<a class="headerlink" href="#dataset-examples" title="Permalink to this headline">¶</a></h1>
+<p>The most basic <a class="reference internal" href="core/dataset.html#module-chainer.dataset" title="chainer.dataset"><code class="xref py py-mod docutils literal"><span class="pre">dataset</span></code></a> implementation is an array.
+Both NumPy and CuPy arrays can be used directly as datasets.</p>
+<p>In many cases, though, the simple arrays are not enough to write the training procedure.
+In order to cover most of such cases, Chainer provides many built-in implementations of datasets.</p>
+<p>These built-in datasets are divided into two groups.
+One is a group of general datasets.
+Most of them are wrapper of other datasets to introduce some structures (e.g., tuple or dict) to each data point.
+The other one is a group of concrete, popular datasets.
+These concrete examples use the downloading utilities in the <a class="reference internal" href="core/dataset.html#module-chainer.dataset" title="chainer.dataset"><code class="xref py py-mod docutils literal"><span class="pre">chainer.dataset</span></code></a> module to cache downloaded and converted datasets.</p>
+<div class="section" id="general-datasets">
+<h2>General datasets<a class="headerlink" href="#general-datasets" title="Permalink to this headline">¶</a></h2>
+<p>General datasets are further divided into three types.</p>
+<p>The first one is <code class="xref py py-class docutils literal"><span class="pre">DictDataset</span></code> and <code class="xref py py-class docutils literal"><span class="pre">TupleDataset</span></code>, both of which combine other datasets and introduce some structures on them.</p>
+<p>The second one is <code class="xref py py-class docutils literal"><span class="pre">SubDataset</span></code>, which represents a subset of an existing dataset. It can be used to separate a dataset for hold-out validation or cross validation. Convenient functions to make random splits are also provided.</p>
+<p>The last one is a group of domain-specific datasets. Currently, <code class="xref py py-class docutils literal"><span class="pre">ImageDataset</span></code> and <code class="xref py py-class docutils literal"><span class="pre">LabeledImageDataset</span></code> are provided for datasets of images.</p>
+<div class="section" id="dictdataset">
+<h3>DictDataset<a class="headerlink" href="#dictdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="tupledataset">
+<h3>TupleDataset<a class="headerlink" href="#tupledataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="subdataset">
+<h3>SubDataset<a class="headerlink" href="#subdataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="imagedataset">
+<h3>ImageDataset<a class="headerlink" href="#imagedataset" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="labeledimagedataset">
+<h3>LabeledImageDataset<a class="headerlink" href="#labeledimagedataset" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="concrete-datasets">
+<h2>Concrete datasets<a class="headerlink" href="#concrete-datasets" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="mnist">
+<h3>MNIST<a class="headerlink" href="#mnist" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="cifar10-100">
+<h3>CIFAR10/100<a class="headerlink" href="#cifar10-100" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="penn-tree-bank">
+<h3>Penn Tree Bank<a class="headerlink" href="#penn-tree-bank" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="iterators.html" class="btn btn-neutral float-right" title="Iterator examples">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="initializers.html" class="btn btn-neutral" title="Weight Initializers"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

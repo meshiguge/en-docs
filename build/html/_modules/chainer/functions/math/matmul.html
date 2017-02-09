@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.functions.math.matmul &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="chainer" href="../../../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.functions.math.matmul</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.functions.math.matmul</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">function</span>
+<span class="kn">from</span> <span class="nn">chainer.utils</span> <span class="kn">import</span> <span class="n">array</span>
+<span class="kn">from</span> <span class="nn">chainer.utils</span> <span class="kn">import</span> <span class="n">type_check</span>
+
+
+<span class="k">def</span> <span class="nf">_mat_ptrs</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Creates an array of pointers to matrices</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a: A batch of matrices on GPU.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        GPU array of pointers to matrices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">1</span><span class="p">,),</span> <span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uintp</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">stride</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">ptr</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span>
+        <span class="k">return</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span> <span class="n">ptr</span> <span class="o">+</span> <span class="n">stride</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">stride</span><span class="p">,</span>
+                                <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">uintp</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_as_batch_mat</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_batch_mat_shape</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+        <span class="n">s</span> <span class="o">*=</span> <span class="n">x</span>
+    <span class="k">return</span> <span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">s</span><span class="p">,)</span>
+
+
+<span class="k">def</span> <span class="nf">_matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">as_mat</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">as_mat</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transa</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">if</span> <span class="n">transb</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">if</span> <span class="n">transout</span><span class="p">:</span>
+        <span class="c"># (A B)^T = B^T A^T</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_get_ld</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="n">strides</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">strides</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span>
+    <span class="n">trans</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">trans</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">trans</span> <span class="o">-</span> <span class="mi">2</span><span class="p">],</span> <span class="nb">max</span><span class="p">(</span><span class="n">strides</span><span class="p">)</span> <span class="o">//</span> <span class="n">a</span><span class="o">.</span><span class="n">itemsize</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_batch_matmul_gpu</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">_as_batch_mat</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">_as_batch_mat</span><span class="p">(</span><span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="n">trans_axis</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transout</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">trans_axis</span><span class="p">)</span>
+    <span class="n">needtrans</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_get_ld</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">needtrans</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c"># (A B)^T = B^T A^T</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span>
+        <span class="n">transa</span><span class="p">,</span> <span class="n">transb</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">transb</span><span class="p">,</span> <span class="ow">not</span> <span class="n">transa</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">trans_axis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transa</span><span class="p">:</span>
+        <span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">trans_axis</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">transb</span><span class="p">:</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">trans_axis</span><span class="p">)</span>
+
+    <span class="n">transa</span><span class="p">,</span> <span class="n">lda</span> <span class="o">=</span> <span class="n">_get_ld</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">transb</span><span class="p">,</span> <span class="n">ldb</span> <span class="o">=</span> <span class="n">_get_ld</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">transout</span><span class="p">,</span> <span class="n">ldout</span> <span class="o">=</span> <span class="n">_get_ld</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">la</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ka</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">lb</span><span class="p">,</span> <span class="n">kb</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="k">assert</span> <span class="n">ka</span> <span class="o">==</span> <span class="n">kb</span>
+    <span class="k">assert</span> <span class="n">transout</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">ldout</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="k">assert</span> <span class="n">out</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="n">la</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+    <span class="n">ap</span> <span class="o">=</span> <span class="n">_mat_ptrs</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">bp</span> <span class="o">=</span> <span class="n">_mat_ptrs</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">outp</span> <span class="o">=</span> <span class="n">_mat_ptrs</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">cuda</span><span class="o">.</span><span class="n">cublas</span><span class="o">.</span><span class="n">sgemmBatched</span><span class="p">(</span>
+        <span class="n">cuda</span><span class="o">.</span><span class="n">Device</span><span class="p">()</span><span class="o">.</span><span class="n">cublas_handle</span><span class="p">,</span>
+        <span class="n">transa</span><span class="p">,</span>
+        <span class="n">transb</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">ka</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span>
+        <span class="n">ap</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">lda</span><span class="p">,</span>
+        <span class="n">bp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">ldb</span><span class="p">,</span>
+        <span class="mf">0.0</span><span class="p">,</span> <span class="n">outp</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">ldout</span><span class="p">,</span> <span class="n">la</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_check_ndim</span><span class="p">(</span><span class="n">in_type</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+        <span class="n">in_type</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;=</span> <span class="n">lower</span><span class="p">,</span>
+        <span class="n">in_type</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&lt;=</span> <span class="n">upper</span>
+    <span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_type</span><span class="p">(</span><span class="n">in_type</span><span class="p">,</span> <span class="n">vector_ndim</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">in_type</span><span class="o">.</span><span class="n">ndim</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="o">==</span> <span class="n">vector_ndim</span><span class="p">:</span>
+        <span class="n">in_type</span> <span class="o">=</span> <span class="n">type_check</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span>
+            <span class="n">type_check</span><span class="o">.</span><span class="n">TypeInfo</span><span class="p">(</span><span class="n">in_type</span><span class="o">.</span><span class="n">shape</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span>
+                                <span class="n">in_type</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span>
+            <span class="s">&#39;</span><span class="si">%s</span><span class="s">(1-D array)&#39;</span> <span class="o">%</span> <span class="n">in_type</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">in_type</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">(2-D array)&#39;</span> <span class="o">%</span> <span class="n">in_type</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">return</span> <span class="n">in_type</span>
+
+
+<span class="k">def</span> <span class="nf">_get_check_index</span><span class="p">(</span><span class="n">trans</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">row_idx</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">trans</span> <span class="o">^</span> <span class="n">right</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">row_idx</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">col_idx</span>
+
+
+<span class="k">class</span> <span class="nc">MatMul</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transa</span> <span class="o">=</span> <span class="n">transa</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transb</span> <span class="o">=</span> <span class="n">transb</span>
+
+    <span class="k">def</span> <span class="nf">check_type_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_types</span><span class="p">):</span>
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">in_types</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">a_type</span><span class="p">,</span> <span class="n">b_type</span> <span class="o">=</span> <span class="n">in_types</span>
+
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+            <span class="n">a_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="n">b_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span>
+        <span class="p">)</span>
+
+        <span class="n">_check_ndim</span><span class="p">(</span><span class="n">a_type</span><span class="p">)</span>
+        <span class="n">_check_ndim</span><span class="p">(</span><span class="n">b_type</span><span class="p">)</span>
+
+        <span class="n">a_type</span> <span class="o">=</span> <span class="n">_convert_type</span><span class="p">(</span><span class="n">a_type</span><span class="p">)</span>
+        <span class="n">b_type</span> <span class="o">=</span> <span class="n">_convert_type</span><span class="p">(</span><span class="n">b_type</span><span class="p">)</span>
+        <span class="n">a_idx</span> <span class="o">=</span> <span class="n">_get_check_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="n">b_idx</span> <span class="o">=</span> <span class="n">_get_check_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+            <span class="n">a_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">a_idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">b_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">b_idx</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_matmul</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">transa</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">),</span>
+
+    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">):</span>
+        <span class="n">gx0</span> <span class="o">=</span> <span class="n">_matmul</span><span class="p">(</span>
+            <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">transb</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">gx1</span> <span class="o">=</span> <span class="n">_matmul</span><span class="p">(</span>
+            <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">transa</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gx0</span><span class="p">,</span> <span class="n">gx1</span>
+
+
+<div class="viewcode-block" id="matmul"><a class="viewcode-back" href="../../../../reference/functions.html#chainer.functions.matmul">[docs]</a><span class="k">def</span> <span class="nf">matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the matrix multiplication of two arrays.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a (Variable): The left operand of the matrix multiplication.</span>
+<span class="sd">            A 1-D array of shape ``(N,)`` is considered as an</span>
+<span class="sd">            :math:`N \\times 1` matrix.</span>
+<span class="sd">            A 2-D array of shape ``(M, N)`` is considered as an</span>
+<span class="sd">            :math:`M \\times N` matrix.</span>
+<span class="sd">        b (Variable): The right operand of the matrix multiplication.</span>
+<span class="sd">            Its array is treated as a matrix in the same way as ``a``&#39;s array.</span>
+<span class="sd">        transa (bool): If ``True``, transpose a.</span>
+<span class="sd">        transb (bool): If ``True``, transpose b.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ~chainer.Variable: The result of the matrix multiplication as a 2-D</span>
+<span class="sd">            array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">MatMul</span><span class="p">(</span><span class="n">transa</span><span class="o">=</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="n">transb</span><span class="p">)(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+</div>
+<span class="k">class</span> <span class="nc">BatchMatMul</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transa</span> <span class="o">=</span> <span class="n">transa</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transb</span> <span class="o">=</span> <span class="n">transb</span>
+
+    <span class="k">def</span> <span class="nf">_output_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">_get_batch_mat_shape</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">2</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transa</span> <span class="k">else</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">_get_batch_mat_shape</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)[</span><span class="mi">1</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transb</span> <span class="k">else</span> <span class="mi">2</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">batch_size</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">n</span>
+
+    <span class="k">def</span> <span class="nf">check_type_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_types</span><span class="p">):</span>
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">in_types</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">a_type</span><span class="p">,</span> <span class="n">b_type</span> <span class="o">=</span> <span class="n">in_types</span>
+
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+            <span class="n">a_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="n">b_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span>
+        <span class="p">)</span>
+
+        <span class="n">_check_ndim</span><span class="p">(</span><span class="n">a_type</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+        <span class="n">_check_ndim</span><span class="p">(</span><span class="n">b_type</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">upper</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+        <span class="n">a_type</span> <span class="o">=</span> <span class="n">_convert_type</span><span class="p">(</span><span class="n">a_type</span><span class="p">,</span> <span class="n">vector_ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">b_type</span> <span class="o">=</span> <span class="n">_convert_type</span><span class="p">(</span><span class="n">b_type</span><span class="p">,</span> <span class="n">vector_ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">a_idx</span> <span class="o">=</span> <span class="n">_get_check_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="n">row_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_idx</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">b_idx</span> <span class="o">=</span> <span class="n">_get_check_index</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="n">row_idx</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col_idx</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+            <span class="n">a_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">a_idx</span><span class="p">]</span> <span class="o">==</span> <span class="n">b_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">b_idx</span><span class="p">]</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">batch_size</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_shape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">ret_dtype</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">find_common_type</span><span class="p">([</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">b</span><span class="o">.</span><span class="n">dtype</span><span class="p">],</span> <span class="p">[])</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">ret_dtype</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">batch_size</span><span class="p">):</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_matmul</span><span class="p">(</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">transa</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">backward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">ga</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+        <span class="n">a0shape</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">b0shape</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+            <span class="n">ga</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_matmul</span><span class="p">(</span>
+                <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">transb</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span>
+                <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a0shape</span><span class="p">)</span>
+            <span class="n">gb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_matmul</span><span class="p">(</span>
+                <span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="n">transa</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span>
+                <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">b0shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ga</span><span class="p">,</span> <span class="n">gb</span>
+
+    <span class="k">def</span> <span class="nf">forward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_shape</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">_batch_matmul_gpu</span><span class="p">(</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">ret</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">backward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gy</span><span class="p">):</span>
+        <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">ga</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">_get_batch_mat_shape</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">_get_batch_mat_shape</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">),</span> <span class="n">a</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="n">_batch_matmul_gpu</span><span class="p">(</span>
+            <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">b</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">ga</span><span class="p">)</span>
+        <span class="n">_batch_matmul_gpu</span><span class="p">(</span>
+            <span class="n">a</span><span class="p">,</span> <span class="n">gy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">transa</span><span class="o">=</span><span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">transa</span><span class="p">,</span> <span class="n">transout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">transb</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">gb</span><span class="p">)</span>
+        <span class="n">ga</span> <span class="o">=</span> <span class="n">ga</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="n">gb</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ga</span><span class="p">,</span> <span class="n">gb</span>
+
+
+<div class="viewcode-block" id="batch_matmul"><a class="viewcode-back" href="../../../../reference/functions.html#chainer.functions.batch_matmul">[docs]</a><span class="k">def</span> <span class="nf">batch_matmul</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">transa</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the batch matrix multiplications of two sets of arrays.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        a (Variable): The left operand of the batch matrix multiplications.</span>
+<span class="sd">            A 2-D array of shape ``(B, N)`` is considered as B</span>
+<span class="sd">            :math:`N \\times 1` matrices.</span>
+<span class="sd">            A 3-D array of shape ``(B, M, N)`` is considered as B</span>
+<span class="sd">            :math:`M \\times N` matrices.</span>
+<span class="sd">        b (Variable): The right operand of the batch matrix multiplications.</span>
+<span class="sd">            Its array is treated as matrices in the same way as ``a``&#39;s array.</span>
+<span class="sd">        transa (bool): If ``True``, transpose each matrix in a.</span>
+<span class="sd">        transb (bool): If ``True``, transpose each matrix in b.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        ~chainer.Variable: The result of the batch matrix multiplications as a</span>
+<span class="sd">            3-D array.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">BatchMatMul</span><span class="p">(</span><span class="n">transa</span><span class="o">=</span><span class="n">transa</span><span class="p">,</span> <span class="n">transb</span><span class="o">=</span><span class="n">transb</span><span class="p">)(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

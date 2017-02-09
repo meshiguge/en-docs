@@ -1,0 +1,454 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.functions.loss.softmax_cross_entropy &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../../../index.html"/>
+        <link rel="up" title="chainer" href="../../../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../../../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../../../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.functions.loss.softmax_cross_entropy</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.functions.loss.softmax_cross_entropy</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">chainer</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">function</span>
+<span class="kn">from</span> <span class="nn">chainer.utils</span> <span class="kn">import</span> <span class="n">type_check</span>
+
+
+<span class="k">if</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn_enabled</span><span class="p">:</span>
+    <span class="n">cudnn</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn</span>
+    <span class="n">libcudnn</span> <span class="o">=</span> <span class="n">cudnn</span><span class="o">.</span><span class="n">cudnn</span>
+    <span class="n">_algorithm</span> <span class="o">=</span> <span class="n">libcudnn</span><span class="o">.</span><span class="n">CUDNN_SOFTMAX_LOG</span>
+    <span class="n">_mode</span> <span class="o">=</span> <span class="n">libcudnn</span><span class="o">.</span><span class="n">CUDNN_SOFTMAX_MODE_CHANNEL</span>
+    <span class="n">_cudnn_version</span> <span class="o">=</span> <span class="n">libcudnn</span><span class="o">.</span><span class="n">getVersion</span><span class="p">()</span>
+
+
+<span class="k">def</span> <span class="nf">logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="n">m</span>
+    <span class="n">xp</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">xp</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span> <span class="o">+</span> <span class="n">m</span>
+
+
+<span class="k">def</span> <span class="nf">softmax_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="p">):</span>
+    <span class="n">xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">xp</span> <span class="o">!=</span> <span class="n">numpy</span> <span class="ow">and</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cudnn_enabled</span> <span class="ow">and</span> <span class="n">use_cudnn</span> \
+       <span class="ow">and</span> <span class="n">_cudnn_version</span> <span class="o">&gt;=</span> <span class="mi">3000</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">ctypes</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">ctypes</span>
+        <span class="n">handle</span> <span class="o">=</span> <span class="n">cudnn</span><span class="o">.</span><span class="n">get_handle</span><span class="p">()</span>
+        <span class="n">x_cube</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">desc</span> <span class="o">=</span> <span class="n">cudnn</span><span class="o">.</span><span class="n">create_tensor_descriptor</span><span class="p">(</span><span class="n">x_cube</span><span class="p">)</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">libcudnn</span><span class="o">.</span><span class="n">softmaxForward</span><span class="p">(</span>
+            <span class="n">handle</span><span class="p">,</span> <span class="n">_algorithm</span><span class="p">,</span> <span class="n">_mode</span><span class="p">,</span> <span class="n">one</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">desc</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">x_cube</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">zero</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">desc</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+            <span class="n">y</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">ptr</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">log_z</span> <span class="o">=</span> <span class="n">logsumexp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">-</span> <span class="n">log_z</span>
+
+
+<span class="k">class</span> <span class="nc">SoftmaxCrossEntropy</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="n">Function</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Softmax activation followed by a cross entropy loss.&quot;&quot;&quot;</span>
+
+    <span class="n">ignore_label</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cache_score</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span> <span class="o">=</span> <span class="n">use_cudnn</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">normalize</span> <span class="o">=</span> <span class="n">normalize</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_score</span> <span class="o">=</span> <span class="n">cache_score</span>
+
+    <span class="k">def</span> <span class="nf">check_type_forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">in_types</span><span class="p">):</span>
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span><span class="n">in_types</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">x_type</span><span class="p">,</span> <span class="n">t_type</span> <span class="o">=</span> <span class="n">in_types</span>
+
+        <span class="n">type_check</span><span class="o">.</span><span class="n">expect</span><span class="p">(</span>
+            <span class="n">x_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span>
+            <span class="n">t_type</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">numpy</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span>
+            <span class="n">t_type</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="n">x_type</span><span class="o">.</span><span class="n">ndim</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+
+            <span class="n">x_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">t_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">x_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="n">t_type</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_check_input_values</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(((</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">t</span><span class="p">)</span> <span class="o">&amp;</span>
+                 <span class="p">(</span><span class="n">t</span> <span class="o">&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="o">|</span>
+                <span class="p">(</span><span class="n">t</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">))</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Each label `t` need to satisfty &#39;</span>
+                   <span class="s">&#39;`0 &lt;= t &lt; x.shape[1] or t == </span><span class="si">%d</span><span class="s">`&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="k">if</span> <span class="n">chainer</span><span class="o">.</span><span class="n">is_debug</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_input_values</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+        <span class="n">log_y</span> <span class="o">=</span> <span class="n">softmax_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_score</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_y</span><span class="p">)</span>
+        <span class="n">log_yd</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">log_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">log_yd</span> <span class="o">=</span> <span class="n">log_yd</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">log_yd</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">log_p</span> <span class="o">=</span> <span class="n">log_yd</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">0</span><span class="p">),</span> <span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span>
+        <span class="c"># deal with the case where the SoftmaxCrossEntropy is</span>
+        <span class="c"># unpickled from the old version</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;normalize&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="n">count</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">log_p</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span> \
+            <span class="o">*</span> <span class="p">(</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(()),</span>
+
+    <span class="k">def</span> <span class="nf">forward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">):</span>
+        <span class="n">cupy</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="k">if</span> <span class="n">chainer</span><span class="o">.</span><span class="n">is_debug</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_check_input_values</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+
+        <span class="n">log_y</span> <span class="o">=</span> <span class="n">softmax_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_score</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">cupy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;normalize&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">):</span>
+            <span class="n">coeff</span> <span class="o">=</span> <span class="n">cupy</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">coeff</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span> <span class="o">=</span> <span class="n">cupy</span><span class="o">.</span><span class="n">divide</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+        <span class="n">log_y</span> <span class="o">=</span> <span class="n">cupy</span><span class="o">.</span><span class="n">rollaxis</span><span class="p">(</span><span class="n">log_y</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">log_y</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span>
+            <span class="s">&#39;S t, raw T log_y, int32 n_channel, raw T coeff&#39;</span><span class="p">,</span> <span class="s">&#39;T out&#39;</span><span class="p">,</span>
+            <span class="s">&#39;t == -1 ? 0 : log_y[_j * n_channel + t]&#39;</span><span class="p">,</span>
+            <span class="s">&#39;a + b&#39;</span><span class="p">,</span> <span class="s">&#39;out = a * -coeff[0]&#39;</span><span class="p">,</span> <span class="s">&#39;0&#39;</span><span class="p">,</span> <span class="s">&#39;crossent_fwd&#39;</span>
+        <span class="p">)(</span><span class="n">t</span><span class="p">,</span> <span class="n">log_y</span><span class="o">.</span><span class="n">reduced_view</span><span class="p">(),</span> <span class="n">log_y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ret</span><span class="p">,</span>
+
+    <span class="k">def</span> <span class="nf">backward_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">grad_outputs</span><span class="p">):</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="n">gloss</span> <span class="o">=</span> <span class="n">grad_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_unit</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log_y</span> <span class="o">=</span> <span class="n">softmax_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span><span class="p">)</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">log_y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">gx</span> <span class="o">=</span> <span class="n">y</span>
+            <span class="n">gx</span><span class="p">[</span><span class="n">six</span><span class="o">.</span><span class="n">moves</span><span class="o">.</span><span class="n">xrange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)),</span> <span class="n">numpy</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">gx</span> <span class="o">*=</span> <span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c"># in the case where y.ndim is higher than 2,</span>
+            <span class="c"># we think that a current implementation is inefficient</span>
+            <span class="c"># because it yields two provisional arrays for indexing.</span>
+            <span class="n">gx</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fst_index</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_unit</span>
+            <span class="n">trd_index</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_unit</span>
+            <span class="n">gx</span><span class="p">[</span><span class="n">fst_index</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="mi">0</span><span class="p">),</span> <span class="n">trd_index</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">gx</span> <span class="o">*=</span> <span class="p">(</span><span class="n">t</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ignore_label</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+            <span class="n">gx</span> <span class="o">=</span> <span class="n">gx</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="n">gx</span> <span class="o">*=</span> <span class="n">gloss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span>
+        <span class="k">return</span> <span class="n">gx</span><span class="p">,</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">backward_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">grad_outputs</span><span class="p">):</span>
+        <span class="n">cupy</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">):</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">softmax_log</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">use_cudnn</span><span class="p">)</span>
+            <span class="n">cupy</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+        <span class="n">gloss</span> <span class="o">=</span> <span class="n">grad_outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">n_unit</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">coeff</span> <span class="o">=</span> <span class="n">gloss</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_coeff</span>
+        <span class="n">gx</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">elementwise</span><span class="p">(</span>
+            <span class="s">&#39;T y, S t, raw T coeff, S n_channel, S n_unit&#39;</span><span class="p">,</span>
+            <span class="s">&#39;T gx&#39;</span><span class="p">,</span>
+            <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">               const int c = (i / n_unit % n_channel);</span>
+<span class="sd">               gx = (t == -1) ? 0 : (coeff[0] * (y - (c == t)));</span>
+<span class="sd">            &#39;&#39;&#39;</span><span class="p">,</span>
+            <span class="s">&#39;softmax_crossent_bwd&#39;</span><span class="p">)(</span>
+                <span class="n">y</span><span class="p">,</span> <span class="n">cupy</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">coeff</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">n_unit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gx</span><span class="p">,</span> <span class="bp">None</span>
+
+
+<div class="viewcode-block" id="softmax_cross_entropy"><a class="viewcode-back" href="../../../../reference/functions.html#chainer.functions.softmax_cross_entropy">[docs]</a><span class="k">def</span> <span class="nf">softmax_cross_entropy</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">use_cudnn</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cache_score</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes cross entropy loss for pre-softmax activations.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        x (Variable): Variable holding a multidimensional array whose element</span>
+<span class="sd">            indicates unnormalized log probability: the first axis of the</span>
+<span class="sd">            variable represents the number of samples, and the second axis</span>
+<span class="sd">            represents the number of classes. While this function computes</span>
+<span class="sd">            a usual softmax cross entropy if the number of dimensions is equal</span>
+<span class="sd">            to 2, it computes a cross entropy of the replicated softmax if the</span>
+<span class="sd">            number of dimensions is greater than 2.</span>
+<span class="sd">        t (Variable): Variable holding an int32 vector of ground truth labels.</span>
+<span class="sd">            If ``t[i] == -1``, corresponding ``x[i]`` is ignored.</span>
+<span class="sd">        normalize (Variable): Variable holding a boolean value which</span>
+<span class="sd">            determines the normalization constant. If true, this function</span>
+<span class="sd">            normalizes the cross entropy loss across all instances. If else,</span>
+<span class="sd">            it only normalizes along a batch size.</span>
+<span class="sd">        cache_score (bool): When it is ``True``, the function stores result</span>
+<span class="sd">            of forward computation to use it on backward computation. It</span>
+<span class="sd">            reduces computational cost though consumes more memories.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Variable: A variable holding a scalar array of the cross entropy loss.</span>
+
+<span class="sd">    .. note::</span>
+
+<span class="sd">       This function is differentiable only by ``x``.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">SoftmaxCrossEntropy</span><span class="p">(</span><span class="n">use_cudnn</span><span class="p">,</span> <span class="n">normalize</span><span class="p">,</span> <span class="n">cache_score</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

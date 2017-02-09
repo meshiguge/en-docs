@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CUDA utilities &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../index.html"/>
+        <link rel="up" title="Utilities" href="../util.html"/>
+        <link rel="next" title="Common algorithms" href="algorithm.html"/>
+        <link rel="prev" title="Utilities" href="../util.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Chainer Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core.html">Core functionalities</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Chainer Reference Manual</a> &raquo;</li>
+      
+          <li><a href="../util.html">Utilities</a> &raquo;</li>
+      
+    <li>CUDA utilities</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../../_sources/reference/util/cuda.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-chainer.cuda">
+<span id="cuda-utilities"></span><h1>CUDA utilities<a class="headerlink" href="#module-chainer.cuda" title="Permalink to this headline">¶</a></h1>
+<p>Device, context and memory management on CuPy.</p>
+<p>Chainer uses CuPy (with very thin wrapper) to exploit the speed of GPU
+computation. Following modules and classes are imported to <code class="xref py py-mod docutils literal"><span class="pre">cuda</span></code>
+module for convenience (refer to this table when reading chainer&#8217;s source
+codes).</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="46%" />
+<col width="54%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">imported name</th>
+<th class="head">original name</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.cupy</span></code></td>
+<td><a class="reference internal" href="../../cupy-reference/ufunc.html#module-cupy" title="cupy"><code class="xref py py-mod docutils literal"><span class="pre">cupy</span></code></a></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.ndarray</span></code></td>
+<td><code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.cupy.cuda</span></code></td>
+<td><code class="xref py py-mod docutils literal"><span class="pre">cupy.cuda</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.Device</span></code></td>
+<td><code class="xref py py-class docutils literal"><span class="pre">cupy.cuda.Device</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.Event</span></code></td>
+<td><code class="xref py py-class docutils literal"><span class="pre">cupy.cuda.Event</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.Stream</span></code></td>
+<td><code class="xref py py-class docutils literal"><span class="pre">cupy.cuda.Stream</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>Chainer replaces the default allocator of CuPy by its memory pool
+implementation. It enables us to reuse the device memory over multiple
+forward/backward computations, and temporary arrays for consecutive elementwise
+operations.</p>
+<div class="section" id="devices">
+<h2>Devices<a class="headerlink" href="#devices" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="chainer.cuda.get_device">
+<code class="descclassname">chainer.cuda.</code><code class="descname">get_device</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#get_device"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.get_device" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the device from an ID integer or an array object.</p>
+<p>This is a convenient utility to select a correct device if the type of
+<code class="docutils literal"><span class="pre">arg</span></code> is unknown (i.e., one can use this function on arrays that may be
+on CPU or GPU). The returned device object supports the context management
+protocol of Python for the <em>with</em> statement.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; Values to specify a GPU device. <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> objects
+are skipped. If all arguments are <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a> objects,
+it returns a dummy device object. Otherwise, the first
+non-<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a> object is used to select a device. If it is a
+<code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> object, its device is returned. Otherwise,
+the argument is passed to the initializer of
+<code class="xref py py-class docutils literal"><span class="pre">Device</span></code> and it is returned.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Device object specified by given <code class="docutils literal"><span class="pre">args</span></code>.</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <code class="xref py py-class docutils literal"><span class="pre">cupy.cuda.Device</span></code> for the device selection not by arrays.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="cupy-array-allocation-and-copy">
+<h2>CuPy array allocation and copy<a class="headerlink" href="#cupy-array-allocation-and-copy" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>As of v1.3.0, the following array construction wrappers are marked as
+deprecated. Use the corresponding functions of the <a class="reference internal" href="../../cupy-reference/ufunc.html#module-cupy" title="cupy"><code class="xref py py-mod docutils literal"><span class="pre">cupy</span></code></a> module
+instead. The main difference of them is that the default dtype is changed
+from float32 to float64.</p>
+<table border="1" class="last docutils">
+<colgroup>
+<col width="54%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Deprecated functions</th>
+<th class="head">Recommended functions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.empty</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.empty()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.empty_like</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.empty_like()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.zeros</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.zeros()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.zeros_like</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.zeros_like()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.ones</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.ones()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.ones_like</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.ones_like()</span></code></td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">chainer.cuda.full</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.full()</span></code></td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">chainer.cuda.full_like</span></code></td>
+<td><code class="xref py py-func docutils literal"><span class="pre">cupy.full_like()</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<dl class="function">
+<dt id="chainer.cuda.copy">
+<code class="descclassname">chainer.cuda.</code><code class="descname">copy</code><span class="sig-paren">(</span><em>array</em>, <em>out=None</em>, <em>out_device=None</em>, <em>stream=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#copy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies a <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> object using the default stream.</p>
+<p>This function can copy the device array to the destination array on another
+device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>array</strong> (<em>cupy.ndarray</em>) &#8211; Array to be copied.</li>
+<li><strong>out</strong> (<em>cupy.ndarray</em>) &#8211; Destination array.
+If it is not <code class="docutils literal"><span class="pre">None</span></code>, then <code class="docutils literal"><span class="pre">out_device</span></code> argument is ignored.</li>
+<li><strong>out_device</strong> &#8211; Destination device specifier. Actual device object is
+obtained by passing this value to <a class="reference internal" href="#chainer.cuda.get_device" title="chainer.cuda.get_device"><code class="xref py py-func docutils literal"><span class="pre">get_device()</span></code></a>.</li>
+<li><strong>stream</strong> (<em>cupy.cuda.Stream</em>) &#8211; CUDA stream.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>Copied array.</p>
+<p>If <code class="docutils literal"><span class="pre">out</span></code> is not specified, then the array is allocated on the device
+specified by <code class="docutils literal"><span class="pre">out_device</span></code> argument.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">cupy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chainer.cuda.to_cpu">
+<code class="descclassname">chainer.cuda.</code><code class="descname">to_cpu</code><span class="sig-paren">(</span><em>array</em>, <em>stream=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#to_cpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.to_cpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies the given GPU array to host CPU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>array</strong> &#8211; Array to be sent to CPU.</li>
+<li><strong>stream</strong> (<em>cupy.cuda.Stream</em>) &#8211; CUDA stream.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>Array on CPU.</p>
+<p>If given <code class="docutils literal"><span class="pre">array</span></code> is already on CPU, then this function just returns
+<code class="docutils literal"><span class="pre">array</span></code> without performing any copy.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="chainer.cuda.to_gpu">
+<code class="descclassname">chainer.cuda.</code><code class="descname">to_gpu</code><span class="sig-paren">(</span><em>array</em>, <em>device=None</em>, <em>stream=None</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#to_gpu"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.to_gpu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies the given CPU array to specified device.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>array</strong> &#8211; Array to be sent to GPU.</li>
+<li><strong>device</strong> &#8211; Device specifier.</li>
+<li><strong>stream</strong> (<em>cupy.cuda.Stream</em>) &#8211; CUDA stream.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>Array on GPU.</p>
+<p>If <code class="docutils literal"><span class="pre">array</span></code> is already on GPU, then this function just returns
+<code class="docutils literal"><span class="pre">array</span></code> without performing any copy. Note that this function does not
+copy <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code> into specified device.</p>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">cupy.ndarray</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="kernel-definition-utilities">
+<h2>Kernel definition utilities<a class="headerlink" href="#kernel-definition-utilities" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="chainer.cuda.memoize">
+<code class="descclassname">chainer.cuda.</code><code class="descname">memoize</code><span class="sig-paren">(</span><em>for_each_device=False</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#memoize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.memoize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a function memoizing the result for each argument and device.</p>
+<p>This is a similar version of <code class="xref py py-func docutils literal"><span class="pre">cupy.memoize()</span></code>. The difference is that
+this function can be used in the global scope even if CUDA is not
+available. In such case, this function does nothing.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This decorator acts as a dummy if CUDA is not available. It cannot be
+used for general purpose memoization even if <code class="docutils literal"><span class="pre">for_each_device</span></code> is set
+to False.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="chainer.cuda.elementwise">
+<code class="descclassname">chainer.cuda.</code><code class="descname">elementwise</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#elementwise"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.elementwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates an elementwise kernel function.</p>
+<p>This function uses <a class="reference internal" href="#chainer.cuda.memoize" title="chainer.cuda.memoize"><code class="xref py py-func docutils literal"><span class="pre">memoize()</span></code></a> to cache the
+kernel object, i.e. the resulting kernel object is cached for each argument
+combination and CUDA device.</p>
+<p>The arguments are the same as those for
+<code class="xref py py-class docutils literal"><span class="pre">cupy.ElementwiseKernel</span></code>, except that the <code class="docutils literal"><span class="pre">name</span></code> argument is
+mandatory.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="chainer.cuda.reduce">
+<code class="descclassname">chainer.cuda.</code><code class="descname">reduce</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#reduce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.reduce" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a global reduction kernel function.</p>
+<p>This function uses <a class="reference internal" href="#chainer.cuda.memoize" title="chainer.cuda.memoize"><code class="xref py py-func docutils literal"><span class="pre">memoize()</span></code></a> to cache the resulting
+kernel object, i.e. the resulting kernel object is cached for each argument
+combination and CUDA device.</p>
+<p>The arguments are the same as those for
+<code class="xref py py-class docutils literal"><span class="pre">cupy.ReductionKernel</span></code>, except that the <code class="docutils literal"><span class="pre">name</span></code> argument is
+mandatory.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="cpu-gpu-generic-code-support">
+<h2>CPU/GPU generic code support<a class="headerlink" href="#cpu-gpu-generic-code-support" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="chainer.cuda.get_array_module">
+<code class="descclassname">chainer.cuda.</code><code class="descname">get_array_module</code><span class="sig-paren">(</span><em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/chainer/cuda.html#get_array_module"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.cuda.get_array_module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets an appropriate one from <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a> or <a class="reference internal" href="../../cupy-reference/ufunc.html#module-cupy" title="cupy"><code class="xref py py-mod docutils literal"><span class="pre">cupy</span></code></a>.</p>
+<p>This is almost equivalent to <code class="xref py py-func docutils literal"><span class="pre">cupy.get_array_module()</span></code>. The only
+difference is that this function can be used even if CUDA is not available.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>args</strong> &#8211; Values to determine whether NumPy or CuPy should be used.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><a class="reference internal" href="../../cupy-reference/ufunc.html#module-cupy" title="cupy"><code class="xref py py-mod docutils literal"><span class="pre">cupy</span></code></a> or <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/index.html#module-numpy" title="(in NumPy v1.12)"><code class="xref py py-mod docutils literal"><span class="pre">numpy</span></code></a> is returned based on the types of
+the arguments.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">module</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="cudnn-support">
+<h2>cuDNN support<a class="headerlink" href="#cudnn-support" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="algorithm.html" class="btn btn-neutral float-right" title="Common algorithms">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../util.html" class="btn btn-neutral" title="Utilities"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

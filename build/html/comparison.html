@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Comparison with Other Frameworks &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="index.html"/>
+        <link rel="next" title="License" href="license.html"/>
+        <link rel="prev" title="Tips and FAQs" href="tips.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Comparison with Other Frameworks</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/comparison.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="comparison-with-other-frameworks">
+<h1>Comparison with Other Frameworks<a class="headerlink" href="#comparison-with-other-frameworks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="a-table-for-quick-comparison">
+<h2>A table for quick comparison<a class="headerlink" href="#a-table-for-quick-comparison" title="Permalink to this headline">¶</a></h2>
+<p>This table compares Chainer with other popular deep learning frameworks.
+We hope it helps you to choose an appropriate framework for the demand.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This chart may be out-dated, since the developers of Chainer do not perfectly follow the latest development status of each framework.
+Please report us if you find an out-dated cell.
+Requests for new comparison axes are also welcome.</p>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="5%" />
+<col width="19%" />
+<col width="13%" />
+<col width="16%" />
+<col width="14%" />
+<col width="34%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">&nbsp;</th>
+<th class="head">&nbsp;</th>
+<th class="head">Chainer</th>
+<th class="head">Theano-based</th>
+<th class="head">Torch7</th>
+<th class="head">Caffe</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td rowspan="5">Specs</td>
+<td>Scripting</td>
+<td>Python</td>
+<td>Python</td>
+<td>LuaJIT</td>
+<td>Python</td>
+</tr>
+<tr class="row-odd"><td>Net definition language</td>
+<td>Python</td>
+<td>Python</td>
+<td>LuaJIT</td>
+<td>Protocol Buffers</td>
+</tr>
+<tr class="row-even"><td>Define-by-Run scheme</td>
+<td>Y</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>CPU Array backend</td>
+<td>NumPy</td>
+<td>NumPy</td>
+<td>Tensor</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>GPU Array backend</td>
+<td>CuPy</td>
+<td>CudaNdarray <a class="footnote-reference" href="#id11" id="id1">[1]</a></td>
+<td>CudaTensor</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td rowspan="5">NNs</td>
+<td>Reverse-mode AD</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr class="row-even"><td>Basic RNN support</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y (<code class="docutils literal"><span class="pre">nnx</span></code>)</td>
+<td><a class="reference external" href="https://github.com/BVLC/caffe/pull/2033">#2033</a></td>
+</tr>
+<tr class="row-odd"><td>Variable-length loops</td>
+<td>Y</td>
+<td>Y (<code class="docutils literal"><span class="pre">scan</span></code>)</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Stateful RNNs <a class="footnote-reference" href="#id12" id="id3">[2]</a></td>
+<td>Y</td>
+<td>Y</td>
+<td>Y <a class="footnote-reference" href="#id16" id="id4">[6]</a></td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-odd"><td>Per-batch architectures</td>
+<td>Y</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td rowspan="6">Perf</td>
+<td>CUDA support</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr class="row-odd"><td>cuDNN support</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y (<code class="docutils literal"><span class="pre">cudnn.torch</span></code>)</td>
+<td>Y</td>
+</tr>
+<tr class="row-even"><td>FFT-based convolution</td>
+<td>&nbsp;</td>
+<td>Y</td>
+<td>Y (<code class="docutils literal"><span class="pre">fbcunn</span></code>)</td>
+<td><a class="reference external" href="https://github.com/BVLC/caffe/pull/544">#544</a></td>
+</tr>
+<tr class="row-odd"><td>CPU/GPU generic coding <a class="footnote-reference" href="#id13" id="id6">[3]</a></td>
+<td>Y</td>
+<td><a class="footnote-reference" href="#id14" id="id7">[4]</a></td>
+<td>Y</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td>Multi GPU (data parallel)</td>
+<td>Y</td>
+<td>Y <a class="footnote-reference" href="#id17" id="id8">[7]</a></td>
+<td>Y (<code class="docutils literal"><span class="pre">fbcunn</span></code>)</td>
+<td>Y</td>
+</tr>
+<tr class="row-odd"><td>Multi GPU (model parallel)</td>
+<td>Y</td>
+<td>Y <a class="footnote-reference" href="#id18" id="id9">[8]</a></td>
+<td>Y (<code class="docutils literal"><span class="pre">fbcunn</span></code>)</td>
+<td>&nbsp;</td>
+</tr>
+<tr class="row-even"><td rowspan="3">Misc</td>
+<td>Type checking</td>
+<td>Y</td>
+<td>Y</td>
+<td>Y</td>
+<td>N/A</td>
+</tr>
+<tr class="row-odd"><td>Model serialization</td>
+<td>Y</td>
+<td>Y (<code class="docutils literal"><span class="pre">pickle</span></code>)</td>
+<td>Y</td>
+<td>Y</td>
+</tr>
+<tr class="row-even"><td>Caffe reference model</td>
+<td>Y</td>
+<td><a class="footnote-reference" href="#id15" id="id10">[5]</a></td>
+<td>Y (<code class="docutils literal"><span class="pre">loadcaffe</span></code>)</td>
+<td>Y</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id11" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[1]</a></td><td>They are also developing <a class="reference external" href="http://deeplearning.net/software/libgpuarray/">libgpuarray</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id12" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id3">[2]</a></td><td>Stateful RNN is a type of RNN implementation that maintains states in the loops. It should enable us to use the states arbitrarily to update them.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id6">[3]</a></td><td>This row shows whether each array API supports unified codes for CPU and GPU.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id14" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id7">[4]</a></td><td>The array backend of Theano does not have compatible interface with NumPy, though most users write code on Theano variables, which is generic for CPU and GPU.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id15" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id10">[5]</a></td><td>Depending on the frameworks.</td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id16" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[6]</a></td><td>Also available in the <a class="reference external" href="https://github.com/Element-Research/rnn">Torch RNN package</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id17" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id8">[7]</a></td><td>Via <a class="reference external" href="https://github.com/mila-udem/platoon/">Platoon</a></td></tr>
+</tbody>
+</table>
+<table class="docutils footnote" frame="void" id="id18" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id9">[8]</a></td><td><a class="reference external" href="http://deeplearning.net/software/theano/tutorial/using_multi_gpu.html">Experimental as May 2016</a></td></tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="benchmarks">
+<h2>Benchmarks<a class="headerlink" href="#benchmarks" title="Permalink to this headline">¶</a></h2>
+<p>We are preparing for the benchmarks.</p>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="license.html" class="btn btn-neutral float-right" title="License">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tips.html" class="btn btn-neutral" title="Tips and FAQs"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

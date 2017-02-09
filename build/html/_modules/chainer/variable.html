@@ -1,0 +1,698 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>chainer.variable &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../../index.html"/>
+        <link rel="up" title="chainer" href="../chainer.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+          <li><a href="../chainer.html">chainer</a> &raquo;</li>
+      
+    <li>chainer.variable</li>
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <h1>Source code for chainer.variable</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">collections</span>
+<span class="kn">import</span> <span class="nn">heapq</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">import</span> <span class="nn">six</span>
+
+<span class="kn">import</span> <span class="nn">chainer</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">cuda</span>
+<span class="kn">from</span> <span class="nn">chainer</span> <span class="kn">import</span> <span class="n">flag</span>
+
+
+<span class="k">def</span> <span class="nf">_check_grad_type</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gx</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">make_message</span><span class="p">(</span><span class="n">message</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">func</span><span class="p">:</span>
+            <span class="n">detail</span> <span class="o">=</span> <span class="s">&#39;Function `{0}` ({1}) has a bug.</span><span class="se">\n</span><span class="s">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+
+            <span class="n">stack</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">stack</span>
+            <span class="k">if</span> <span class="n">stack</span><span class="p">:</span>
+                <span class="n">detail</span> <span class="o">+=</span> <span class="s">&#39;Stacktrace of the function is below:</span><span class="se">\n</span><span class="s">&#39;</span>
+                <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_list</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">_stack</span><span class="p">):</span>
+                    <span class="n">detail</span> <span class="o">+=</span> <span class="n">line</span>
+
+            <span class="n">detail</span> <span class="o">+=</span> <span class="s">&#39;&#39;&#39;</span>
+<span class="s">Please report this error to the issue tracker with the stack trace,</span>
+<span class="s">the information of your environment, and your script:</span>
+<span class="s">https://github.com/pfnet/chainer/issues/new.</span>
+<span class="s">&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">func</span><span class="p">)</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">detail</span> <span class="o">=</span> <span class="s">&#39;&#39;</span>
+
+        <span class="n">detail</span> <span class="o">+=</span> <span class="n">message</span>
+        <span class="k">return</span> <span class="n">detail</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">gx</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">)):</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Type of data and grad mismatch</span><span class="se">\n</span><span class="si">%s</span><span class="s"> != </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+               <span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">gx</span><span class="p">)))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">make_message</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">gx</span><span class="o">.</span><span class="n">dtype</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Dtype of data and grad mismatch</span><span class="se">\n</span><span class="si">%s</span><span class="s"> != </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+               <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">gx</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">make_message</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">gx</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;Shape of data and grad mismatch</span><span class="se">\n</span><span class="si">%s</span><span class="s"> != </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span>
+               <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">gx</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">make_message</span><span class="p">(</span><span class="n">msg</span><span class="p">))</span>
+
+
+<div class="viewcode-block" id="Variable"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable">[docs]</a><span class="k">class</span> <span class="nc">Variable</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;Array with a structure to keep track of computation.</span>
+
+<span class="sd">    Every variable holds a data array of type either :class:`numpy.ndarray` or</span>
+<span class="sd">    :class:`cupy.ndarray`.</span>
+
+<span class="sd">    A Variable object may be constructed in two ways: by the user or by some</span>
+<span class="sd">    function. When a variable is created by some function as one of its</span>
+<span class="sd">    outputs, the variable holds a reference to that function. This reference is</span>
+<span class="sd">    used in error backpropagation (a.k.a. backprop). It is also used in</span>
+<span class="sd">    *backward unchaining*. A variable that does not hold a reference to its</span>
+<span class="sd">    creator is called a *root* variable. A variable is root if it is created by</span>
+<span class="sd">    the user, or if the reference is deleted by :meth:`unchain_backward`.</span>
+
+<span class="sd">    Users can disable this chaining behavior by setting the volatile flag for</span>
+<span class="sd">    the initial variables. When a function gets volatile variables as its</span>
+<span class="sd">    inputs, the output variables do not hold references to the function. This</span>
+<span class="sd">    acts like unchaining on every function application.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data (array): Initial data array.</span>
+<span class="sd">        volatile (~chainer.Flag): Volatility flag. String (&#39;on&#39;, &#39;off&#39;, or</span>
+<span class="sd">            &#39;auto&#39;) or boolean values can be used, too.</span>
+<span class="sd">        name (str): Name of the variable.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        data: Data array of type either :class:`numpy.ndarray` or</span>
+<span class="sd">            :class:`cupy.ndarray`.</span>
+<span class="sd">        grad: Gradient array. It is ``None`` until backprop reaches this</span>
+<span class="sd">            variable.</span>
+<span class="sd">        creator: The function who creates this variable. It is ``None`` if the</span>
+<span class="sd">            variable is not created by any function.</span>
+<span class="sd">        volatile: Ternary :class:`~chainer.Flag` object. If ON, the variable</span>
+<span class="sd">            does not keep track of any function applications. See</span>
+<span class="sd">            :class:`~chainer.Flag` for the detail of ternary flags.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">volatile</span><span class="o">=</span><span class="n">flag</span><span class="o">.</span><span class="n">OFF</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">cuda</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;numpy.ndarray or cuda.ndarray are expected.</span>
+<span class="s">Actual: {0}&#39;&#39;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_volatile</span> <span class="o">=</span> <span class="n">flag</span><span class="o">.</span><span class="n">Flag</span><span class="p">(</span><span class="n">volatile</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creator</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Variable</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">volatile</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;&lt;variable </span><span class="si">%s</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s">&#39;&lt;variable at 0x</span><span class="si">%x</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">or</span> <span class="p">(</span><span class="s">&#39;&lt;var@</span><span class="si">%x</span><span class="s">&gt;&#39;</span> <span class="o">%</span> <span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+<div class="viewcode-block" id="Variable.debug_print"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.debug_print">[docs]</a>    <span class="k">def</span> <span class="nf">debug_print</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Display a summary of the stored data and location of the Variable&quot;&quot;&quot;</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;{summary}</span>
+<span class="s">- device: {device}</span>
+<span class="s">- volatile: {volatile}</span>
+<span class="s">- backend: {background}</span>
+<span class="s">- shape: {shape}</span>
+<span class="s">- dtype: {dtype}</span>
+<span class="s">- statistics: {stats}</span>
+<span class="s">- grad: {grad}&quot;&quot;&quot;</span>
+
+        <span class="n">stats_msg</span> <span class="o">=</span> <span class="s">&#39;mean={0:.8f}, std={1:.8f}&#39;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">device</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="n">device</span> <span class="o">=</span> <span class="s">&#39;CPU&#39;</span>
+
+        <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+            <span class="n">xp</span> <span class="o">=</span> <span class="n">numpy</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">elif</span> <span class="n">xp</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">grad</span> <span class="o">=</span> <span class="n">stats_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="p">)),</span>
+                                        <span class="nb">float</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grad</span><span class="p">)))</span>
+
+            <span class="n">stats</span> <span class="o">=</span> <span class="n">stats_msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)),</span>
+                                     <span class="nb">float</span><span class="p">(</span><span class="n">xp</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)))</span>
+
+        <span class="k">return</span> <span class="n">msg</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">summary</span><span class="o">=</span><span class="nb">repr</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="n">volatile</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">volatile</span><span class="p">,</span>
+                          <span class="n">grad</span><span class="o">=</span><span class="n">grad</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                          <span class="n">background</span><span class="o">=</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">),</span>
+                          <span class="n">dtype</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+                          <span class="n">stats</span><span class="o">=</span><span class="n">stats</span><span class="p">)</span>
+</div>
+    <span class="k">def</span> <span class="nf">__pos__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+<div class="viewcode-block" id="Variable.__len__"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.__len__">[docs]</a>    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the number of elements of the data array.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            int: the number of elements of the data array.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">size</span>
+</div>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">volatile</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_volatile</span>
+
+    <span class="nd">@volatile.setter</span>
+    <span class="k">def</span> <span class="nf">volatile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_volatile</span> <span class="o">=</span> <span class="n">flag</span><span class="o">.</span><span class="n">Flag</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Short text that represents the function.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">():</span>
+            <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s">&#39;(</span><span class="si">%s</span><span class="s">), </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)),</span>
+                             <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span>
+
+    <span class="nd">@grad.setter</span>
+    <span class="k">def</span> <span class="nf">grad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">g</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">_check_grad_type</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">g</span>
+
+<div class="viewcode-block" id="Variable.to_cpu"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.to_cpu">[docs]</a>    <span class="k">def</span> <span class="nf">to_cpu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies the data and gradient arrays to CPU.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_cpu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_cpu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grad</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Variable.to_gpu"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.to_gpu">[docs]</a>    <span class="k">def</span> <span class="nf">to_gpu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies the data and gradient arrays to specified GPU.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            device: Target device specifier. If omitted, the current device is</span>
+<span class="sd">                used.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_grad</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Variable.zerograd"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.zerograd">[docs]</a>    <span class="k">def</span> <span class="nf">zerograd</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the gradient array by zeros.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">dev</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">xp</span> <span class="o">=</span> <span class="n">numpy</span> <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">dev</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">xp</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Variable.copydata"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.copydata">[docs]</a>    <span class="k">def</span> <span class="nf">copydata</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Copies the data array from given source variable.</span>
+
+<span class="sd">        This method just copies the data attribute from given variable to this</span>
+<span class="sd">        variable, except that the copy is even done across the host and</span>
+<span class="sd">        different devices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var (Variable): Source variable.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">dst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span>
+        <span class="n">src_xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="n">dst_xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dst_xp</span> <span class="ow">is</span> <span class="n">src_xp</span><span class="p">:</span>
+            <span class="n">dst_xp</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">dst_xp</span> <span class="ow">is</span> <span class="n">numpy</span><span class="p">:</span>
+            <span class="n">dst_xp</span><span class="o">.</span><span class="n">copyto</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dst</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Variable.addgrad"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.addgrad">[docs]</a>    <span class="k">def</span> <span class="nf">addgrad</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">var</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Accumulates the gradient array from given source variable.</span>
+
+<span class="sd">        This method just runs ``self.grad += var.grad``, except that the</span>
+<span class="sd">        accumulation is even done across the host and different devices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            var (Variable): Source variable.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">_grad</span>
+        <span class="n">dst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_grad</span>
+        <span class="k">if</span> <span class="n">src</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Source gradient is not set.&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">dst</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Target graidient is not set.&#39;</span><span class="p">)</span>
+
+        <span class="n">xp</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">dst</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">xp</span> <span class="ow">is</span> <span class="n">numpy</span><span class="p">:</span>
+            <span class="n">dst</span> <span class="o">+=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_cpu</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+            <span class="n">dst</span> <span class="o">+=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">to_gpu</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">dst</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">dst_dev</span> <span class="o">=</span> <span class="n">dst</span><span class="o">.</span><span class="n">device</span>
+            <span class="k">if</span> <span class="n">dst_dev</span> <span class="o">==</span> <span class="n">src</span><span class="o">.</span><span class="n">device</span><span class="p">:</span>
+                <span class="n">dst</span> <span class="o">+=</span> <span class="n">src</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">dst_dev</span><span class="p">:</span>
+                    <span class="n">dst</span> <span class="o">+=</span> <span class="n">xp</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="Variable.set_creator"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.set_creator">[docs]</a>    <span class="k">def</span> <span class="nf">set_creator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gen_func</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Notifies the variable that the given function is its creator.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            gen_func (Function): Function object that creates this variable as</span>
+<span class="sd">                one of its outputs.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">creator</span> <span class="o">=</span> <span class="n">gen_func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rank</span> <span class="o">=</span> <span class="n">gen_func</span><span class="o">.</span><span class="n">rank</span> <span class="o">+</span> <span class="mi">1</span>
+</div>
+<div class="viewcode-block" id="Variable.backward"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.backward">[docs]</a>    <span class="k">def</span> <span class="nf">backward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">retain_grad</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Runs error backpropagation (a.k.a. backprop) from this variable.</span>
+
+<span class="sd">        On backprop, :meth:`Function.backward` is called on each</span>
+<span class="sd">        :class:`Function` object appearing in the backward graph starting from</span>
+<span class="sd">        this variable. The backward graph is represented by backward references</span>
+<span class="sd">        from variables to their creators, and from functions to their inputs.</span>
+<span class="sd">        The backprop stops at all root variables. Some functions set ``None``</span>
+<span class="sd">        as gradients of some inputs, where further backprop does not take place</span>
+<span class="sd">        at such input variables.</span>
+
+<span class="sd">        This method uses :data:`grad` as the initial error array. User can</span>
+<span class="sd">        manually set a gradient array before calling this method. If</span>
+<span class="sd">        :data:`data` contains only one element (i.e., it is scalar) and</span>
+<span class="sd">        :data:`grad` is None, then this method automatically complements 1.0 as</span>
+<span class="sd">        the initial error. This is useful on starting backprop from some scalar</span>
+<span class="sd">        loss value.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            retain_grad (bool): If ``True``, the gradient arrays of all</span>
+<span class="sd">                intermediate variables are kept. Otherwise, :data:`grad` of the</span>
+<span class="sd">                intermediate variables are set to ``None`` on appropriate</span>
+<span class="sd">                timing, which may reduce the maximum memory consumption.</span>
+
+<span class="sd">                In most cases of training some model, the purpose of backprop</span>
+<span class="sd">                is to compute gradients of parameters, not of variables, so it</span>
+<span class="sd">                is recommended to set this flag False.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creator</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">cand_funcs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">seen_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">seen_vars</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="n">need_copy</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="c"># Initialize error by 1, if this is a loss variable</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="k">as</span> <span class="n">device</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">device</span> <span class="ow">is</span> <span class="n">cuda</span><span class="o">.</span><span class="n">DummyDevice</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">cuda</span><span class="o">.</span><span class="n">cupy</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">add_cand</span><span class="p">(</span><span class="n">cand</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cand</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_set</span><span class="p">:</span>
+                <span class="c"># Negate since heapq is min-heap</span>
+                <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">cand_funcs</span><span class="p">,</span> <span class="p">(</span><span class="o">-</span><span class="n">cand</span><span class="o">.</span><span class="n">rank</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen_set</span><span class="p">),</span> <span class="n">cand</span><span class="p">))</span>
+                <span class="n">seen_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">creator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">add_cand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creator</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">cand_funcs</span><span class="p">:</span>
+            <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">func</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">cand_funcs</span><span class="p">)</span>
+            <span class="n">outputs</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">y</span><span class="p">()</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="n">outputs</span><span class="p">)</span>  <span class="c"># access via weak ref</span>
+
+            <span class="n">in_data</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="n">inputs</span><span class="p">)</span>
+            <span class="n">out_grad</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="bp">None</span> <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">y</span><span class="o">.</span><span class="n">grad</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">)</span>
+            <span class="n">hooks</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">(</span><span class="n">chainer</span><span class="o">.</span><span class="n">get_function_hooks</span><span class="p">())</span>
+            <span class="n">hooks</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">local_function_hooks</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="n">hooks</span><span class="p">):</span>
+                <span class="n">hook</span><span class="o">.</span><span class="n">backward_preprocess</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">in_data</span><span class="p">,</span> <span class="n">out_grad</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="o">*</span><span class="p">(</span><span class="n">in_data</span> <span class="o">+</span> <span class="n">out_grad</span><span class="p">)):</span>
+                <span class="n">gxs</span> <span class="o">=</span> <span class="n">func</span><span class="o">.</span><span class="n">backward</span><span class="p">(</span><span class="n">in_data</span><span class="p">,</span> <span class="n">out_grad</span><span class="p">)</span>
+            <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">gxs</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">in_data</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">hook</span> <span class="ow">in</span> <span class="n">six</span><span class="o">.</span><span class="n">itervalues</span><span class="p">(</span><span class="n">hooks</span><span class="p">):</span>
+                <span class="n">hook</span><span class="o">.</span><span class="n">backward_postprocess</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">in_data</span><span class="p">,</span> <span class="n">out_grad</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">chainer</span><span class="o">.</span><span class="n">is_debug</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">gx</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span>
+                       <span class="n">cuda</span><span class="o">.</span><span class="n">get_array_module</span><span class="p">(</span><span class="n">gx</span><span class="p">)</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">gx</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+                       <span class="k">for</span> <span class="n">gx</span> <span class="ow">in</span> <span class="n">gxs</span><span class="p">):</span>
+                    <span class="n">msg</span> <span class="o">=</span> <span class="s">&#39;NaN is detected on backward computation&#39;</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">retain_grad</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+                        <span class="n">y</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">gx</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">gxs</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">gx</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">_check_grad_type</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">gx</span><span class="p">)</span>
+
+                <span class="c"># Accumulate the gradient to x. It is a bit tricky to handle</span>
+                <span class="c"># branches and parameter gradient accumulation correctly.</span>
+                <span class="k">with</span> <span class="n">cuda</span><span class="o">.</span><span class="n">get_device</span><span class="p">(</span><span class="n">gx</span><span class="p">):</span>
+                    <span class="n">id_x</span> <span class="o">=</span> <span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">creator</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>  <span class="c"># leaf</span>
+                        <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">_grad</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">gx</span>
+                            <span class="n">need_copy</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">id_x</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">id_x</span> <span class="ow">in</span> <span class="n">need_copy</span><span class="p">:</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">grad</span> <span class="o">+</span> <span class="n">gx</span>  <span class="c"># copy</span>
+                            <span class="n">need_copy</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">id_x</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">_grad</span> <span class="o">+=</span> <span class="n">gx</span>
+                    <span class="k">else</span><span class="p">:</span>  <span class="c"># not a leaf</span>
+                        <span class="n">add_cand</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">creator</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">id_x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_vars</span><span class="p">:</span>  <span class="c"># 1st visit</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">grad</span> <span class="o">=</span> <span class="n">gx</span>
+                            <span class="n">seen_vars</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">id_x</span><span class="p">)</span>
+                            <span class="n">need_copy</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">id_x</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">id_x</span> <span class="ow">in</span> <span class="n">need_copy</span><span class="p">:</span>  <span class="c"># 2nd visit</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">_grad</span> <span class="o">=</span> <span class="n">gx</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="n">_grad</span>  <span class="c"># copied</span>
+                            <span class="n">need_copy</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">id_x</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>  <span class="c"># 3rd or later visit</span>
+                            <span class="n">x</span><span class="o">.</span><span class="n">_grad</span> <span class="o">+=</span> <span class="n">gx</span>
+            <span class="k">del</span> <span class="n">gxs</span>  <span class="c"># to reduce memory usage</span>
+</div>
+<div class="viewcode-block" id="Variable.unchain_backward"><a class="viewcode-back" href="../../reference/core/variable.html#chainer.Variable.unchain_backward">[docs]</a>    <span class="k">def</span> <span class="nf">unchain_backward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Deletes references between variables and functions backward.</span>
+
+<span class="sd">        After this method completes, intermediate variables and functions that</span>
+<span class="sd">        are not referenced from anywhere are deallocated by reference</span>
+<span class="sd">        count GC. Also this variable itself deletes the reference to its</span>
+<span class="sd">        creator function, i.e. this variable becomes root in the computation</span>
+<span class="sd">        graph. It indicates that backprop after unchaining stops at this</span>
+<span class="sd">        variable. This behavior is useful to implement truncated BPTT.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cand_funcs</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">seen_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">def</span> <span class="nf">add_cand</span><span class="p">(</span><span class="n">cand</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cand</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">cand</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen_set</span><span class="p">:</span>
+                <span class="n">cand_funcs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+                <span class="n">seen_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">cand</span><span class="p">)</span>
+
+        <span class="n">add_cand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">creator</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="n">cand_funcs</span><span class="p">:</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="n">cand_funcs</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">func</span><span class="o">.</span><span class="n">inputs</span><span class="p">:</span>
+                <span class="n">add_cand</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">creator</span><span class="p">)</span>
+            <span class="n">func</span><span class="o">.</span><span class="n">unchain</span><span class="p">()</span>
+</div>
+    <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__nonzero__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Variable</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__hash__</span><span class="p">()</span>
+
+    <span class="n">__array_priority__</span> <span class="o">=</span> <span class="mi">200</span></div>
+</pre></div>
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

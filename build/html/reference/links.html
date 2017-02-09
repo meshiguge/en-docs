@@ -1,0 +1,1493 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Standard Link implementations &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Chainer Reference Manual" href="index.html"/>
+        <link rel="next" title="Optimizers" href="optimizers.html"/>
+        <link rel="prev" title="Standard Function implementations" href="functions.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Chainer Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Chainer Reference Manual</a> &raquo;</li>
+      
+    <li>Standard Link implementations</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/reference/links.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-chainer.links">
+<span id="standard-link-implementations"></span><h1>Standard Link implementations<a class="headerlink" href="#module-chainer.links" title="Permalink to this headline">¶</a></h1>
+<p>Chainer provides many <a class="reference internal" href="core/link.html#chainer.Link" title="chainer.Link"><code class="xref py py-class docutils literal"><span class="pre">Link</span></code></a> implementations in the
+<a class="reference internal" href="#module-chainer.links" title="chainer.links"><code class="xref py py-mod docutils literal"><span class="pre">chainer.links</span></code></a> package.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Some of the links are originally defined in the <a class="reference internal" href="functions.html#module-chainer.functions" title="chainer.functions"><code class="xref py py-mod docutils literal"><span class="pre">chainer.functions</span></code></a>
+namespace. They are still left in the namespace for backward compatibility,
+though it is strongly recommended to use them via the <a class="reference internal" href="#module-chainer.links" title="chainer.links"><code class="xref py py-mod docutils literal"><span class="pre">chainer.links</span></code></a>
+package.</p>
+</div>
+<div class="section" id="learnable-connections">
+<h2>Learnable connections<a class="headerlink" href="#learnable-connections" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="bias">
+<h3>Bias<a class="headerlink" href="#bias" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="bilinear">
+<h3>Bilinear<a class="headerlink" href="#bilinear" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Bilinear">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Bilinear</code><span class="sig-paren">(</span><em>left_size</em>, <em>right_size</em>, <em>out_size</em>, <em>nobias=False</em>, <em>initialW=None</em>, <em>initial_bias=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/bilinear.html#Bilinear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Bilinear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bilinear layer that performs tensor multiplication.</p>
+<p>Bilinear is a primitive link that wraps the
+<a class="reference internal" href="functions.html#chainer.functions.bilinear" title="chainer.functions.bilinear"><code class="xref py py-func docutils literal"><span class="pre">bilinear()</span></code></a> functions. It holds parameters <code class="docutils literal"><span class="pre">W</span></code>,
+<code class="docutils literal"><span class="pre">V1</span></code>, <code class="docutils literal"><span class="pre">V2</span></code>, and <code class="docutils literal"><span class="pre">b</span></code> corresponding to the arguments of
+<a class="reference internal" href="functions.html#chainer.functions.bilinear" title="chainer.functions.bilinear"><code class="xref py py-func docutils literal"><span class="pre">bilinear()</span></code></a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>left_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vector <span class="math">\(e^1\)</span> (<span class="math">\(J\)</span>)</li>
+<li><strong>right_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vector <span class="math">\(e^2\)</span> (<span class="math">\(K\)</span>)</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of output vector <span class="math">\(y\)</span> (<span class="math">\(L\)</span>)</li>
+<li><strong>nobias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, parameters <code class="docutils literal"><span class="pre">V1</span></code>, <code class="docutils literal"><span class="pre">V2</span></code>, and <code class="docutils literal"><span class="pre">b</span></code> are
+omitted.</li>
+<li><strong>initialW</strong> (<em>3-D numpy array</em>) &#8211; Initial value of <span class="math">\(W\)</span>.
+Shape of this argument must be
+<code class="docutils literal"><span class="pre">(left_size,</span> <span class="pre">right_size,</span> <span class="pre">out_size)</span></code>. If <code class="docutils literal"><span class="pre">None</span></code>,
+<span class="math">\(W\)</span> is initialized by centered Gaussian distribution properly
+scaled according to the dimension of inputs and outputs.</li>
+<li><strong>initial_bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) &#8211; Initial values of <span class="math">\(V^1\)</span>, <span class="math">\(V^2\)</span>
+and <span class="math">\(b\)</span>. The length this argument must be 3.
+Each element of this tuple must have the shapes of
+<code class="docutils literal"><span class="pre">(left_size,</span> <span class="pre">output_size)</span></code>, <code class="docutils literal"><span class="pre">(right_size,</span> <span class="pre">output_size)</span></code>,
+and <code class="docutils literal"><span class="pre">(output_size,)</span></code>, respectively. If <code class="docutils literal"><span class="pre">None</span></code>, <span class="math">\(V^1\)</span>
+and <span class="math">\(V^2\)</span> is initialized by scaled centered Gaussian
+distributions and <span class="math">\(b\)</span> is set to <span class="math">\(0\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <a class="reference internal" href="functions.html#chainer.functions.bilinear" title="chainer.functions.bilinear"><code class="xref py py-func docutils literal"><span class="pre">chainer.functions.bilinear()</span></code></a> for details.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Bilinear weight parameter.</li>
+<li><strong>V1</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Linear weight parameter for the first argument.</li>
+<li><strong>V2</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Linear weight parameter for the second
+argument.</li>
+<li><strong>b</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Bias parameter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Bilinear.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>e1</em>, <em>e2</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/bilinear.html#Bilinear.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Bilinear.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the bilinear function to inputs and the internal parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>e1</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Left input.</li>
+<li><strong>e2</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Right input.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Output variable.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="convolution2d">
+<h3>Convolution2D<a class="headerlink" href="#convolution2d" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Convolution2D">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Convolution2D</code><span class="sig-paren">(</span><em>in_channels</em>, <em>out_channels</em>, <em>ksize</em>, <em>stride=1</em>, <em>pad=0</em>, <em>wscale=1</em>, <em>bias=0</em>, <em>nobias=False</em>, <em>use_cudnn=True</em>, <em>initialW=None</em>, <em>initial_bias=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/convolution_2d.html#Convolution2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Convolution2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Two-dimensional convolutional layer.</p>
+<p>This link wraps the <a class="reference internal" href="functions.html#chainer.functions.convolution_2d" title="chainer.functions.convolution_2d"><code class="xref py py-func docutils literal"><span class="pre">convolution_2d()</span></code></a> function and
+holds the filter weight and bias vector as parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of input arrays.</li>
+<li><strong>out_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of output arrays.</li>
+<li><strong>ksize</strong> (<em>int or pair of ints</em>) &#8211; Size of filters (a.k.a. kernels).
+<code class="docutils literal"><span class="pre">ksize=k</span></code> and <code class="docutils literal"><span class="pre">ksize=(k,</span> <span class="pre">k)</span></code> are equivalent.</li>
+<li><strong>stride</strong> (<em>int or pair of ints</em>) &#8211; Stride of filter applications.
+<code class="docutils literal"><span class="pre">stride=s</span></code> and <code class="docutils literal"><span class="pre">stride=(s,</span> <span class="pre">s)</span></code> are equivalent.</li>
+<li><strong>pad</strong> (<em>int or pair of ints</em>) &#8211; Spatial padding width for input arrays.
+<code class="docutils literal"><span class="pre">pad=p</span></code> and <code class="docutils literal"><span class="pre">pad=(p,</span> <span class="pre">p)</span></code> are equivalent.</li>
+<li><strong>wscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Scaling factor of the initial weight.</li>
+<li><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Initial bias value.</li>
+<li><strong>nobias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this link does not use the bias term.</li>
+<li><strong>use_cudnn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this link uses cuDNN if available.</li>
+<li><strong>initialW</strong> (<em>4-D array</em>) &#8211; Initial weight value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">wscale</span></code>.</li>
+<li><strong>initial_bias</strong> (<em>1-D array</em>) &#8211; Initial bias value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">bias</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <a class="reference internal" href="functions.html#chainer.functions.convolution_2d" title="chainer.functions.convolution_2d"><code class="xref py py-func docutils literal"><span class="pre">chainer.functions.convolution_2d()</span></code></a> for the definition of
+two-dimensional convolution.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Weight parameter.</li>
+<li><strong>b</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Bias parameter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Convolution2D.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/convolution_2d.html#Convolution2D.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Convolution2D.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the convolution layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output of the convolution.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="convolutionnd">
+<h3>ConvolutionND<a class="headerlink" href="#convolutionnd" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="deconvolution2d">
+<h3>Deconvolution2D<a class="headerlink" href="#deconvolution2d" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Deconvolution2D">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Deconvolution2D</code><span class="sig-paren">(</span><em>in_channels</em>, <em>out_channels</em>, <em>ksize</em>, <em>stride=1</em>, <em>pad=0</em>, <em>wscale=1</em>, <em>bias=0</em>, <em>nobias=False</em>, <em>outsize=None</em>, <em>use_cudnn=True</em>, <em>initialW=None</em>, <em>initial_bias=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/deconvolution_2d.html#Deconvolution2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Deconvolution2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Two dimensional deconvolution function.</p>
+<p>This link wraps the <a class="reference internal" href="functions.html#chainer.functions.deconvolution_2d" title="chainer.functions.deconvolution_2d"><code class="xref py py-func docutils literal"><span class="pre">deconvolution_2d()</span></code></a> function
+and holds the filter weight and bias vector as parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of input arrays.</li>
+<li><strong>out_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of output arrays.</li>
+<li><strong>ksize</strong> (<em>int or pair of ints</em>) &#8211; Size of filters (a.k.a. kernels).
+<code class="docutils literal"><span class="pre">ksize=k</span></code> and <code class="docutils literal"><span class="pre">ksize=(k,</span> <span class="pre">k)</span></code> are equivalent.</li>
+<li><strong>stride</strong> (<em>int or pair of ints</em>) &#8211; Stride of filter applications.
+<code class="docutils literal"><span class="pre">stride=s</span></code> and <code class="docutils literal"><span class="pre">stride=(s,</span> <span class="pre">s)</span></code> are equivalent.</li>
+<li><strong>pad</strong> (<em>int or pair of ints</em>) &#8211; Spatial padding width for input arrays.
+<code class="docutils literal"><span class="pre">pad=p</span></code> and <code class="docutils literal"><span class="pre">pad=(p,</span> <span class="pre">p)</span></code> are equivalent.</li>
+<li><strong>wscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Scaling factor of the initial weight.</li>
+<li><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Initial bias value.</li>
+<li><strong>nobias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this function does not use the bias
+term.</li>
+<li><strong>outsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)"><em>tuple</em></a>) &#8211; Expected output size of deconvolutional operation.
+It should be pair of height and width <span class="math">\((out_H, out_W)\)</span>.
+Default value is <code class="docutils literal"><span class="pre">None</span></code> and the outsize is estimated by
+input size, stride and pad.</li>
+<li><strong>use_cudnn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this function uses cuDNN if
+available.</li>
+<li><strong>initialW</strong> (<em>4-D array</em>) &#8211; Initial weight value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">wscale</span></code>.</li>
+<li><strong>initial_bias</strong> (<em>1-D array</em>) &#8211; Initial bias value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">bias</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>The filter weight has four dimensions <span class="math">\((c_I, c_O, k_H, k_W)\)</span>
+which indicate the number of the number of input channels, output channels,
+height and width of the kernels, respectively.
+The filter weight is initialized with i.i.d. Gaussian random samples, each
+of which has zero mean and deviation <span class="math">\(\sqrt{1/(c_I k_H k_W)}\)</span> by
+default. The deviation is scaled by <code class="docutils literal"><span class="pre">wscale</span></code> if specified.</p>
+<p>The bias vector is of size <span class="math">\(c_O\)</span>.
+Its elements are initialized by <code class="docutils literal"><span class="pre">bias</span></code> argument.
+If <code class="docutils literal"><span class="pre">nobias</span></code> argument is set to True, then this function does not hold
+the bias parameter.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">See <a class="reference internal" href="functions.html#chainer.functions.deconvolution_2d" title="chainer.functions.deconvolution_2d"><code class="xref py py-func docutils literal"><span class="pre">chainer.functions.deconvolution_2d()</span></code></a> for the definition of
+two-dimensional convolution.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="deconvolutionnd">
+<h3>DeconvolutionND<a class="headerlink" href="#deconvolutionnd" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="dilatedconvolution2d">
+<h3>DilatedConvolution2D<a class="headerlink" href="#dilatedconvolution2d" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="embedid">
+<h3>EmbedID<a class="headerlink" href="#embedid" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.EmbedID">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">EmbedID</code><span class="sig-paren">(</span><em>in_size</em>, <em>out_size</em>, <em>ignore_label=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/embed_id.html#EmbedID"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.EmbedID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Efficient linear layer for one-hot input.</p>
+<p>This is a link that wraps the <a class="reference internal" href="functions.html#chainer.functions.embed_id" title="chainer.functions.embed_id"><code class="xref py py-func docutils literal"><span class="pre">embed_id()</span></code></a> function.
+This link holds the ID (word) embedding matrix <code class="docutils literal"><span class="pre">W</span></code> as a parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of different identifiers (a.k.a. vocabulary
+size).</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Size of embedding vector.</li>
+<li><strong>ignore_label</strong> (<em>int or None</em>) &#8211; If <code class="docutils literal"><span class="pre">ignore_label</span></code> is an int value,
+<code class="docutils literal"><span class="pre">i</span></code>-th column of return value is filled with <code class="docutils literal"><span class="pre">0</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.embed_id" title="chainer.functions.embed_id"><code class="xref py py-func docutils literal"><span class="pre">chainer.functions.embed_id()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Embedding parameter matrix.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.EmbedID.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/embed_id.html#EmbedID.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.EmbedID.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the word embedding of given IDs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Batch vectors of IDs.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Batch of corresponding embeddings.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="gru">
+<h3>GRU<a class="headerlink" href="#gru" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.GRU">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">GRU</code><span class="sig-paren">(</span><em>n_units</em>, <em>n_inputs=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/gru.html#GRU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.GRU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stateless Gated Recurrent Unit function (GRU).</p>
+<p>GRU function has six parameters <span class="math">\(W_r\)</span>, <span class="math">\(W_z\)</span>, <span class="math">\(W\)</span>,
+<span class="math">\(U_r\)</span>, <span class="math">\(U_z\)</span>, and <span class="math">\(U\)</span>. All these parameters are
+<span class="math">\(n \times n\)</span> matrices, where <span class="math">\(n\)</span> is the dimension of
+hidden vectors.</p>
+<p>Given two inputs a previous hidden vector <span class="math">\(h\)</span> and an input vector
+<span class="math">\(x\)</span>, GRU returns the next hidden vector <span class="math">\(h'\)</span> defined as</p>
+<div class="math">
+\[\begin{split}r &amp;=&amp; \sigma(W_r x + U_r h), \\
+z &amp;=&amp; \sigma(W_z x + U_z h), \\
+\bar{h} &amp;=&amp; \tanh(W x + U (r \odot h)), \\
+h' &amp;=&amp; (1 - z) \odot h + z \odot \bar{h},\end{split}\]</div>
+<p>where <span class="math">\(\sigma\)</span> is the sigmoid function, and <span class="math">\(\odot\)</span> is the
+element-wise product.</p>
+<p><a class="reference internal" href="#chainer.links.GRU" title="chainer.links.GRU"><code class="xref py py-class docutils literal"><span class="pre">GRU</span></code></a> does not hold the value of
+hidden vector <span class="math">\(h\)</span>. So this is <em>stateless</em>.
+Use <a class="reference internal" href="#chainer.links.StatefulGRU" title="chainer.links.StatefulGRU"><code class="xref py py-class docutils literal"><span class="pre">StatefulGRU</span></code></a> as a <em>stateful</em> GRU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>n_units</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of hidden vector <span class="math">\(h\)</span>.</li>
+<li><strong>n_inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vector <span class="math">\(x\)</span>. If <code class="docutils literal"><span class="pre">None</span></code>,
+it is set to the same value as <code class="docutils literal"><span class="pre">n_units</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="docutils">
+<dt>See:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="http://www.aclweb.org/anthology/W14-4012">On the Properties of Neural Machine Translation: Encoder-Decoder
+Approaches</a>
+[Cho+, SSST2014].</li>
+<li><a class="reference external" href="http://arxiv.org/abs/1412.3555">Empirical Evaluation of Gated Recurrent Neural Networks on Sequence
+Modeling</a>
+[Chung+NIPS2014 DLWorkshop].</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#chainer.links.StatefulGRU" title="chainer.links.StatefulGRU"><code class="xref py py-class docutils literal"><span class="pre">StatefulGRU</span></code></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="highway">
+<h3>Highway<a class="headerlink" href="#highway" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="inception">
+<h3>Inception<a class="headerlink" href="#inception" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Inception">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Inception</code><span class="sig-paren">(</span><em>in_channels</em>, <em>out1</em>, <em>proj3</em>, <em>out3</em>, <em>proj5</em>, <em>out5</em>, <em>proj_pool</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/inception.html#Inception"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Inception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inception module of GoogLeNet.</p>
+<p>It applies four different functions to the input array and concatenates
+their outputs along the channel dimension. Three of them are 2D
+convolutions of sizes 1x1, 3x3 and 5x5. Convolution paths of 3x3 and 5x5
+sizes have 1x1 convolutions (called projections) ahead of them. The other
+path consists of 1x1 convolution (projection) and 3x3 max pooling.</p>
+<p>The output array has the same spatial size as the input. In order to
+satisfy this, Inception module uses appropriate padding for each
+convolution and pooling.</p>
+<p>See: <a class="reference external" href="http://arxiv.org/abs/1409.4842">Going Deeper with Convolutions</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of input arrays.</li>
+<li><strong>out1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of 1x1 convolution path.</li>
+<li><strong>proj3</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Projection size of 3x3 convolution path.</li>
+<li><strong>out3</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of 3x3 convolution path.</li>
+<li><strong>proj5</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Projection size of 5x5 convolution path.</li>
+<li><strong>out5</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of 5x5 convolution path.</li>
+<li><strong>proj_pool</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Projection size of max pooling path.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Inception.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/inception.html#Inception.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Inception.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the output of the Inception module.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input variable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output variable. Its array has the same spatial size and
+the same minibatch size as the input array. The channel dimension
+has size <code class="docutils literal"><span class="pre">out1</span> <span class="pre">+</span> <span class="pre">out3</span> <span class="pre">+</span> <span class="pre">out5</span> <span class="pre">+</span> <span class="pre">proj_pool</span></code>.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="inceptionbn">
+<h3>InceptionBN<a class="headerlink" href="#inceptionbn" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.InceptionBN">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">InceptionBN</code><span class="sig-paren">(</span><em>in_channels</em>, <em>out1</em>, <em>proj3</em>, <em>out3</em>, <em>proj33</em>, <em>out33</em>, <em>pooltype</em>, <em>proj_pool=None</em>, <em>stride=1</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/inceptionbn.html#InceptionBN"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.InceptionBN" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inception module of the new GoogLeNet with BatchNormalization.</p>
+<p>This chain acts like <a class="reference internal" href="#chainer.links.Inception" title="chainer.links.Inception"><code class="xref py py-class docutils literal"><span class="pre">Inception</span></code></a>, while InceptionBN uses the
+<a class="reference internal" href="#chainer.links.BatchNormalization" title="chainer.links.BatchNormalization"><code class="xref py py-class docutils literal"><span class="pre">BatchNormalization</span></code></a> on top of each convolution, the 5x5 convolution
+path is replaced by two consecutive 3x3 convolution applications, and the
+pooling method is configurable.</p>
+<p>See: <a class="reference external" href="http://arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing     Internal Covariate Shift</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of input arrays.</li>
+<li><strong>out1</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of the 1x1 convolution path.</li>
+<li><strong>proj3</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Projection size of the single 3x3 convolution path.</li>
+<li><strong>out3</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of the single 3x3 convolution path.</li>
+<li><strong>proj33</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Projection size of the double 3x3 convolutions path.</li>
+<li><strong>out33</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Output size of the double 3x3 convolutions path.</li>
+<li><strong>pooltype</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; Pooling type. It must be either <code class="docutils literal"><span class="pre">'max'</span></code> or <code class="docutils literal"><span class="pre">'avg'</span></code>.</li>
+<li><strong>proj_pool</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, do projection in the pooling path.</li>
+<li><strong>stride</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Stride parameter of the last convolution of each path.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#chainer.links.Inception" title="chainer.links.Inception"><code class="xref py py-class docutils literal"><span class="pre">Inception</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>train</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then batch normalization layers are used in
+training mode. If <code class="docutils literal"><span class="pre">False</span></code>, they are used in testing mode.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+<div class="section" id="linear">
+<h3>Linear<a class="headerlink" href="#linear" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Linear">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Linear</code><span class="sig-paren">(</span><em>in_size</em>, <em>out_size</em>, <em>wscale=1</em>, <em>bias=0</em>, <em>nobias=False</em>, <em>initialW=None</em>, <em>initial_bias=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/linear.html#Linear"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear layer (a.k.a. fully-connected layer).</p>
+<p>This is a link that wraps the <a class="reference internal" href="functions.html#chainer.functions.linear" title="chainer.functions.linear"><code class="xref py py-func docutils literal"><span class="pre">linear()</span></code></a> function,
+and holds a weight matrix <code class="docutils literal"><span class="pre">W</span></code> and optionally a bias vector <code class="docutils literal"><span class="pre">b</span></code> as
+parameters.</p>
+<p>The weight matrix <code class="docutils literal"><span class="pre">W</span></code> is initialized with i.i.d. Gaussian samples, each
+of which has zero mean and deviation <span class="math">\(\sqrt{1/\text{in_size}}\)</span>. The
+bias vector <code class="docutils literal"><span class="pre">b</span></code> is of size <code class="docutils literal"><span class="pre">out_size</span></code>. Each element is initialized with
+the <code class="docutils literal"><span class="pre">bias</span></code> value. If <code class="docutils literal"><span class="pre">nobias</span></code> argument is set to True, then this link
+does not hold a bias vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vectors.</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of output vectors.</li>
+<li><strong>wscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Scaling factor of the weight matrix.</li>
+<li><strong>bias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Initial bias value.</li>
+<li><strong>nobias</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this function does not use the bias.</li>
+<li><strong>initialW</strong> (<em>2-D array</em>) &#8211; Initial weight value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">wscale</span></code>.</li>
+<li><strong>initial_bias</strong> (<em>1-D array</em>) &#8211; Initial bias value. If <code class="docutils literal"><span class="pre">None</span></code>, then this
+function uses to initialize <code class="docutils literal"><span class="pre">bias</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.linear" title="chainer.functions.linear"><code class="xref py py-func docutils literal"><span class="pre">linear()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Weight parameter.</li>
+<li><strong>b</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Bias parameter.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Linear.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/linear.html#Linear.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Linear.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the linear layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Batch of input vectors.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output of the linear layer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="lstm">
+<h3>LSTM<a class="headerlink" href="#lstm" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.LSTM">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">LSTM</code><span class="sig-paren">(</span><em>in_size</em>, <em>out_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/lstm.html#LSTM"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.LSTM" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fully-connected LSTM layer.</p>
+<p>This is a fully-connected LSTM layer as a chain. Unlike the
+<a class="reference internal" href="functions.html#chainer.functions.lstm" title="chainer.functions.lstm"><code class="xref py py-func docutils literal"><span class="pre">lstm()</span></code></a> function, which is defined as a stateless
+activation function, this chain holds upward and lateral connections as
+child links.</p>
+<p>It also maintains <em>states</em>, including the cell state and the output
+at the previous time step. Therefore, it can be used as a <em>stateful LSTM</em>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimensionality of input vectors.</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimensionality of output vectors.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>upward</strong> (<a class="reference internal" href="#chainer.links.Linear" title="chainer.links.Linear"><em>Linear</em></a>) &#8211; Linear layer of upward connections.</li>
+<li><strong>lateral</strong> (<a class="reference internal" href="#chainer.links.Linear" title="chainer.links.Linear"><em>Linear</em></a>) &#8211; Linear layer of lateral connections.</li>
+<li><strong>c</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Cell states of LSTM units.</li>
+<li><strong>h</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Output at the previous time step.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.LSTM.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/lstm.html#LSTM.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.LSTM.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the internal state and returns the LSTM outputs.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; A new batch from the input sequence.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Outputs of updated LSTM units.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.links.LSTM.reset_state">
+<code class="descname">reset_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/lstm.html#LSTM.reset_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.LSTM.reset_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the internal state.</p>
+<p>It sets <code class="docutils literal"><span class="pre">None</span></code> to the <code class="xref py py-attr docutils literal"><span class="pre">c</span></code> and <code class="xref py py-attr docutils literal"><span class="pre">h</span></code> attributes.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mlpconvolution2d">
+<h3>MLPConvolution2D<a class="headerlink" href="#mlpconvolution2d" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.MLPConvolution2D">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">MLPConvolution2D</code><span class="sig-paren">(</span><em>in_channels</em>, <em>out_channels</em>, <em>ksize</em>, <em>stride=1</em>, <em>pad=0</em>, <em>wscale=1</em>, <em>activation=&lt;function relu&gt;</em>, <em>use_cudnn=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/mlp_convolution_2d.html#MLPConvolution2D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.MLPConvolution2D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Two-dimensional MLP convolution layer of Network in Network.</p>
+<p>This is an &#8220;mlpconv&#8221; layer from the Network in Network paper. This layer
+is a two-dimensional convolution layer followed by 1x1 convolution layers
+and interleaved activation functions.</p>
+<p>Note that it does not apply the activation function to the output of the
+last 1x1 convolution layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_channels</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels of input arrays.</li>
+<li><strong>out_channels</strong> (<em>tuple of ints</em>) &#8211; Tuple of number of channels. The i-th
+integer indicates the number of filters of the i-th convolution.</li>
+<li><strong>ksize</strong> (<em>int or pair of ints</em>) &#8211; Size of filters (a.k.a. kernels) of the
+first convolution layer. <code class="docutils literal"><span class="pre">ksize=k</span></code> and <code class="docutils literal"><span class="pre">ksize=(k,</span> <span class="pre">k)</span></code> are
+equivalent.</li>
+<li><strong>stride</strong> (<em>int or pair of ints</em>) &#8211; Stride of filter applications at the
+first convolution layer. <code class="docutils literal"><span class="pre">stride=s</span></code> and <code class="docutils literal"><span class="pre">stride=(s,</span> <span class="pre">s)</span></code> are
+equivalent.</li>
+<li><strong>pad</strong> (<em>int or pair of ints</em>) &#8211; Spatial padding width for input arrays at
+the first convolution layer. <code class="docutils literal"><span class="pre">pad=p</span></code> and <code class="docutils literal"><span class="pre">pad=(p,</span> <span class="pre">p)</span></code> are
+equivalent.</li>
+<li><strong>activation</strong> (<a class="reference internal" href="function_hooks.html#module-chainer.function" title="chainer.function"><em>function</em></a>) &#8211; Activation function for internal hidden units.
+Note that this function is not applied to the output of this link.</li>
+<li><strong>use_cudnn</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, then this link uses cuDNN if available.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See: <cite>Network in Network &lt;http://arxiv.org/abs/1312.4400v3&gt;</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>activation</strong> (<a class="reference internal" href="function_hooks.html#module-chainer.function" title="chainer.function"><em>function</em></a>) &#8211; Activation function.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.MLPConvolution2D.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/mlp_convolution_2d.html#MLPConvolution2D.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.MLPConvolution2D.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the output of the mlpconv layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input image.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output of the mlpconv layer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="nsteplstm">
+<h3>NStepLSTM<a class="headerlink" href="#nsteplstm" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="scale">
+<h3>Scale<a class="headerlink" href="#scale" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="statefulgru">
+<h3>StatefulGRU<a class="headerlink" href="#statefulgru" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.StatefulGRU">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">StatefulGRU</code><span class="sig-paren">(</span><em>in_size</em>, <em>out_size</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/gru.html#StatefulGRU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.StatefulGRU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stateful Gated Recurrent Unit function (GRU).</p>
+<p>Stateful GRU function has six parameters <span class="math">\(W_r\)</span>, <span class="math">\(W_z\)</span>,
+<span class="math">\(W\)</span>, <span class="math">\(U_r\)</span>, <span class="math">\(U_z\)</span>, and <span class="math">\(U\)</span>.
+All these parameters are <span class="math">\(n \times n\)</span> matrices,
+where <span class="math">\(n\)</span> is the dimension of hidden vectors.</p>
+<p>Given input vector <span class="math">\(x\)</span>, Stateful GRU returns the next
+hidden vector <span class="math">\(h'\)</span> defined as</p>
+<div class="math">
+\[\begin{split}r &amp;=&amp; \sigma(W_r x + U_r h), \\
+z &amp;=&amp; \sigma(W_z x + U_z h), \\
+\bar{h} &amp;=&amp; \tanh(W x + U (r \odot h)), \\
+h' &amp;=&amp; (1 - z) \odot h + z \odot \bar{h},\end{split}\]</div>
+<p>where <span class="math">\(h\)</span> is current hidden vector.</p>
+<p>As the name indicates, <a class="reference internal" href="#chainer.links.StatefulGRU" title="chainer.links.StatefulGRU"><code class="xref py py-class docutils literal"><span class="pre">StatefulGRU</span></code></a> is <em>stateful</em>,
+meaning that it also holds the next hidden vector <cite>h&#8217;</cite> as a state.
+Use <a class="reference internal" href="#chainer.links.GRU" title="chainer.links.GRU"><code class="xref py py-class docutils literal"><span class="pre">GRU</span></code></a> as a stateless version of GRU.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vector <span class="math">\(x\)</span>.</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of hidden vector <span class="math">\(h\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><p class="first last"><strong>h</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Hidden vector that indicates the state of
+<a class="reference internal" href="#chainer.links.StatefulGRU" title="chainer.links.StatefulGRU"><code class="xref py py-class docutils literal"><span class="pre">StatefulGRU</span></code></a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><code class="xref py py-class docutils literal"><span class="pre">GRU</span></code></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="statefulpeepholelstm">
+<h3>StatefulPeepholeLSTM<a class="headerlink" href="#statefulpeepholelstm" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="statelesslstm">
+<h3>StatelessLSTM<a class="headerlink" href="#statelesslstm" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="activation-loss-normalization-functions-with-parameters">
+<h2>Activation/loss/normalization functions with parameters<a class="headerlink" href="#activation-loss-normalization-functions-with-parameters" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="batchnormalization">
+<h3>BatchNormalization<a class="headerlink" href="#batchnormalization" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.BatchNormalization">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">BatchNormalization</code><span class="sig-paren">(</span><em>size</em>, <em>decay=0.9</em>, <em>eps=1e-05</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/normalization/batch_normalization.html#BatchNormalization"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BatchNormalization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch normalization layer on outputs of linear or convolution functions.</p>
+<p>This link wraps the <a class="reference internal" href="functions.html#chainer.functions.batch_normalization" title="chainer.functions.batch_normalization"><code class="xref py py-func docutils literal"><span class="pre">batch_normalization()</span></code></a> and
+<a class="reference internal" href="functions.html#chainer.functions.fixed_batch_normalization" title="chainer.functions.fixed_batch_normalization"><code class="xref py py-func docutils literal"><span class="pre">fixed_batch_normalization()</span></code></a> functions.</p>
+<p>It runs in three modes: training mode, fine-tuning mode, and testing mode.</p>
+<p>In training mode, it normalizes the input by <em>batch statistics</em>. It also
+maintains approximated population statistics by moving averages, which can
+be used for instant evaluation in testing mode.</p>
+<p>In fine-tuning mode, it accumulates the input to compute <em>population
+statistics</em>. In order to correctly compute the population statistics, a
+user must use this mode to feed mini batches running through whole training
+dataset.</p>
+<p>In testing mode, it uses pre-computed population statistics to normalize
+the input variable. The population statistics is approximated if it is
+computed by training mode, or accurate if it is correctly computed by
+fine-tuning mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>size</strong> (<em>int or tuple of ints</em>) &#8211; Size (or shape) of channel
+dimensions.</li>
+<li><strong>decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Decay rate of moving average. It is used on training.</li>
+<li><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Epsilon value for numerical stability.</li>
+<li><strong>dtype</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.12)"><em>numpy.dtype</em></a>) &#8211; Type to use in computing.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See: <a class="reference external" href="http://arxiv.org/abs/1502.03167">Batch Normalization: Accelerating Deep Network Training by Reducing          Internal Covariate Shift</a></p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.batch_normalization" title="chainer.functions.batch_normalization"><code class="xref py py-func docutils literal"><span class="pre">batch_normalization()</span></code></a>,
+<a class="reference internal" href="functions.html#chainer.functions.fixed_batch_normalization" title="chainer.functions.fixed_batch_normalization"><code class="xref py py-func docutils literal"><span class="pre">fixed_batch_normalization()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>gamma</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Scaling parameter.</li>
+<li><strong>beta</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Shifting parameter.</li>
+<li><strong>avg_mean</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Population mean.</li>
+<li><strong>avg_var</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Population variance.</li>
+<li><strong>N</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Count of batches given for fine-tuning.</li>
+<li><strong>decay</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Decay rate of moving average. It is used on training.</li>
+<li><strong>eps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Epsilon value for numerical stability. This value is added
+to the batch variances.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.BatchNormalization.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>test=False</em>, <em>finetune=False</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/normalization/batch_normalization.html#BatchNormalization.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BatchNormalization.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Invokes the forward propagation of BatchNormalization.</p>
+<p>BatchNormalization accepts additional arguments, which controls three
+different running mode.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; An input variable.</li>
+<li><strong>test</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, BatchNormalization runs in testing mode;
+it normalizes the input using pre-computed statistics.</li>
+<li><strong>finetune</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, BatchNormalization runs in
+fine-tuning mode; it accumulates the input array to compute
+population statistics for normalization, and normalizes the
+input using batch statistics.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If <code class="docutils literal"><span class="pre">test</span></code> and <code class="docutils literal"><span class="pre">finetune</span></code> are both <code class="docutils literal"><span class="pre">False</span></code>, then
+BatchNormalization runs in training mode; it computes moving averages
+of mean and variance for evaluation during training, and normalizes the
+input using batch statistics.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="chainer.links.BatchNormalization.start_finetuning">
+<code class="descname">start_finetuning</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/normalization/batch_normalization.html#BatchNormalization.start_finetuning"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BatchNormalization.start_finetuning" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resets the population count for collecting population statistics.</p>
+<p>This method can be skipped if it is the first time to use the
+fine-tuning mode. Otherwise, this method should be called before
+starting the fine-tuning mode again.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="layernormalization">
+<h3>LayerNormalization<a class="headerlink" href="#layernormalization" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="binaryhierarchicalsoftmax">
+<h3>BinaryHierarchicalSoftmax<a class="headerlink" href="#binaryhierarchicalsoftmax" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.BinaryHierarchicalSoftmax">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">BinaryHierarchicalSoftmax</code><span class="sig-paren">(</span><em>in_size</em>, <em>tree</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/loss/hierarchical_softmax.html#BinaryHierarchicalSoftmax"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BinaryHierarchicalSoftmax" title="Permalink to this definition">¶</a></dt>
+<dd><p>Hierarchical softmax layer over binary tree.</p>
+<p>In natural language applications, vocabulary size is too large to use
+softmax loss.
+Instead, the hierarchical softmax uses product of sigmoid functions.
+It costs only <span class="math">\(O(\log(n))\)</span> time where <span class="math">\(n\)</span> is the vocabulary
+size in average.</p>
+<p>At first a user need to prepare a binary tree whose each leaf is
+corresponding to a word in a vocabulary.
+When a word <span class="math">\(x\)</span> is given, exactly one path from the root of the tree
+to the leaf of the word exists.
+Let <span class="math">\(\mbox{path}(x) = ((e_1, b_1), \dots, (e_m, b_m))\)</span> be the path
+of <span class="math">\(x\)</span>, where <span class="math">\(e_i\)</span> is an index of <span class="math">\(i\)</span>-th internal node,
+and <span class="math">\(b_i \in \{-1, 1\}\)</span> indicates direction to move at
+<span class="math">\(i\)</span>-th internal node (-1 is left, and 1 is right).
+Then, the probability of <span class="math">\(x\)</span> is given as below:</p>
+<div class="math">
+\[\begin{split}P(x) &amp;= \prod_{(e_i, b_i) \in \mbox{path}(x)}P(b_i | e_i)  \\
+     &amp;= \prod_{(e_i, b_i) \in \mbox{path}(x)}\sigma(b_i x^\top
+        w_{e_i}),\end{split}\]</div>
+<p>where <span class="math">\(\sigma(\cdot)\)</span> is a sigmoid function, and <span class="math">\(w\)</span> is a
+weight matrix.</p>
+<p>This function costs <span class="math">\(O(\log(n))\)</span> time as an average length of paths
+is <span class="math">\(O(\log(n))\)</span>, and <span class="math">\(O(n)\)</span> memory as the number of internal
+nodes equals <span class="math">\(n - 1\)</span>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vectors.</li>
+<li><strong>tree</strong> &#8211; A binary tree made with tuples like <cite>((1, 2), 3)</cite>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><p class="first last"><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Weight parameter matrix.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See: Hierarchical Probabilistic Neural Network Language Model [Morin+,
+AISTAT2005].</p>
+<dl class="method">
+<dt id="chainer.links.BinaryHierarchicalSoftmax.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/loss/hierarchical_softmax.html#BinaryHierarchicalSoftmax.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BinaryHierarchicalSoftmax.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the loss value for given input and ground truth labels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input to the classifier at each node.</li>
+<li><strong>t</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Batch of ground truth labels.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loss value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="chainer.links.BinaryHierarchicalSoftmax.create_huffman_tree">
+<em class="property">static </em><code class="descname">create_huffman_tree</code><span class="sig-paren">(</span><em>word_counts</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/loss/hierarchical_softmax.html#BinaryHierarchicalSoftmax.create_huffman_tree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.BinaryHierarchicalSoftmax.create_huffman_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Makes a Huffman tree from a dictionary containing word counts.</p>
+<p>This method creates a binary Huffman tree, that is required for
+<a class="reference internal" href="#chainer.links.BinaryHierarchicalSoftmax" title="chainer.links.BinaryHierarchicalSoftmax"><code class="xref py py-class docutils literal"><span class="pre">BinaryHierarchicalSoftmax</span></code></a>.
+For example, <code class="docutils literal"><span class="pre">{0:</span> <span class="pre">8,</span> <span class="pre">1:</span> <span class="pre">5,</span> <span class="pre">2:</span> <span class="pre">6,</span> <span class="pre">3:</span> <span class="pre">4}</span></code> is converted to
+<code class="docutils literal"><span class="pre">((3,</span> <span class="pre">1),</span> <span class="pre">(2,</span> <span class="pre">0))</span></code>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>word_counts</strong> (<em>dict of int key and int or float values</em>) &#8211; Dictionary representing counts of words.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Binary Huffman tree with tuples and keys of <code class="docutils literal"><span class="pre">word_coutns</span></code>.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="blackout">
+<h3>BlackOut<a class="headerlink" href="#blackout" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="crf1d">
+<h3>CRF1d<a class="headerlink" href="#crf1d" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="prelu">
+<h3>PReLU<a class="headerlink" href="#prelu" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.PReLU">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">PReLU</code><span class="sig-paren">(</span><em>shape=()</em>, <em>init=0.25</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/activation/prelu.html#PReLU"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.PReLU" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parametric ReLU function as a link.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>shape</strong> (<em>tuple of ints</em>) &#8211; Shape of the parameter array.</li>
+<li><strong>init</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Initial parameter value.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>See the paper for details: <a class="reference external" href="http://arxiv.org/abs/1502.01852">Delving Deep into Rectifiers: Surpassing     Human-Level Performance on ImageNet Classification</a>.</p>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.prelu" title="chainer.functions.prelu"><code class="xref py py-func docutils literal"><span class="pre">chainer.functions.prelu()</span></code></a></p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Coefficient of parametric ReLU.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.PReLU.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/activation/prelu.html#PReLU.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.PReLU.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the parametric ReLU activation function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input variable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output of the parametric ReLU function.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="maxout">
+<h3>Maxout<a class="headerlink" href="#maxout" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Maxout">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Maxout</code><span class="sig-paren">(</span><em>in_size</em>, <em>out_size</em>, <em>pool_size</em>, <em>wscale=1</em>, <em>initialW=None</em>, <em>initial_bias=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/activation/maxout.html#Maxout"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Maxout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fully-connected maxout layer.</p>
+<p>Let <code class="docutils literal"><span class="pre">M</span></code>, <code class="docutils literal"><span class="pre">P</span></code> and <code class="docutils literal"><span class="pre">N</span></code> be an input dimension, a pool size,
+and an output dimension, respectively.
+For an input vector <span class="math">\(x\)</span> of size <code class="docutils literal"><span class="pre">M</span></code>, it computes</p>
+<div class="math">
+\[Y_{i} = \mathrm{max}_{j} (W_{ij\cdot}x + b_{ij}).\]</div>
+<p>Here <span class="math">\(W\)</span> is a weight tensor of shape <code class="docutils literal"><span class="pre">(M,</span> <span class="pre">P,</span> <span class="pre">N)</span></code>,
+<span class="math">\(b\)</span> an  optional bias vector of shape <code class="docutils literal"><span class="pre">(M,</span> <span class="pre">P)</span></code>
+and <span class="math">\(W_{ij\cdot}\)</span> is a sub-vector extracted from
+<span class="math">\(W\)</span> by fixing first and second dimensions to
+<span class="math">\(i\)</span> and <span class="math">\(j\)</span>, respectively.
+Minibatch dimension is omitted in the above equation.</p>
+<p>As for the actual implementation, this chain has a
+Linear link with a <code class="docutils literal"><span class="pre">(M</span> <span class="pre">*</span> <span class="pre">P,</span> <span class="pre">N)</span></code> weight matrix and
+an optional <code class="docutils literal"><span class="pre">M</span> <span class="pre">*</span> <span class="pre">P</span></code> dimensional bias vector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vectors.</li>
+<li><strong>out_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of output vectors.</li>
+<li><strong>pool_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of channels.</li>
+<li><strong>wscale</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Scaling factor of the weight matrix.</li>
+<li><strong>initialW</strong> (<em>3-D array or None</em>) &#8211; Initial weight value.
+If <code class="docutils literal"><span class="pre">None</span></code>, then this function uses <code class="docutils literal"><span class="pre">wscale</span></code> to initialize.</li>
+<li><strong>initial_bias</strong> (<em>2-D array, float or None</em>) &#8211; Initial bias value.
+If it is float, initial bias is filled with this value.
+If it is <code class="docutils literal"><span class="pre">None</span></code>, bias is omitted.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><p class="first last"><a class="reference internal" href="functions.html#chainer.functions.linear" title="chainer.functions.linear"><strong>linear</strong></a> (<a class="reference internal" href="core/link.html#chainer.Link" title="chainer.Link"><em>Link</em></a>) &#8211; The Linear link that performs
+affine transformation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.maxout" title="chainer.functions.maxout"><code class="xref py py-func docutils literal"><span class="pre">maxout()</span></code></a></p>
+</div>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last">Goodfellow, I., Warde-farley, D., Mirza, M.,
+Courville, A., &amp; Bengio, Y. (2013).
+Maxout Networks. In Proceedings of the 30th International
+Conference on Machine Learning (ICML-13) (pp. 1319-1327).
+<a class="reference external" href="http://jmlr.org/proceedings/papers/v28/goodfellow13.html">URL</a></p>
+</div>
+<dl class="method">
+<dt id="chainer.links.Maxout.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/activation/maxout.html#Maxout.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Maxout.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies the maxout layer.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Batch of input vectors.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">Output of the maxout layer.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="negativesampling">
+<h3>NegativeSampling<a class="headerlink" href="#negativesampling" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.NegativeSampling">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">NegativeSampling</code><span class="sig-paren">(</span><em>in_size</em>, <em>counts</em>, <em>sample_size</em>, <em>power=0.75</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/loss/negative_sampling.html#NegativeSampling"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.NegativeSampling" title="Permalink to this definition">¶</a></dt>
+<dd><p>Negative sampling loss layer.</p>
+<p>This link wraps the <a class="reference internal" href="functions.html#chainer.functions.negative_sampling" title="chainer.functions.negative_sampling"><code class="xref py py-func docutils literal"><span class="pre">negative_sampling()</span></code></a> function.
+It holds the weight matrix as a parameter. It also builds a sampler
+internally given a list of word counts.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>in_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Dimension of input vectors.</li>
+<li><strong>counts</strong> (<em>int list</em>) &#8211; Number of each identifiers.</li>
+<li><strong>sample_size</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.6)"><em>int</em></a>) &#8211; Number of negative samples.</li>
+<li><strong>power</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.6)"><em>float</em></a>) &#8211; Power factor <span class="math">\(\alpha\)</span>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="functions.html#chainer.functions.negative_sampling" title="chainer.functions.negative_sampling"><code class="xref py py-func docutils literal"><span class="pre">negative_sampling()</span></code></a> for more detail.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Variables:</th><td class="field-body"><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Weight parameter matrix.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.NegativeSampling.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/loss/negative_sampling.html#NegativeSampling.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.NegativeSampling.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the loss value for given input and ground truth labels.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input of the weight matrix multiplication.</li>
+<li><strong>t</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Batch of ground truth labels.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loss value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="machine-learning-models">
+<h2>Machine learning models<a class="headerlink" href="#machine-learning-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="classifier">
+<h3>Classifier<a class="headerlink" href="#classifier" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Classifier">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Classifier</code><span class="sig-paren">(</span><em>predictor</em>, <em>lossfun=&lt;function softmax_cross_entropy&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/model/classifier.html#Classifier"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Classifier" title="Permalink to this definition">¶</a></dt>
+<dd><p>A simple classifier model.</p>
+<p>This is an example of chain that wraps another chain. It computes the
+loss and accuracy based on a given input/label pair.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>predictor</strong> (<a class="reference internal" href="core/link.html#chainer.Link" title="chainer.Link"><em>Link</em></a>) &#8211; Predictor network.</li>
+<li><strong>lossfun</strong> (<a class="reference internal" href="function_hooks.html#module-chainer.function" title="chainer.function"><em>function</em></a>) &#8211; Loss function.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>predictor</strong> (<a class="reference internal" href="core/link.html#chainer.Link" title="chainer.Link"><em>Link</em></a>) &#8211; Predictor network.</li>
+<li><strong>lossfun</strong> (<a class="reference internal" href="function_hooks.html#module-chainer.function" title="chainer.function"><em>function</em></a>) &#8211; Loss function.</li>
+<li><strong>y</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Prediction for the last minibatch.</li>
+<li><strong>loss</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Loss value for the last minibatch.</li>
+<li><a class="reference internal" href="functions.html#chainer.functions.accuracy" title="chainer.functions.accuracy"><strong>accuracy</strong></a> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Accuracy for the last minibatch.</li>
+<li><strong>compute_accuracy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, compute accuracy on the forward
+computation. The default value is <code class="docutils literal"><span class="pre">True</span></code>.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Classifier.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>x</em>, <em>t</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/model/classifier.html#Classifier.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Classifier.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the loss value for an input and label pair.</p>
+<p>It also computes accuracy and stores it to the attribute.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>x</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Input minibatch.</li>
+<li><strong>t</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Corresponding ground truth labels.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">Loss value.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="pre-trained-models">
+<h2>Pre-trained models<a class="headerlink" href="#pre-trained-models" title="Permalink to this headline">¶</a></h2>
+<p>Pre-trained models are mainly used to achieve a good performance with a small
+dataset, or extract a semantic feature vector. Although <code class="docutils literal"><span class="pre">CaffeFunction</span></code>
+automatically loads a pre-trained model released as a caffemodel,
+the following link models provide an interface for automatically converting
+caffemodels, and easily extracting semantic feature vectors.</p>
+<p>For example, to extract the feature vectors with <code class="docutils literal"><span class="pre">VGG16Layers</span></code>, which is
+a common pre-trained model in the field of image recognition,
+users need to write the following few lines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">chainer.links</span> <span class="kn">import</span> <span class="n">VGG16Layers</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">VGG16Layers</span><span class="p">()</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s">&quot;path/to/image.jpg&quot;</span><span class="p">)</span>
+<span class="n">feature</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">extract</span><span class="p">([</span><span class="n">img</span><span class="p">],</span> <span class="n">layers</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;fc7&quot;</span><span class="p">])[</span><span class="s">&quot;fc7&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>where <code class="docutils literal"><span class="pre">fc7</span></code> denotes a layer before the last fully-connected layer.
+Unlike the usual links, these classes automatically load all the
+parameters from the pre-trained models during initialization.</p>
+<div class="section" id="vgg16layers">
+<h3>VGG16Layers<a class="headerlink" href="#vgg16layers" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="resnet50layers">
+<h3>ResNet50Layers<a class="headerlink" href="#resnet50layers" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="deprecated-links">
+<h2>Deprecated links<a class="headerlink" href="#deprecated-links" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="parameter">
+<h3>Parameter<a class="headerlink" href="#parameter" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="chainer.links.Parameter">
+<em class="property">class </em><code class="descclassname">chainer.links.</code><code class="descname">Parameter</code><span class="sig-paren">(</span><em>array</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/parameter.html#Parameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Parameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Link that just holds a parameter and returns it.</p>
+<div class="deprecated">
+<p><span class="versionmodified">Deprecated since version v1.5: </span>The parameters are stored as variables as of v1.5. Use them directly
+instead.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>array</strong> &#8211; Initial parameter array.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><strong>W</strong> (<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><em>Variable</em></a>) &#8211; Parameter variable.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.Parameter.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>volatile='off'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/connection/parameter.html#Parameter.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.Parameter.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the parameter variable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>volatile</strong> (<a class="reference internal" href="core/flag.html#chainer.Flag" title="chainer.Flag"><em>Flag</em></a>) &#8211; The volatility of the returned variable.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">A copy of the parameter variable with given
+volatility.</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable">Variable</a></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="optimizers.html" class="btn btn-neutral float-right" title="Optimizers">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="functions.html" class="btn btn-neutral" title="Standard Function implementations"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

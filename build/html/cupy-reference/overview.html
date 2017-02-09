@@ -1,0 +1,610 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CuPy Overview &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="CuPy Reference Manual" href="index.html"/>
+        <link rel="next" title="Multi-Dimensional Array (ndarray)" href="ndarray.html"/>
+        <link rel="prev" title="CuPy Reference Manual" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">CuPy Reference Manual</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">CuPy Reference Manual</a> &raquo;</li>
+      
+    <li>CuPy Overview</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/cupy-reference/overview.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-cupy">
+<span id="id1"></span><span id="cupy-overview"></span><h1>CuPy Overview<a class="headerlink" href="#module-cupy" title="Permalink to this headline">¶</a></h1>
+<p>CuPy is an implementation of NumPy-compatible multi-dimensional array on CUDA.
+CuPy consists of the core multi-dimensional array class, <code class="xref py py-class docutils literal"><span class="pre">cupy.ndarray</span></code>,
+and many functions on it. It supports a subset of <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.12)"><code class="xref py py-class docutils literal"><span class="pre">numpy.ndarray</span></code></a>
+interface that is enough for Chainer.</p>
+<p>The following is a brief overview of supported subset of NumPy interface:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/arrays.indexing.html">Basic indexing</a>
+(indexing by ints, slices, newaxes, and Ellipsis)</li>
+<li>Element types (dtypes): bool_, (u)int{8, 16, 32, 64}, float{16, 32, 64}</li>
+<li>Most of the array creation routines</li>
+<li>Reshaping and transposition</li>
+<li>All operators with broadcasting</li>
+<li>All <a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/ufuncs.html">Universal functions</a> (a.k.a. ufuncs)
+for elementwise operations except those for complex numbers</li>
+<li>Dot product functions (except einsum) using cuBLAS</li>
+<li>Reduction along axes (sum, max, argmax, etc.)</li>
+</ul>
+<p>CuPy also includes following features for performance:</p>
+<ul class="simple">
+<li>Customizable memory allocator, and a simple memory pool as an example</li>
+<li>User-defined elementwise kernels</li>
+<li>User-defined reduction kernels</li>
+<li>cuDNN utilities</li>
+</ul>
+<p>CuPy uses on-the-fly kernel synthesis: when a kernel call is required, it
+compiles a kernel code optimized for the shapes and dtypes of given arguments,
+sends it to the GPU device, and executes the kernel. The compiled code is
+cached to <code class="docutils literal"><span class="pre">$(HOME)/.cupy/kernel_cache</span></code> directory (this cache path can be
+overwritten by setting the <code class="docutils literal"><span class="pre">CUPY_CACHE_DIR</span></code> environment variable). It may
+make things slower at the first kernel call, though this slow down will be
+resolved at the second execution. CuPy also caches the kernel code sent to GPU
+device within the process, which reduces the kernel transfer time on further
+calls.</p>
+<div class="section" id="a-list-of-supported-attributes-properties-and-methods-of-ndarray">
+<h2>A list of supported attributes, properties, and methods of ndarray<a class="headerlink" href="#a-list-of-supported-attributes-properties-and-methods-of-ndarray" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="memory-layout">
+<h3>Memory layout<a class="headerlink" href="#memory-layout" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-attr docutils literal"><span class="pre">base</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">ctypes</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">itemsize</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">flags</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">nbytes</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">shape</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">size</span></code>
+<code class="xref py py-attr docutils literal"><span class="pre">strides</span></code></p>
+</div>
+<div class="section" id="data-type">
+<h3>Data type<a class="headerlink" href="#data-type" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-attr docutils literal"><span class="pre">dtype</span></code></p>
+</div>
+<div class="section" id="other-attributes">
+<h3>Other attributes<a class="headerlink" href="#other-attributes" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-attr docutils literal"><span class="pre">T</span></code></p>
+</div>
+<div class="section" id="array-conversion">
+<h3>Array conversion<a class="headerlink" href="#array-conversion" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">tolist()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">tofile()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">dump()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">dumps()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">astype()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">copy()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">view()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">fill()</span></code></p>
+</div>
+<div class="section" id="shape-manipulation">
+<h3>Shape manipulation<a class="headerlink" href="#shape-manipulation" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">reshape()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">transpose()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">swapaxes()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">ravel()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">squeeze()</span></code></p>
+</div>
+<div class="section" id="item-selection-and-manipulation">
+<h3>Item selection and manipulation<a class="headerlink" href="#item-selection-and-manipulation" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">take()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">diagonal()</span></code></p>
+</div>
+<div class="section" id="calculation">
+<h3>Calculation<a class="headerlink" href="#calculation" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">max()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">argmax()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">min()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">argmin()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">clip()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">trace()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">sum()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">mean()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">var()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">std()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">prod()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">dot()</span></code></p>
+</div>
+<div class="section" id="arithmetic-and-comparison-operations">
+<h3>Arithmetic and comparison operations<a class="headerlink" href="#arithmetic-and-comparison-operations" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">__lt__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__le__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__gt__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ge__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__eq__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ne__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__nonzero__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__neg__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__pos__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__abs__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__invert__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__add__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__sub__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__mul__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__div__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__truediv__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__floordiv__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__mod__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__divmod__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__pow__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__lshift__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__rshift__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__and__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__or__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__xor__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__iadd__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__isub__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__imul__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__idiv__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__itruediv__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ifloordiv__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__imod__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ipow__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ilshift__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__irshift__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__iand__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ior__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__ixor__()</span></code></p>
+</div>
+<div class="section" id="special-methods">
+<h3>Special methods<a class="headerlink" href="#special-methods" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">__copy__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__deepcopy__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__reduce__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__array__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__len__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__getitem__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__setitem__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__int__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__long__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__float__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__oct__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__hex__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__repr__()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">__str__()</span></code></p>
+</div>
+<div class="section" id="memory-transfer">
+<h3>Memory transfer<a class="headerlink" href="#memory-transfer" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-meth docutils literal"><span class="pre">get()</span></code>
+<code class="xref py py-meth docutils literal"><span class="pre">set()</span></code></p>
+</div>
+</div>
+<div class="section" id="a-list-of-supported-routines-of-cupy-module">
+<h2>A list of supported routines of <a class="reference internal" href="ufunc.html#module-cupy" title="cupy"><code class="xref py py-mod docutils literal"><span class="pre">cupy</span></code></a> module<a class="headerlink" href="#a-list-of-supported-routines-of-cupy-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="array-creation-routines">
+<h3>Array creation routines<a class="headerlink" href="#array-creation-routines" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">empty()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">empty_like()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">eye()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">identity()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">ones()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">ones_like()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">zeros()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">zeros_like()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">full()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">full_like()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">array()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">asarray()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">ascontiguousarray()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">copy()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">arange()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">linspace()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">diag()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">diagflat()</span></code></p>
+</div>
+<div class="section" id="array-manipulation-routines">
+<h3>Array manipulation routines<a class="headerlink" href="#array-manipulation-routines" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">copyto()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">reshape()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">ravel()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">rollaxis()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">swapaxes()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">transpose()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">atleast_1d()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">atleast_2d()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">atleast_3d()</span></code>
+<code class="xref py py-class docutils literal"><span class="pre">broadcast</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">broadcast_arrays()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">broadcast_to()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">expand_dims()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">squeeze()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">column_stack()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">concatenate()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">dstack()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">hstack()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">vstack()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">array_split()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">dsplit()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">hsplit()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">split()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">vsplit()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">roll()</span></code></p>
+</div>
+<div class="section" id="binary-operations">
+<h3>Binary operations<a class="headerlink" href="#binary-operations" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-data docutils literal"><span class="pre">bitwise_and</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">bitwise_or</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">bitwise_xor</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">invert</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">left_shift</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">right_shift</span></code></p>
+</div>
+<div class="section" id="indexing-routines">
+<h3>Indexing routines<a class="headerlink" href="#indexing-routines" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">take()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">diagonal()</span></code></p>
+</div>
+<div class="section" id="input-and-output">
+<h3>Input and output<a class="headerlink" href="#input-and-output" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">load()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">save()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">savez()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">savez_compressed()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">array_repr()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">array_str()</span></code></p>
+</div>
+<div class="section" id="linear-algebra">
+<h3>Linear algebra<a class="headerlink" href="#linear-algebra" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">dot()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">vdot()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">inner()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">outer()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">tensordot()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">trace()</span></code></p>
+</div>
+<div class="section" id="logic-functions">
+<h3>Logic functions<a class="headerlink" href="#logic-functions" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-data docutils literal"><span class="pre">isfinite</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">isinf</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">isnan</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">logical_and</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">logical_or</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">logical_not</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">logical_xor</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">greater</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">greater_equal</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">less</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">less_equal</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">equal</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">not_equal</span></code></p>
+</div>
+<div class="section" id="mathematical-functions">
+<h3>Mathematical functions<a class="headerlink" href="#mathematical-functions" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-data docutils literal"><span class="pre">sin</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">cos</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">tan</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arcsin</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arccos</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arctan</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">hypot</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arctan2</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">deg2rad</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">rad2deg</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">degrees</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">radians</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">sinh</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">cosh</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">tanh</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arcsinh</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arccosh</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">arctanh</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">rint</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">floor</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">ceil</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">trunc</span></code></p>
+<p><a class="reference external" href="https://docs.python.org/3/library/functions.html#sum" title="(in Python v3.6)"><code class="xref py py-func docutils literal"><span class="pre">sum()</span></code></a>
+<code class="xref py py-func docutils literal"><span class="pre">prod()</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">exp</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">expm1</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">exp2</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">log</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">log10</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">log2</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">log1p</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">logaddexp</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">logaddexp2</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">signbit</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">copysign</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">ldexp</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">frexp</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">nextafter</span></code></p>
+<p><code class="xref py py-data docutils literal"><span class="pre">add</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">reciprocal</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">negative</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">multiply</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">divide</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">power</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">subtract</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">true_divide</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">floor_divide</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">fmod</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">mod</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">modf</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">remainder</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">clip()</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">sqrt</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">square</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">absolute</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">sign</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">maximum</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">minimum</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">fmax</span></code>
+<code class="xref py py-data docutils literal"><span class="pre">fmin</span></code></p>
+</div>
+<div class="section" id="sorting-searching-and-counting">
+<h3>Sorting, searching, and counting<a class="headerlink" href="#sorting-searching-and-counting" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">argmax()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">argmin()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">count_nonzero()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">nonzero()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">flatnonzero()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">where()</span></code></p>
+</div>
+<div class="section" id="statistics">
+<h3>Statistics<a class="headerlink" href="#statistics" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">amin()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">amax()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">mean()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">var()</span></code>
+<code class="xref py py-func docutils literal"><span class="pre">std()</span></code></p>
+<p><code class="xref py py-func docutils literal"><span class="pre">bincount()</span></code></p>
+</div>
+<div class="section" id="padding">
+<h3>Padding<a class="headerlink" href="#padding" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">pad()</span></code></p>
+</div>
+<div class="section" id="external-functions">
+<h3>External Functions<a class="headerlink" href="#external-functions" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">scatter_add()</span></code></p>
+</div>
+<div class="section" id="other">
+<h3>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-func docutils literal"><span class="pre">asnumpy()</span></code></p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="ndarray.html" class="btn btn-neutral float-right" title="Multi-Dimensional Array (ndarray)">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="CuPy Reference Manual"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

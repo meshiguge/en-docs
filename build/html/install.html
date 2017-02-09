@@ -1,0 +1,490 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Install Guide &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="index.html"/>
+        <link rel="next" title="Chainer Tutorial" href="tutorial/index.html"/>
+        <link rel="prev" title="Chainer – A flexible framework of neural networks" href="index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Install Guide</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/install.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="install-guide">
+<h1>Install Guide<a class="headerlink" href="#install-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="before-installing-chainer">
+<span id="before-install"></span><h2>Before installing Chainer<a class="headerlink" href="#before-installing-chainer" title="Permalink to this headline">¶</a></h2>
+<p>We recommend these platforms.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.ubuntu.com/">Ubuntu</a> 14.04 LTS 64bit</li>
+<li><a class="reference external" href="https://www.centos.org/">CentOS</a> 7 64bit</li>
+</ul>
+<p>Chainer is supported on Python 2.7.6+, 3.4.3+, 3.5.1+.
+Chainer uses C++ compiler such as g++.
+You need to install it before installing Chainer.
+This is typical installation method for each platform:</p>
+<div class="highlight-python"><div class="highlight"><pre># Ubuntu 14.04
+$ apt-get install g++
+
+# CentOS 7
+$ yum install gcc-c++
+</pre></div>
+</div>
+<p>If you use old <code class="docutils literal"><span class="pre">setuptools</span></code>, upgrade it:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install -U setuptools
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-chainer">
+<h2>Install Chainer<a class="headerlink" href="#install-chainer" title="Permalink to this headline">¶</a></h2>
+<p>Chainer depends on these Python packages:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.numpy.org/">NumPy</a> 1.9, 1.10, 1.11</li>
+<li><a class="reference external" href="https://pythonhosted.org/six/">Six</a> 1.9</li>
+</ul>
+<p>CUDA support</p>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.nvidia.com/cuda-zone">CUDA</a> 6.5, 7.0, 7.5, 8.0</li>
+<li><a class="reference external" href="https://filelock.readthedocs.org">filelock</a></li>
+</ul>
+<p>cuDNN support</p>
+<ul class="simple">
+<li><a class="reference external" href="https://developer.nvidia.com/cudnn">cuDNN</a> v2, v3, v4, v5, v5.1</li>
+</ul>
+<p>Caffe model support</p>
+<ul class="simple">
+<li><a class="reference external" href="https://developers.google.com/protocol-buffers/">Protocol Buffers</a></li>
+<li>protobuf&gt;=3.0.0 is required for Py3</li>
+</ul>
+<p>All these libraries are automatically installed with <code class="docutils literal"><span class="pre">pip</span></code> or <code class="docutils literal"><span class="pre">setup.py</span></code>.</p>
+<p>Image dataset is optional</p>
+<ul class="simple">
+<li><a class="reference external" href="https://pillow.readthedocs.io/">Pillow</a></li>
+</ul>
+<p>HDF5 serialization is optional</p>
+<ul class="simple">
+<li><a class="reference external" href="http://www.h5py.org/">h5py</a> 2.5.0</li>
+</ul>
+<div class="section" id="install-chainer-via-pip">
+<h3>Install Chainer via pip<a class="headerlink" href="#install-chainer-via-pip" title="Permalink to this headline">¶</a></h3>
+<p>We recommend to install Chainer via pip:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install chainer
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-chainer-from-source">
+<h3>Install Chainer from source<a class="headerlink" href="#install-chainer-from-source" title="Permalink to this headline">¶</a></h3>
+<p>You can use <code class="docutils literal"><span class="pre">setup.py</span></code> to install Chainer from source:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ tar zxf chainer-x.x.x.tar.gz
+$ cd chainer-x.x.x
+$ python setup.py install
+</pre></div>
+</div>
+</div>
+<div class="section" id="when-an-error-occurs">
+<span id="install-error"></span><h3>When an error occurs...<a class="headerlink" href="#when-an-error-occurs" title="Permalink to this headline">¶</a></h3>
+<p>Use <code class="docutils literal"><span class="pre">-vvvv</span></code> option with <code class="docutils literal"><span class="pre">pip</span></code> command.
+That shows all logs of installation. It may helps you:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install chainer -vvvv
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-chainer-with-cuda">
+<span id="install-cuda"></span><h3>Install Chainer with CUDA<a class="headerlink" href="#install-chainer-with-cuda" title="Permalink to this headline">¶</a></h3>
+<p>You need to install CUDA Toolkit before installing Chainer.
+If you have CUDA in a default directory or set <code class="docutils literal"><span class="pre">CUDA_PATH</span></code> correctly, Chainer installer finds CUDA automatically:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install chainer
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Chainer installer looks up <code class="docutils literal"><span class="pre">CUDA_PATH</span></code> environment variable first.
+If it is empty, the installer looks for <code class="docutils literal"><span class="pre">nvcc</span></code> command from <code class="docutils literal"><span class="pre">PATH</span></code> environment variable and use its parent directory as the root directory of CUDA installation.
+If <code class="docutils literal"><span class="pre">nvcc</span></code> command is also not found, the installer tries to use the default directory for Ubuntu <code class="docutils literal"><span class="pre">/usr/local/cuda</span></code>.</p>
+</div>
+<p>If you installed CUDA into a non-default directory, you need to specify the directory with <code class="docutils literal"><span class="pre">CUDA_PATH</span></code> environment variable:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ CUDA_PATH=/opt/nvidia/cuda pip install chainer
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>If you want to use <code class="docutils literal"><span class="pre">sudo</span></code> to install Chainer, note that <code class="docutils literal"><span class="pre">sudo</span></code> command initializes all environment variables.
+Please specify <code class="docutils literal"><span class="pre">CUDA_PATH</span></code> environment variable inside <code class="docutils literal"><span class="pre">sudo</span></code> like this:</p>
+<div class="last highlight-python"><div class="highlight"><pre>$ sudo CUDA_PATH=/opt/nvidia/cuda pip install chainer
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="install-chainer-with-cuda-and-cudnn">
+<span id="install-cudnn"></span><h3>Install Chainer with CUDA and cuDNN<a class="headerlink" href="#install-chainer-with-cuda-and-cudnn" title="Permalink to this headline">¶</a></h3>
+<p>cuDNN is a library for Deep Neural Networks that NVIDIA provides.
+Chainer can use cuDNN.
+If you want to enable cuDNN, install cuDNN and CUDA before installing Chainer.
+We recommend you to install cuDNN to CUDA directory.
+For example if you uses Ubuntu Linux, copy <code class="docutils literal"><span class="pre">.h</span></code> files to <code class="docutils literal"><span class="pre">include</span></code> directory and <code class="docutils literal"><span class="pre">.so</span></code> files to <code class="docutils literal"><span class="pre">lib64</span></code> directory:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ cp /path/to/cudnn.h $CUDA_PATH/include
+$ cp /path/to/libcudnn.so* $CUDA_PATH/lib64
+</pre></div>
+</div>
+<p>The destination directories depend on your environment.</p>
+<p>If you want to use cuDNN installed in other directory, please use <code class="docutils literal"><span class="pre">CFLAGS</span></code>, <code class="docutils literal"><span class="pre">LDFLAGS</span></code> and <code class="docutils literal"><span class="pre">LD_LIBRARY_PATH</span></code> environment variables before installing Chainer:</p>
+<div class="highlight-python"><div class="highlight"><pre>export CFLAGS=-I/path/to/cudnn/include
+export LDFLAGS=-L/path/to/cudnn/lib
+export LD_LIBRARY_PATH=/path/to/cudnn/lib:$LD_LIBRARY_PATH
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-chainer-for-developers">
+<h3>Install Chainer for developers<a class="headerlink" href="#install-chainer-for-developers" title="Permalink to this headline">¶</a></h3>
+<p>Chainer uses Cython (&gt;=0.24).
+Developers need to use Cython to regenerate C++ sources from <code class="docutils literal"><span class="pre">pyx</span></code> files.
+We recommend to use <code class="docutils literal"><span class="pre">pip</span></code> with <code class="docutils literal"><span class="pre">-e</span></code> option for editable mode:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install -U cython
+$ cd /path/to/chainer/source
+$ pip install -e .
+</pre></div>
+</div>
+<p>Users need not to install Cython as a distribution package of Chainer only contains generated sources.</p>
+</div>
+<div class="section" id="support-image-dataset">
+<h3>Support image dataset<a class="headerlink" href="#support-image-dataset" title="Permalink to this headline">¶</a></h3>
+<p>Install Pillow manually to activate image dataset.
+This feature is optional:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install pillow
+</pre></div>
+</div>
+</div>
+<div class="section" id="support-hdf5-serialization">
+<h3>Support HDF5 serialization<a class="headerlink" href="#support-hdf5-serialization" title="Permalink to this headline">¶</a></h3>
+<p>Install h5py manually to activate HDF5 serialization.
+This feature is optional:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install h5py
+</pre></div>
+</div>
+<p>Before installing h5py, you need to install libhdf5.
+It depends on your environment:</p>
+<div class="highlight-python"><div class="highlight"><pre># Ubuntu 14.04
+$ apt-get install libhdf5-dev
+
+# CentOS 7
+$ yum -y install epel-release
+$ yum install hdf5-devel
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="uninstall-chainer">
+<h2>Uninstall Chainer<a class="headerlink" href="#uninstall-chainer" title="Permalink to this headline">¶</a></h2>
+<p>Use pip to uninstall Chainer:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip uninstall chainer
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">When you upgrade Chainer, <code class="docutils literal"><span class="pre">pip</span></code> sometimes installed various version of Chainer in <code class="docutils literal"><span class="pre">site-packages</span></code>.
+Please uninstall it repeatedly until <code class="docutils literal"><span class="pre">pip</span></code> returns an error.</p>
+</div>
+</div>
+<div class="section" id="upgrade-chainer">
+<h2>Upgrade Chainer<a class="headerlink" href="#upgrade-chainer" title="Permalink to this headline">¶</a></h2>
+<p>Just use <code class="docutils literal"><span class="pre">pip</span></code> with <code class="docutils literal"><span class="pre">-U</span></code> option:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip install -U chainer
+</pre></div>
+</div>
+</div>
+<div class="section" id="reinstall-chainer">
+<h2>Reinstall Chainer<a class="headerlink" href="#reinstall-chainer" title="Permalink to this headline">¶</a></h2>
+<p>If you want to reinstall Chainer, please uninstall Chainer and then install it.
+We recommend to use <code class="docutils literal"><span class="pre">--no-cache-dir</span></code> option as <code class="docutils literal"><span class="pre">pip</span></code> sometimes uses cache:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ pip uninstall chainer
+$ pip install chainer --no-cache-dir
+</pre></div>
+</div>
+<p>When you install Chainer without CUDA, and after that you want to use CUDA, please reinstall Chainer.
+You need to reinstall Chainer when you want to upgrade CUDA.</p>
+</div>
+<div class="section" id="run-chainer-with-docker">
+<h2>Run Chainer with Docker<a class="headerlink" href="#run-chainer-with-docker" title="Permalink to this headline">¶</a></h2>
+<p>We provide the official Docker image.
+Use <a class="reference external" href="https://github.com/NVIDIA/nvidia-docker">nvidia-docker</a> command to run Chainer image with GPU.
+You can login to the environment with bash, and run the Python interpreter:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nvidia-docker run -it chainer/chainer /bin/bash
+</pre></div>
+</div>
+<p>Or, run the interpreter directly:</p>
+<div class="highlight-python"><div class="highlight"><pre>$ nvidia-docker run -it chainer/chainer /usr/bin/python
+</pre></div>
+</div>
+</div>
+<div class="section" id="what-recommend-means">
+<h2>What &#8220;recommend&#8221; means?<a class="headerlink" href="#what-recommend-means" title="Permalink to this headline">¶</a></h2>
+<p>We tests Chainer automatically with Jenkins.
+All supported environments are tested in this environment.
+We cannot guarantee that Chainer works on other environments.</p>
+</div>
+<div class="section" id="faq">
+<h2>FAQ<a class="headerlink" href="#faq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="the-installer-says-hdf5-h-is-not-found">
+<h3>The installer says &#8220;hdf5.h is not found&#8221;<a class="headerlink" href="#the-installer-says-hdf5-h-is-not-found" title="Permalink to this headline">¶</a></h3>
+<p>You don&#8217;t have libhdf5.
+Please install hdf5.
+See <a class="reference internal" href="#before-install"><span>Before installing Chainer</span></a>.</p>
+</div>
+<div class="section" id="memoryerror-happens">
+<h3>MemoryError happens<a class="headerlink" href="#memoryerror-happens" title="Permalink to this headline">¶</a></h3>
+<p>You maybe failed to install Cython.
+Please install it manually.
+See <a class="reference internal" href="#install-error"><span>When an error occurs...</span></a>.</p>
+</div>
+<div class="section" id="examples-says-cudnn-is-not-enabled">
+<h3>Examples says &#8220;cuDNN is not enabled&#8221;<a class="headerlink" href="#examples-says-cudnn-is-not-enabled" title="Permalink to this headline">¶</a></h3>
+<p>You failed to build Chainer with cuDNN.
+If you don&#8217;t need cuDNN, ignore this message.
+Otherwise, retry to install Chainer with cuDNN.
+<code class="docutils literal"><span class="pre">-vvvv</span></code> option helps you.
+See <a class="reference internal" href="#install-cudnn"><span>Install Chainer with CUDA and cuDNN</span></a>.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial/index.html" class="btn btn-neutral float-right" title="Chainer Tutorial">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Chainer – A flexible framework of neural networks"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

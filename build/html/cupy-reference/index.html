@@ -1,0 +1,327 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>CuPy Reference Manual &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../index.html"/>
+        <link rel="next" title="CuPy Overview" href="overview.html"/>
+        <link rel="prev" title="Environment variables" href="../reference/environment.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../reference/index.html">Chainer Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../reference/core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/caffe.html">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reference/environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>CuPy Reference Manual</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/cupy-reference/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="cupy-reference-manual">
+<span id="cupy-reference"></span><h1>CuPy Reference Manual<a class="headerlink" href="#cupy-reference-manual" title="Permalink to this headline">¶</a></h1>
+<p>This is the official documentation of CuPy, a multi-dimensional array on CUDA with a subset of NumPy interface.</p>
+<span class="target" id="module-cupy"></span><div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">CuPy Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#a-list-of-supported-attributes-properties-and-methods-of-ndarray">A list of supported attributes, properties, and methods of ndarray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#a-list-of-supported-routines-of-cupy-module">A list of supported routines of <code class="docutils literal"><span class="pre">cupy</span></code> module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ufunc.html">Universal Functions (ufunc)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ufunc.html#ufunc-class">Ufunc class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ufunc.html#available-ufuncs">Available ufuncs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ufunc.html#ufunc-at">ufunc.at</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="routines.html">Routines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="creation.html">Array Creation Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html">Array Manipulation Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html#repeating-part-of-arrays-along-axis">Repeating part of arrays along axis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manipulation.html#rearranging-elements">Rearranging elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="binary.html">Binary Operations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="indexing.html">Indexing Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io.html">Input and Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linalg.html">Linear Algebra</a></li>
+<li class="toctree-l2"><a class="reference internal" href="logic.html">Logic Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="math.html">Mathematical Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="random.html">Random Sampling (<code class="docutils literal"><span class="pre">cupy.random</span></code>)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sorting.html">Sorting, Searching, and Counting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="statistics.html">Statistics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ext.html">External Functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cuda.html">Low-Level CUDA Support</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html#device-management">Device management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html#memory-management">Memory management</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html#streams-and-events">Streams and events</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cuda.html#profiler">Profiler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="kernel.html">User-Defined Kernels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html#basics-of-elementwise-kernels">Basics of elementwise kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html#type-generic-kernels">Type-generic kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html#raw-argument-specifiers">Raw argument specifiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html#reduction-kernels">Reduction kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kernel.html#module-cupy">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testing.html">Testing Modules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#standard-assertions">Standard Assertions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#numpy-cupy-consistency-check">NumPy-CuPy Consistency Check</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#parameterized-dtype-test">Parameterized dtype Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testing.html#parameterized-order-test">Parameterized order Test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="environment.html">Environment variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="environment.html#for-install">For install</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="difference.html">Difference between CuPy and NumPy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="difference.html#cast-behavior-from-float-to-integer">Cast behavior from float to integer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html#boolean-values-squared">Boolean values squared</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html#random-methods-support-dtype-argument">Random methods support dtype argument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html#out-of-bounds-indices">Out-of-bounds indices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="difference.html#duplicate-values-in-indices">Duplicate values in indices</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="overview.html" class="btn btn-neutral float-right" title="CuPy Overview">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../reference/environment.html" class="btn btn-neutral" title="Environment variables"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

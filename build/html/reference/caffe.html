@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Caffe Reference Model Support &mdash; Chainer 1.8.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/modified_theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="Chainer 1.8.0 documentation" href="../index.html"/>
+        <link rel="up" title="Chainer Reference Manual" href="index.html"/>
+        <link rel="next" title="Visualization of Computational Graph" href="graph.html"/>
+        <link rel="prev" title="Trainer triggers" href="triggers.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> Chainer</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Install Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#before-installing-chainer">Before installing Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#install-chainer">Install Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#uninstall-chainer">Uninstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#upgrade-chainer">Upgrade Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#reinstall-chainer">Reinstall Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#run-chainer-with-docker">Run Chainer with Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#what-recommend-means">What &#8220;recommend&#8221; means?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#faq">FAQ</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Chainer Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/basic.html">Introduction to Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/recurrentnet.html">Recurrent Nets and their Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/gpu.html">Using GPU(s) in Chainer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/function.html">Define your own function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/type_check.html">Type check</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Chainer Reference Manual</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="core.html">Core functionalities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html">Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check.html">Assertion and Testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="functions.html">Standard Function implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="links.html">Standard Link implementations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="serializers.html">Serializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="function_hooks.html">Function hooks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="initializers.html">Weight Initializers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datasets.html">Dataset examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="iterators.html">Iterator examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extensions.html">Trainer extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="triggers.html">Trainer triggers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Caffe Reference Model Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="graph.html">Visualization of Computational Graph</a></li>
+<li class="toctree-l2"><a class="reference internal" href="environment.html">Environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cupy-reference/index.html">CuPy Reference Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/overview.html">CuPy Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ndarray.html">Multi-Dimensional Array (ndarray)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/ufunc.html">Universal Functions (ufunc)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/routines.html">Routines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/generic.html">NumPy-CuPy Generic Code Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/cuda.html">Low-Level CUDA Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/memoize.html">Kernel binary memoization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/kernel.html">User-Defined Kernels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/testing.html">Testing Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/environment.html">Environment variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cupy-reference/difference.html">Difference between CuPy and NumPy</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../contribution.html">Chainer Contribution Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#classification-of-contributions">Classification of Contributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#release-and-milestone">Release and Milestone</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#issues-and-prs">Issues and PRs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#coding-guidelines">Coding Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contribution.html#testing-guidelines">Testing Guidelines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">API Compatibility Policy</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#targeted-versions">Targeted Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#versioning-and-backward-compatibilities">Versioning and Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#processes-to-break-backward-compatibilities">Processes to Break Backward Compatibilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#experimental-apis">Experimental APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#supported-backward-compatibility">Supported Backward Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#model-format-compatibility">Model Format Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compatibility.html#installation-compatibility">Installation Compatibility</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tips.html">Tips and FAQs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#it-takes-too-long-time-to-compile-a-computational-graph-can-i-skip-it">It takes too long time to compile a computational graph. Can I skip it?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips.html#mnist-example-does-not-converge-in-cpu-mode-on-mac-os-x">mnist example does not converge in CPU mode on Mac OS X</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../comparison.html">Comparison with Other Frameworks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#a-table-for-quick-comparison">A table for quick comparison</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../comparison.html#benchmarks">Benchmarks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../license.html#cupy">CuPy</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Chainer</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Chainer Reference Manual</a> &raquo;</li>
+      
+    <li>Caffe Reference Model Support</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/reference/caffe.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="module-chainer.links.caffe">
+<span id="caffe-reference-model-support"></span><h1>Caffe Reference Model Support<a class="headerlink" href="#module-chainer.links.caffe" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference external" href="http://caffe.berkeleyvision.org/">Caffe</a> is a popular framework maintained by <a class="reference external" href="http://bvlc.eecs.berkeley.edu/">BVLC</a> at UC Berkeley.
+It is widely used by computer vision communities, and aims at fast computation and easy usage without any programming.
+The BVLC team provides trained reference models in their <a class="reference external" href="http://caffe.berkeleyvision.org/model_zoo.html">Model Zoo</a>, one of the reason why this framework gets popular.</p>
+<p>Chainer can import the reference models and emulate the network by <a class="reference internal" href="core/link.html#chainer.Link" title="chainer.Link"><code class="xref py py-class docutils literal"><span class="pre">Link</span></code></a> implementations.
+This functionality is provided by the <a class="reference internal" href="#chainer.links.caffe.CaffeFunction" title="chainer.links.caffe.CaffeFunction"><code class="xref py py-class docutils literal"><span class="pre">chainer.links.caffe.CaffeFunction</span></code></a> class.</p>
+<dl class="class">
+<dt id="chainer.links.caffe.CaffeFunction">
+<em class="property">class </em><code class="descclassname">chainer.links.caffe.</code><code class="descname">CaffeFunction</code><span class="sig-paren">(</span><em>model_path</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/caffe/caffe_function.html#CaffeFunction"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.caffe.CaffeFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Caffe emulator based on the model file of Caffe.</p>
+<p>Given a protocol buffers file of a Caffe model, this class loads and
+emulates it on <a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects. It supports the official
+reference models provided by BVLC.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This class only supports Python 2.7, since the compiled module for
+protocol buffers only supports Python 2. The <code class="docutils literal"><span class="pre">__init__</span></code> function
+raises an exception in Python 3.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>CaffeFunction ignores the following layers:</p>
+<ul class="last simple">
+<li>Layers that CaffeFunction does not support (including data layers)</li>
+<li>Layers that have no top blobs</li>
+<li>Layers whose bottom blobs are incomplete (i.e., some or all of them
+are not given nor computed)</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">It does not support full compatibility against Caffe. Some layers and
+configurations are not implemented in Chainer yet, though the reference
+models provided by the BVLC team are supported except data layers.</p>
+</div>
+<div class="admonition-example admonition">
+<p class="first admonition-title">Example</p>
+<p>Consider we want to extract the (unnormalized) log class probability
+of given images using BVLC reference CaffeNet. The model can be
+downloaded from:</p>
+<p><a class="reference external" href="http://dl.caffe.berkeleyvision.org/bvlc_reference_caffenet.caffemodel">http://dl.caffe.berkeleyvision.org/bvlc_reference_caffenet.caffemodel</a></p>
+<p>We want to compute the <code class="docutils literal"><span class="pre">fc8</span></code> blob from the <code class="docutils literal"><span class="pre">data</span></code> blob. It is simply
+written as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Load the model</span>
+<span class="n">func</span> <span class="o">=</span> <span class="n">CaffeFunction</span><span class="p">(</span><span class="s">&#39;path/to/bvlc_reference_caffenet.caffemodel&#39;</span><span class="p">)</span>
+
+<span class="c"># Minibatch of size 10</span>
+<span class="n">x_data</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">227</span><span class="p">,</span> <span class="mi">227</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">numpy</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="o">...</span>  <span class="c"># (Fill the minibatch here)</span>
+
+<span class="c"># Forward the pre-trained net</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Variable</span><span class="p">(</span><span class="n">x_data</span><span class="p">)</span>
+<span class="n">y</span><span class="p">,</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="n">x</span><span class="p">},</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;fc8&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p class="last">The result <code class="docutils literal"><span class="pre">y</span></code> contains the Variable corresponding to the <code class="docutils literal"><span class="pre">fc8</span></code>
+blob. The computational graph is memorized as a usual forward
+computation in Chainer, so we can run backprop through this pre-trained
+net.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>model_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.6)"><em>str</em></a>) &#8211; Path to the binary-proto model file of Caffe.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Variables:</th><td class="field-body"><ul class="first last simple">
+<li><strong>fs</strong> (<a class="reference internal" href="core/function_set.html#chainer.FunctionSet" title="chainer.FunctionSet"><em>FunctionSet</em></a>) &#8211; A set of functions corresponding to parameterized
+layers of Caffe. The names of its attributes are same as the layer
+names of the given network.</li>
+<li><strong>forwards</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) &#8211; A mapping from layer names to corresponding functions.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="chainer.links.caffe.CaffeFunction.__call__">
+<code class="descname">__call__</code><span class="sig-paren">(</span><em>inputs</em>, <em>outputs</em>, <em>disable=()</em>, <em>train=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/chainer/links/caffe/caffe_function.html#CaffeFunction.__call__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#chainer.links.caffe.CaffeFunction.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes a sub-network of the network.</p>
+<p>This function acts as an interpreter of the network definition for
+Caffe. On execution, it interprets each layer one by one, and if the
+bottom blobs are already computed, then emulates the layer and stores
+output blobs as <a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.6)"><em>dict</em></a>) &#8211; A dictionary whose key-value pairs indicate initial
+correspondences between blob names and
+<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects.</li>
+<li><strong>outputs</strong> (<em>Iterable</em>) &#8211; A list of blob names whose corresponding
+<a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects are returned.</li>
+<li><strong>disable</strong> (<em>Iterable</em>) &#8211; A list of layer names that will be ignored
+during the forward computation.</li>
+<li><strong>train</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.6)"><em>bool</em></a>) &#8211; If <code class="docutils literal"><span class="pre">True</span></code>, this function emulates the TRAIN phase
+of the Caffe layers. Otherwise, it emulates the TEST phase.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">A tuple of output <a class="reference internal" href="core/variable.html#chainer.Variable" title="chainer.Variable"><code class="xref py py-class docutils literal"><span class="pre">Variable</span></code></a> objects
+corresponding to elements of the  <cite>outputs</cite> argument.</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.6)">tuple</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="graph.html" class="btn btn-neutral float-right" title="Visualization of Computational Graph">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="triggers.html" class="btn btn-neutral" title="Trainer triggers"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Preferred Networks, inc. and Preferred Infrastructure, inc..
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.8.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
